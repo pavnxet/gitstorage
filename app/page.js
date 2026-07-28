@@ -326,7 +326,17 @@ export default function Page() {
       
       {/* Responsive Style Overrides */}
       <style jsx global>{`
-        @media (max-width: 640px) {
+        .index-table-wrapper {
+          overflow-x: auto;
+        }
+        .index-table-wrapper::-webkit-scrollbar {
+          height: 6px;
+        }
+        .index-table-wrapper::-webkit-scrollbar-thumb {
+          background: #3f3f46;
+          border-radius: 10px;
+        }
+        @media (max-width: 768px) {
           .header-container {
             flex-direction: column !important;
             align-items: flex-start !important;
@@ -334,13 +344,13 @@ export default function Page() {
           }
           .controls-group {
             width: 100% !important;
-            justify-content: space-between !important;
+            justify-content: flex-start !important;
+            overflow-x: auto;
+            flex-wrap: nowrap !important;
+            padding-bottom: 4px;
           }
           .controls-btn {
-            flex: 1 !important;
-            padding: 8px 6px !important;
-            font-size: 11px !important;
-            text-align: center !important;
+            white-space: nowrap !important;
           }
           .upload-zone {
             flex-direction: column !important;
@@ -350,16 +360,15 @@ export default function Page() {
           .upload-btn {
             width: 100% !important;
           }
-          .hide-mobile {
-            display: none !important;
+          .index-table {
+            font-size: 13px !important;
           }
           .index-table th, .index-table td {
-            padding: 8px 6px !important;
-            font-size: 12px !important;
+            padding: 10px 10px !important;
+            white-space: nowrap !important;
           }
-          .action-btn {
-            padding: 4px 6px !important;
-            font-size: 10px !important;
+          .hide-mobile {
+            display: table-cell !important;
           }
         }
       `}</style>
@@ -473,8 +482,8 @@ export default function Page() {
       )}
 
       {/* Directory Index Table */}
-      <div style={{ marginTop: 20, overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-        <table className="index-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, minWidth: 320 }}>
+      <div className="index-table-wrapper" style={{ marginTop: 20, overflowX: 'auto', WebkitOverflowScrolling: 'touch', border: `1px solid ${styles.border}`, borderRadius: 8, scrollbarWidth: 'thin' }}>
+        <table className="index-table" style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
           <thead>
             <tr style={{ borderBottom: `2px solid ${styles.border}`, color: styles.mutedText }}>
               <th style={{ padding: '10px 8px', fontWeight: 700 }}>Name</th>
@@ -512,19 +521,19 @@ export default function Page() {
                   background: idx % 2 === 0 ? styles.bg : styles.altRowBg
                 }}
               >
-                <td style={{ padding: '10px 8px', wordBreak: 'break-word' }}>
+                <td style={{ padding: '12px 10px', whiteSpace: 'nowrap', maxWidth: 350, overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {f.type === 'dir' ? (
                     <span
                       onClick={() => handleFileClick(f)}
-                      style={{ cursor: 'pointer', color: styles.link, fontWeight: 600 }}
+                      style={{ cursor: 'pointer', color: styles.link, fontWeight: 600, whiteSpace: 'nowrap' }}
                     >
                       📁 {f.name}/
                     </span>
                   ) : (
                     <span
                       onClick={() => handleFileClick(f)}
-                      style={{ cursor: 'pointer', color: styles.text, textDecoration: 'underline', textDecorationColor: styles.border }}
-                      title="Click to view online"
+                      style={{ cursor: 'pointer', color: styles.text, textDecoration: 'underline', textDecorationColor: styles.border, whiteSpace: 'nowrap' }}
+                      title={f.name}
                     >
                       📄 {f.name}
                     </span>
