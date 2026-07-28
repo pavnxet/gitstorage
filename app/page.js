@@ -34,7 +34,10 @@ export default function Page() {
       const uploadPath = path ? `${path}/${file.name}` : `uploads/${file.name}`;
       await fetch('/api/upload', {
         method:'POST',
-        headers:{'Content-Type':'application/json'},
+        headers:{
+          'Content-Type':'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('site_pw')||''}`
+        },
         body: JSON.stringify({ path: uploadPath, content: base64, isBase64:true })
       });
     }
@@ -55,7 +58,10 @@ export default function Page() {
 
   const handleDelete = async (p) => {
     if(!confirm(`Delete ${p}?`)) return;
-    await fetch(`/api/delete?path=${encodeURIComponent(p)}`, { method:'DELETE' });
+    await fetch(`/api/delete?path=${encodeURIComponent(p)}`, { 
+      method:'DELETE',
+      headers:{'Authorization': `Bearer ${localStorage.getItem('site_pw')||''}`}
+    });
     fetchFiles();
   };
 
