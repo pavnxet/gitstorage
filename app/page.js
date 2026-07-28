@@ -9,7 +9,21 @@ export default function Page() {
   const [isDragging, setIsDragging] = useState(false);
   const [path, setPath] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [theme, setTheme] = useState('dark');
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('site_theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    localStorage.setItem('site_theme', nextTheme);
+  };
 
   const getAuthHeader = () => {
     const pw = localStorage.getItem('site_pw') || '';
@@ -180,23 +194,43 @@ export default function Page() {
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   };
 
+  const isDark = theme === 'dark';
+  const styles = {
+    bg: isDark ? '#09090b' : '#ffffff',
+    text: isDark ? '#e4e4e7' : '#18181b',
+    border: isDark ? '#27272a' : '#e4e4e7',
+    subtleBorder: isDark ? '#18181b' : '#f4f4f5',
+    cardBg: isDark ? '#121215' : '#f4f4f5',
+    altRowBg: isDark ? '#0d0d10' : '#fafafa',
+    mutedText: isDark ? '#a1a1aa' : '#71717a',
+    link: isDark ? '#60a5fa' : '#2563eb',
+    btnBg: isDark ? '#27272a' : '#e4e4e7',
+    btnText: isDark ? '#ffffff' : '#18181b'
+  };
+
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 24px', fontFamily: 'monospace, system-ui, sans-serif', color: '#e4e4e7', background: '#09090b', minHeight: '100vh' }}>
+    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 24px', fontFamily: 'monospace, system-ui, sans-serif', color: styles.text, background: styles.bg, minHeight: '100vh', transition: 'background 0.2s ease, color 0.2s ease' }}>
       
-      {/* Header bar with Index path and controls */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #27272a', paddingBottom: 16 }}>
+      {/* Header bar with Index path, Theme Toggle, and Controls */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${styles.border}`, paddingBottom: 16 }}>
         <div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, fontFamily: 'system-ui, sans-serif' }}>
             Index of /{path}
           </h1>
-          <p style={{ opacity: 0.5, fontSize: 12, margin: '4px 0 0 0' }}>
+          <p style={{ color: styles.mutedText, fontSize: 12, margin: '4px 0 0 0' }}>
             Directory Index Listing {loading ? '(Loading...)' : `(${files.length} items)`}
           </p>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <button
+            onClick={toggleTheme}
+            style={{ padding: '6px 14px', background: styles.btnBg, color: styles.btnText, border: `1px solid ${styles.border}`, borderRadius: 6, fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
+          >
+            {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
+          </button>
+          <button
             onClick={() => fetchFiles()}
-            style={{ padding: '6px 14px', background: '#27272a', color: 'white', border: '1px solid #3f3f46', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+            style={{ padding: '6px 14px', background: styles.btnBg, color: styles.btnText, border: `1px solid ${styles.border}`, borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
           >
             🔄 Refresh
           </button>
@@ -225,12 +259,12 @@ export default function Page() {
         onClick={() => fileInputRef.current?.click()}
         style={{
           marginTop: 20,
-          background: isDragging ? '#18181b' : '#121215',
-          border: `2px dashed ${isDragging ? '#3b82f6' : '#27272a'}`,
+          background: isDragging ? styles.cardBg : (isDark ? '#121215' : '#f8f8f8'),
+          border: `2px dashed ${isDragging ? styles.link : styles.border}`,
           borderRadius: 10,
           padding: '20px 24px',
           display: 'flex',
-          justifyContent: 'space-between',
+          justify: 'space-between',
           alignItems: 'center',
           cursor: 'pointer',
           transition: 'all 0.2s ease'
@@ -241,7 +275,7 @@ export default function Page() {
           <h4 style={{ margin: 0, fontSize: 15, fontFamily: 'system-ui, sans-serif', fontWeight: 600 }}>
             {uploading ? 'Uploading Files...' : '📁 Upload Files to Current Directory'}
           </h4>
-          <p style={{ margin: '4px 0 0 0', fontSize: 12, opacity: 0.5 }}>
+          <p style={{ margin: '4px 0 0 0', fontSize: 12, color: styles.mutedText }}>
             Drag & drop files here or click to browse (Max 4MB per file)
           </p>
         </div>
@@ -254,8 +288,8 @@ export default function Page() {
           }}
           style={{
             padding: '8px 18px',
-            background: 'white',
-            color: 'black',
+            background: isDark ? 'white' : '#18181b',
+            color: isDark ? 'black' : 'white',
             border: 'none',
             borderRadius: 6,
             fontSize: 13,
@@ -268,7 +302,7 @@ export default function Page() {
       </div>
 
       {uploadProgress && (
-        <div style={{ marginTop: 10, fontSize: 12, color: '#60a5fa', fontWeight: 600 }}>
+        <div style={{ marginTop: 10, fontSize: 12, color: styles.link, fontWeight: 600 }}>
           {uploadProgress}
         </div>
       )}
@@ -277,11 +311,11 @@ export default function Page() {
       <div style={{ marginTop: 24, overflowX: 'auto' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
           <thead>
-            <tr style={{ borderBottom: '2px solid #27272a', color: '#a1a1aa' }}>
+            <tr style={{ borderBottom: `2px solid ${styles.border}`, color: styles.mutedText }}>
               <th style={{ padding: '10px 12px', fontWeight: 700 }}>Name</th>
-              <th style={{ padding: '10px 12px', fontWeight: 700, width: 140 }}>Type</th>
-              <th style={{ padding: '10px 12px', fontWeight: 700, width: 120, textAlign: 'right' }}>Size</th>
-              <th style={{ padding: '10px 12px', fontWeight: 700, width: 160, textAlign: 'center' }}>Actions</th>
+              <th style={{ padding: '10px 12px', fontWeight 700, width: 140 }}>Type</th>
+              <th style={{ padding: '10px 12px', fontWeight 700, width: 120, textAlign: 'right' }}>Size</th>
+              <th style={{ padding: '10px 12px', fontWeight 700, width: 160, textAlign: 'center' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -289,9 +323,9 @@ export default function Page() {
             {path && (
               <tr
                 onClick={navigateUp}
-                style={{ borderBottom: '1px solid #18181b', cursor: 'pointer', background: '#0e0e11' }}
+                style={{ borderBottom: `1px solid ${styles.subtleBorder}`, cursor: 'pointer', background: styles.cardBg }}
               >
-                <td colSpan={4} style={{ padding: '10px 12px', color: '#60a5fa', fontWeight: 600 }}>
+                <td colSpan={4} style={{ padding: '10px 12px', color: styles.link, fontWeight: 600 }}>
                   📁 Parent Directory/
                 </td>
               </tr>
@@ -299,7 +333,7 @@ export default function Page() {
 
             {files.length === 0 && !loading && (
               <tr>
-                <td colSpan={4} style={{ padding: '24px 12px', textAlign: 'center', opacity: 0.4 }}>
+                <td colSpan={4} style={{ padding: '24px 12px', textAlign: 'center', color: styles.mutedText }}>
                   Directory is empty.
                 </td>
               </tr>
@@ -309,15 +343,15 @@ export default function Page() {
               <tr
                 key={f.sha || idx}
                 style={{
-                  borderBottom: '1px solid #18181b',
-                  background: idx % 2 === 0 ? '#09090b' : '#0d0d10'
+                  borderBottom: `1px solid ${styles.subtleBorder}`,
+                  background: idx % 2 === 0 ? styles.bg : styles.altRowBg
                 }}
               >
                 <td style={{ padding: '10px 12px' }}>
                   {f.type === 'dir' ? (
                     <span
                       onClick={() => viewFolder(f)}
-                      style={{ cursor: 'pointer', color: '#60a5fa', fontWeight: 600 }}
+                      style={{ cursor: 'pointer', color: styles.link, fontWeight: 600 }}
                     >
                       📁 {f.name}/
                     </span>
@@ -325,10 +359,10 @@ export default function Page() {
                     <span>📄 {f.name}</span>
                   )}
                 </td>
-                <td style={{ padding: '10px 12px', opacity: 0.6, fontSize: 12 }}>
+                <td style={{ padding: '10px 12px', color: styles.mutedText, fontSize: 12 }}>
                   {f.type === 'dir' ? 'Directory' : 'File'}
                 </td>
-                <td style={{ padding: '10px 12px', textAlign: 'right', opacity: 0.7 }}>
+                <td style={{ padding: '10px 12px', textAlign: 'right', color: styles.mutedText }}>
                   {formatSize(f.size)}
                 </td>
                 <td style={{ padding: '10px 12px', textAlign: 'center' }}>
@@ -340,8 +374,8 @@ export default function Page() {
                         rel="noopener noreferrer"
                         style={{
                           padding: '4px 10px',
-                          background: '#27272a',
-                          color: '#fff',
+                          background: styles.btnBg,
+                          color: styles.btnText,
                           borderRadius: 4,
                           fontSize: 11,
                           textDecoration: 'none'
@@ -372,7 +406,7 @@ export default function Page() {
         </table>
       </div>
 
-      <div style={{ marginTop: 32, paddingTop: 16, borderTop: '1px solid #18181b', opacity: 0.4, fontSize: 11, textAlign: 'center' }}>
+      <div style={{ marginTop: 32, paddingTop: 16, borderTop: `1px solid ${styles.subtleBorder}`, color: styles.mutedText, fontSize: 11, textAlign: 'center' }}>
         Directory Listing Index • Secure GitHub Storage Server
       </div>
     </div>
