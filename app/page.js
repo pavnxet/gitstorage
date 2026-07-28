@@ -7,7 +7,7 @@ export default function Page() {
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState('');
   const [isDragging, setIsDragging] = useState(false);
-  const [path, setPath] = useState('');
+  const [path, setPath] = useState('uploads');
   const [errorMsg, setErrorMsg] = useState('');
   const [theme, setTheme] = useState('dark');
   const fileInputRef = useRef(null);
@@ -37,6 +37,12 @@ export default function Page() {
     setLoading(false);
   };
 
+  const changePath = (newPath) => {
+    setPath(newPath);
+    localStorage.setItem('site_last_path', newPath);
+    fetchFiles(newPath);
+  };
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('site_theme');
     if (savedTheme) {
@@ -44,7 +50,12 @@ export default function Page() {
     }
     const match = document.cookie.match(/site_auth=([^;]+)/);
     if (match) localStorage.setItem('site_pw', match[1]);
-    fetchFiles('');
+
+    // Default to 'uploads' or remember last opened folder
+    const lastPath = localStorage.getItem('site_last_path');
+    const initialPath = lastPath !== null ? lastPath : 'uploads';
+    setPath(initialPath);
+    fetchFiles(initialPath);
   }, []);
 
   const toggleTheme = () => {
@@ -88,7 +99,9 @@ export default function Page() {
           reader.readAsDataURL(file);
         });
 
-        const uploadPath = path ? `${path}/${file.name}` : `uploads/${file.name}`;
+        // Always upload to the currently opened directory
+        const uploadPath = path ? `${path}/${file.name}` : file.name;
+
         const resp = await fetch('/api/upload', {
           method: 'POST',
           headers: {
@@ -145,8 +158,7 @@ export default function Page() {
 
   const viewFolder = (f) => {
     if (f.type === 'dir') {
-      setPath(f.path);
-      fetchFiles(f.path);
+      changePath(f.path);
     }
   };
 
@@ -155,8 +167,7 @@ export default function Page() {
     const parts = path.split('/');
     parts.pop();
     const np = parts.join('/');
-    setPath(np);
-    fetchFiles(np);
+    changePath(np);
   };
 
   const handleDelete = async (p) => {
@@ -314,10 +325,10 @@ export default function Page() {
         <input ref={fileInputRef} type="file" multiple onChange={onFileChange} style={{ display: 'none' }} />
         <div>
           <h4 style={{ margin: 0, fontSize: 15, fontFamily: 'system-ui, sans-serif', fontWeight: 600 }}>
-            {uploading ? 'Uploading Files...' : '📁 Upload Files'}
+            {uploading ? 'Uploading Files...' : `📁 Upload Files to /${path}`}
           </h4>
           <p style={{ margin: '4px 0 0 0', fontSize: 12, color: styles.mutedText }}>
-            Drag & drop files here or tap to browse (Max 4MB per file)
+            Files will be uploaded directly into <b>/{path || 'root'}</b> (Max 4MB per file)
           </p>
         </div>
         <button
