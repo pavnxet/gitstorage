@@ -54,8 +54,9 @@ export default function Page() {
       count++;
       setUploadProgress(`Uploading (${count}/${total}): ${file.name}...`);
 
-      if (file.size > 4.5 * 1024 * 1024) {
-        setErrorMsg(`File "${file.name}" is ${(file.size / (1024 * 1024)).toFixed(1)}MB. Vercel serverless limit is 4.5MB. Please choose a smaller file.`);
+      // Enforce 4.0MB client-side limit to prevent exceeding Vercel 4.5MB payload limit after Base64 encoding
+      if (file.size > 4.0 * 1024 * 1024) {
+        setErrorMsg(`File "${file.name}" is ${(file.size / (1024 * 1024)).toFixed(1)}MB. Limit is 4.0MB to prevent Vercel body overflow.`);
         setUploading(false);
         setUploadProgress('');
         return;
