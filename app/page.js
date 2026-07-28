@@ -231,6 +231,16 @@ export default function Page() {
     }
   };
 
+  const getHtmlSrcDoc = (content) => {
+    if (!content) return '';
+    if (content.includes('<head>')) {
+      return content.replace('<head>', '<head><base target="_blank">');
+    } else if (content.includes('<html>')) {
+      return content.replace('<html>', '<html><head><base target="_blank"></head>');
+    }
+    return `<head><base target="_blank"></head>${content}`;
+  };
+
   const onFileChange = (e) => {
     uploadFiles(e.target.files);
     e.target.value = '';
@@ -651,8 +661,8 @@ export default function Page() {
                         </div>
                         {htmlMode === 'live' ? (
                           <iframe
-                            srcDoc={previewFile.content}
-                            sandbox="allow-scripts"
+                            srcDoc={getHtmlSrcDoc(previewFile.content)}
+                            sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-forms allow-same-origin"
                             title={previewFile.file.name}
                             style={{ width: '100%', height: '65vh', border: 'none', background: '#ffffff', borderRadius: 8 }}
                           />
