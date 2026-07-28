@@ -10,6 +10,7 @@ export default function Page() {
   const [path, setPath] = useState('uploads');
   const [errorMsg, setErrorMsg] = useState('');
   const [theme, setTheme] = useState('dark');
+  const [previewFile, setPreviewFile] = useState(null);
   const fileInputRef = useRef(null);
 
   const getAuthHeader = () => {
@@ -51,7 +52,6 @@ export default function Page() {
     const match = document.cookie.match(/site_auth=([^;]+)/);
     if (match) localStorage.setItem('site_pw', match[1]);
 
-    // Default to 'uploads' or remember last opened folder
     const lastPath = localStorage.getItem('site_last_path');
     const initialPath = lastPath !== null ? lastPath : 'uploads';
     setPath(initialPath);
@@ -99,7 +99,6 @@ export default function Page() {
           reader.readAsDataURL(file);
         });
 
-        // Always upload to the currently opened directory
         const uploadPath = path ? `${path}/${file.name}` : file.name;
 
         const resp = await fetch('/api/upload', {
@@ -130,6 +129,30 @@ export default function Page() {
     fetchFiles();
   };
 
+  const handleFileClick = async (f) => {
+    if (f.type === 'dir') {
+      changePath(f.path);
+      return;
+    }
+
+    setPreviewFile({ file: f, content: null, loading: true });
+
+    const ext = f.name.split('.').pop().toLowerCase();
+    const textExts = ['txt', 'md', 'json', 'js', 'css', 'html', 'py', 'ts', 'jsx', 'tsx', 'csv', 'log', 'xml', 'yaml', 'yml'];
+
+    if (textExts.includes(ext) && f.download_url) {
+      try {
+        const res = await fetch(f.download_url);
+        const text = await res.text();
+        setPreviewFile({ file: f, content: text.slice(0, 30000), loading: false });
+      } catch (err) {
+        setPreviewFile({ file: f, content: 'Failed to load text content.', loading: false });
+      }
+    } else {
+      setPreviewFile({ file: f, content: null, loading: false });
+    }
+  };
+
   const onFileChange = (e) => {
     uploadFiles(e.target.files);
     e.target.value = '';
@@ -153,12 +176,6 @@ export default function Page() {
     setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       uploadFiles(e.dataTransfer.files);
-    }
-  };
-
-  const viewFolder = (f) => {
-    if (f.type === 'dir') {
-      changePath(f.path);
     }
   };
 
@@ -403,13 +420,19 @@ export default function Page() {
                 <td style={{ padding: '10px 8px', wordBreak: 'break-word' }}>
                   {f.type === 'dir' ? (
                     <span
-                      onClick={() => viewFolder(f)}
+                      onClick={() => handleFileClick(f)}
                       style={{ cursor: 'pointer', color: styles.link, fontWeight: 600 }}
                     >
                       📁 {f.name}/
                     </span>
                   ) : (
-                    <span>📄 {f.name}</span>
+                    <span
+                      onClick={() => handleFileClick(f)}
+                      style={{ cursor: 'pointer', color: styles.text, textDecoration: 'underline', textDecorationColor: styles.border }}
+                      title="Click to view online"
+                    >
+                      📄 {f.name}
+                    </span>
                   )}
                 </td>
                 <td className="hide-mobile" style={{ padding: '10px 8px', color: styles.mutedText, fontSize: 12 }}>
@@ -462,6 +485,68 @@ export default function Page() {
           </tbody>
         </table>
       </div>
+
+      {/* Online File Viewer Modal */}
+      {previewFile && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 16 }}>
+          <div style={{ background: styles.cardBg, color: styles.text, border: `1px solid ${styles.border}`, borderRadius: 12, maxWidth: 900, width: '100%', maxHeight: '90vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+            
+            {/* Modal Header */}
+            <div style={{ padding: '14px 20px', borderBottom: `1px solid ${styles.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h3 style={{ margin: 0, fontSize: 16, fontFamily: 'system-ui, sans-serif', wordBreak: 'break-all' }}>
+                📄 {previewFile.file.name}
+              </h3>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                {previewFile.file.download_url && (
+                  <a href={previewFile.file.download_url} target="_blank" rel="noopener noreferrer" style={{ padding: '5px 12px', background: styles.btnBg, color: styles.btnText, borderRadius: 6, fontSize: 12, textDecoration: 'none', fontWeight: 600 }}>
+                    ⬇ Download
+                  </a>
+                )}
+                <button onClick={() => setPreviewFile(null)} style={{ background: 'none', border: 'none', color: styles.text, fontSize: 20, cursor: 'pointer', padding: '0 6px' }}>✕</button>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div style={{ padding: 20, overflow: 'auto', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              {previewFile.loading ? (
+                <p style={{ opacity: 0.6 }}>Loading online preview...</p>
+              ) : (
+                (() => {
+                  const ext = previewFile.file.name.split('.').pop().toLowerCase();
+                  const imgExts = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+                  
+                  if (imgExts.includes(ext) && previewFile.file.download_url) {
+                    return <img src={previewFile.file.download_url} alt={previewFile.file.name} style={{ maxWidth: '100%', maxHeight: '70vh', objectFit: 'contain', borderRadius: 8 }} />;
+                  }
+                  if (ext === 'pdf' && previewFile.file.download_url) {
+                    return <iframe src={previewFile.file.download_url} title={previewFile.file.name} style={{ width: '100%', height: '70vh', border: 'none', borderRadius: 8 }} />;
+                  }
+                  if (['mp4', 'webm'].includes(ext) && previewFile.file.download_url) {
+                    return <video controls src={previewFile.file.download_url} style={{ maxWidth: '100%', maxHeight: '70vh', borderRadius: 8 }} />;
+                  }
+                  if (['mp3', 'wav', 'ogg'].includes(ext) && previewFile.file.download_url) {
+                    return <audio controls src={previewFile.file.download_url} style={{ width: '100%' }} />;
+                  }
+                  if (previewFile.content !== null) {
+                    return <pre style={{ width: '100%', padding: 16, background: isDark ? '#000000' : '#ffffff', border: `1px solid ${styles.border}`, borderRadius: 8, fontSize: 12, overflow: 'auto', maxHeight: '65vh', fontFamily: 'monospace', whiteSpace: 'pre-wrap', margin: 0 }}>{previewFile.content}</pre>;
+                  }
+                  return (
+                    <div style={{ textAlign: 'center', padding: 20 }}>
+                      <p style={{ opacity: 0.7 }}>No inline viewer for .{ext} files.</p>
+                      {previewFile.file.download_url && (
+                        <a href={previewFile.file.download_url} target="_blank" rel="noopener noreferrer" style={{ padding: '8px 16px', background: styles.link, color: 'white', borderRadius: 6, textDecoration: 'none', fontSize: 13, fontWeight: 600, display: 'inline-block', marginTop: 10 }}>
+                          Open File in Browser
+                        </a>
+                      )}
+                    </div>
+                  );
+                })()
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
 
       <div style={{ marginTop: 28, paddingTop: 16, borderTop: `1px solid ${styles.subtleBorder}`, color: styles.mutedText, fontSize: 11, textAlign: 'center' }}>
         Directory Listing Index • Secure GitHub Storage Server
