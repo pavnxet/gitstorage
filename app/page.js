@@ -206,34 +206,77 @@ export default function Page() {
   };
 
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 24px', fontFamily: 'monospace, system-ui, sans-serif', color: styles.text, background: styles.bg, minHeight: '100vh', transition: 'background 0.2s ease, color 0.2s ease' }}>
+    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 16px', fontFamily: 'monospace, system-ui, sans-serif', color: styles.text, background: styles.bg, minHeight: '100vh', transition: 'background 0.2s ease, color 0.2s ease' }}>
       
+      {/* Responsive Style Overrides */}
+      <style jsx global>{`
+        @media (max-width: 640px) {
+          .header-container {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+          }
+          .controls-group {
+            width: 100% !important;
+            justify-content: space-between !important;
+          }
+          .controls-btn {
+            flex: 1 !important;
+            padding: 8px 6px !important;
+            font-size: 11px !important;
+            text-align: center !important;
+          }
+          .upload-zone {
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 14px !important;
+          }
+          .upload-btn {
+            width: 100% !important;
+          }
+          .hide-mobile {
+            display: none !important;
+          }
+          .index-table th, .index-table td {
+            padding: 8px 6px !important;
+            font-size: 12px !important;
+          }
+          .action-btn {
+            padding: 4px 6px !important;
+            font-size: 10px !important;
+          }
+        }
+      `}</style>
+
       {/* Header bar with Index path, Theme Toggle, and Controls */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${styles.border}`, paddingBottom: 16 }}>
+      <div className="header-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${styles.border}`, paddingBottom: 16 }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, fontFamily: 'system-ui, sans-serif' }}>
+          <h1 style={{ fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 700, margin: 0, fontFamily: 'system-ui, sans-serif', wordBreak: 'break-word' }}>
             Index of /{path}
           </h1>
           <p style={{ color: styles.mutedText, fontSize: 12, margin: '4px 0 0 0' }}>
             Directory Index Listing {loading ? '(Loading...)' : `(${files.length} items)`}
           </p>
         </div>
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+        <div className="controls-group" style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
           <button
+            className="controls-btn"
             onClick={toggleTheme}
-            style={{ padding: '6px 14px', background: styles.btnBg, color: styles.btnText, border: `1px solid ${styles.border}`, borderRadius: 6, fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
+            style={{ padding: '6px 12px', background: styles.btnBg, color: styles.btnText, border: `1px solid ${styles.border}`, borderRadius: 6, fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
           >
-            {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
+            {isDark ? '☀️ Light' : '🌙 Dark'}
           </button>
           <button
+            className="controls-btn"
             onClick={() => fetchFiles()}
-            style={{ padding: '6px 14px', background: styles.btnBg, color: styles.btnText, border: `1px solid ${styles.border}`, borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+            style={{ padding: '6px 12px', background: styles.btnBg, color: styles.btnText, border: `1px solid ${styles.border}`, borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
           >
             🔄 Refresh
           </button>
           <button
+            className="controls-btn"
             onClick={logout}
-            style={{ padding: '6px 14px', background: '#3f3f46', color: 'white', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+            style={{ padding: '6px 12px', background: '#3f3f46', color: 'white', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
           >
             Logout
           </button>
@@ -250,6 +293,7 @@ export default function Page() {
 
       {/* Drag & Drop Upload Zone */}
       <div
+        className="upload-zone"
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
@@ -259,7 +303,7 @@ export default function Page() {
           background: isDragging ? styles.cardBg : (isDark ? '#121215' : '#f8f8f8'),
           border: `2px dashed ${isDragging ? styles.link : styles.border}`,
           borderRadius: 10,
-          padding: '20px 24px',
+          padding: '18px 20px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -270,13 +314,14 @@ export default function Page() {
         <input ref={fileInputRef} type="file" multiple onChange={onFileChange} style={{ display: 'none' }} />
         <div>
           <h4 style={{ margin: 0, fontSize: 15, fontFamily: 'system-ui, sans-serif', fontWeight: 600 }}>
-            {uploading ? 'Uploading Files...' : '📁 Upload Files to Current Directory'}
+            {uploading ? 'Uploading Files...' : '📁 Upload Files'}
           </h4>
           <p style={{ margin: '4px 0 0 0', fontSize: 12, color: styles.mutedText }}>
-            Drag & drop files here or click to browse (Max 4MB per file)
+            Drag & drop files here or tap to browse (Max 4MB per file)
           </p>
         </div>
         <button
+          className="upload-btn"
           type="button"
           disabled={uploading}
           onClick={(e) => {
@@ -305,14 +350,14 @@ export default function Page() {
       )}
 
       {/* Directory Index Table */}
-      <div style={{ marginTop: 24, overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
+      <div style={{ marginTop: 20, overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+        <table className="index-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, minWidth: 320 }}>
           <thead>
             <tr style={{ borderBottom: `2px solid ${styles.border}`, color: styles.mutedText }}>
-              <th style={{ padding: '10px 12px', fontWeight: 700 }}>Name</th>
-              <th style={{ padding: '10px 12px', fontWeight: 700, width: 140 }}>Type</th>
-              <th style={{ padding: '10px 12px', fontWeight: 700, width: 120, textAlign: 'right' }}>Size</th>
-              <th style={{ padding: '10px 12px', fontWeight: 700, width: 160, textAlign: 'center' }}>Actions</th>
+              <th style={{ padding: '10px 8px', fontWeight: 700 }}>Name</th>
+              <th className="hide-mobile" style={{ padding: '10px 8px', fontWeight: 700, width: 100 }}>Type</th>
+              <th style={{ padding: '10px 8px', fontWeight: 700, width: 90, textAlign: 'right' }}>Size</th>
+              <th style={{ padding: '10px 8px', fontWeight: 700, width: 140, textAlign: 'center' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -322,7 +367,7 @@ export default function Page() {
                 onClick={navigateUp}
                 style={{ borderBottom: `1px solid ${styles.subtleBorder}`, cursor: 'pointer', background: styles.cardBg }}
               >
-                <td colSpan={4} style={{ padding: '10px 12px', color: styles.link, fontWeight: 600 }}>
+                <td colSpan={4} style={{ padding: '10px 8px', color: styles.link, fontWeight: 600 }}>
                   📁 Parent Directory/
                 </td>
               </tr>
@@ -330,7 +375,7 @@ export default function Page() {
 
             {files.length === 0 && !loading && (
               <tr>
-                <td colSpan={4} style={{ padding: '24px 12px', textAlign: 'center', color: styles.mutedText }}>
+                <td colSpan={4} style={{ padding: '24px 8px', textAlign: 'center', color: styles.mutedText }}>
                   Directory is empty.
                 </td>
               </tr>
@@ -344,7 +389,7 @@ export default function Page() {
                   background: idx % 2 === 0 ? styles.bg : styles.altRowBg
                 }}
               >
-                <td style={{ padding: '10px 12px' }}>
+                <td style={{ padding: '10px 8px', wordBreak: 'break-word' }}>
                   {f.type === 'dir' ? (
                     <span
                       onClick={() => viewFolder(f)}
@@ -356,41 +401,45 @@ export default function Page() {
                     <span>📄 {f.name}</span>
                   )}
                 </td>
-                <td style={{ padding: '10px 12px', color: styles.mutedText, fontSize: 12 }}>
+                <td className="hide-mobile" style={{ padding: '10px 8px', color: styles.mutedText, fontSize: 12 }}>
                   {f.type === 'dir' ? 'Directory' : 'File'}
                 </td>
-                <td style={{ padding: '10px 12px', textAlign: 'right', color: styles.mutedText }}>
+                <td style={{ padding: '10px 8px', textAlign: 'right', color: styles.mutedText, whiteSpace: 'nowrap' }}>
                   {formatSize(f.size)}
                 </td>
-                <td style={{ padding: '10px 12px', textAlign: 'center' }}>
-                  <div style={{ display: 'flex', gap: 6, justifyContent: 'center' }}>
+                <td style={{ padding: '10px 8px', textAlign: 'center' }}>
+                  <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
                     {f.type === 'file' && (
                       <a
+                        className="action-btn"
                         href={f.download_url}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
-                          padding: '4px 10px',
+                          padding: '4px 8px',
                           background: styles.btnBg,
                           color: styles.btnText,
                           borderRadius: 4,
                           fontSize: 11,
-                          textDecoration: 'none'
+                          textDecoration: 'none',
+                          whiteSpace: 'nowrap'
                         }}
                       >
                         Download
                       </a>
                     )}
                     <button
+                      className="action-btn"
                       onClick={() => handleDelete(f.path)}
                       style={{
-                        padding: '4px 10px',
+                        padding: '4px 8px',
                         background: '#7f1d1d',
                         color: '#fff',
                         border: 'none',
                         borderRadius: 4,
                         fontSize: 11,
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       Delete
@@ -403,7 +452,7 @@ export default function Page() {
         </table>
       </div>
 
-      <div style={{ marginTop: 32, paddingTop: 16, borderTop: `1px solid ${styles.subtleBorder}`, color: styles.mutedText, fontSize: 11, textAlign: 'center' }}>
+      <div style={{ marginTop: 28, paddingTop: 16, borderTop: `1px solid ${styles.subtleBorder}`, color: styles.mutedText, fontSize: 11, textAlign: 'center' }}>
         Directory Listing Index • Secure GitHub Storage Server
       </div>
     </div>
