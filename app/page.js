@@ -129,6 +129,82 @@ export default function Page() {
     fetchFiles();
   };
 
+  const handleCreateFolder = async () => {
+    const folderName = prompt('Enter new folder name:');
+    if (!folderName || !folderName.trim()) return;
+    setErrorMsg('');
+    try {
+      const resp = await fetch('/api/folder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...getAuthHeader()
+        },
+        body: JSON.stringify({ name: folderName.trim(), path })
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.success) {
+        setErrorMsg(data.error || 'Failed to create folder');
+      } else {
+        fetchFiles();
+      }
+    } catch (err) {
+      setErrorMsg(err.message || 'Folder creation failed');
+    }
+  };
+
+  const handleCopy = async (srcPath) => {
+    const fileName = srcPath.split('/').pop();
+    const defaultTo = path ? `${path}/copy_${fileName}` : `copy_${fileName}`;
+    const to = prompt(`Copy "${srcPath}" to path:`, defaultTo);
+    if (!to || !to.trim()) return;
+    setErrorMsg('');
+    try {
+      const resp = await fetch('/api/copy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...getAuthHeader()
+        },
+        body: JSON.stringify({ from: srcPath, to: to.trim() })
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.success) {
+        setErrorMsg(data.error || 'Copy failed');
+      } else {
+        fetchFiles();
+      }
+    } catch (err) {
+      setErrorMsg(err.message || 'Copy failed');
+    }
+  };
+
+  const handleMove = async (srcPath) => {
+    const fileName = srcPath.split('/').pop();
+    const defaultTo = path ? `${path}/${fileName}` : fileName;
+    const to = prompt(`Move "${srcPath}" to new path:`, defaultTo);
+    if (!to || !to.trim() || to.trim() === srcPath) return;
+    setErrorMsg('');
+    try {
+      const resp = await fetch('/api/move', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...getAuthHeader()
+        },
+        body: JSON.stringify({ from: srcPath, to: to.trim() })
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.success) {
+        setErrorMsg(data.error || 'Move failed');
+      } else {
+        fetchFiles();
+      }
+    } catch (err) {
+      setErrorMsg(err.message || 'Move failed');
+    }
+  };
+
   const handleFileClick = async (f) => {
     if (f.type === 'dir') {
       changePath(f.path);
@@ -289,6 +365,13 @@ export default function Page() {
         <div className="controls-group" style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
           <button
             className="controls-btn"
+            onClick={handleCreateFolder}
+            style={{ padding: '6px 12px', background: styles.link, color: 'white', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
+          >
+            📁 + New Folder
+          </button>
+          <button
+            className="controls-btn"
             onClick={toggleTheme}
             style={{ padding: '6px 12px', background: styles.btnBg, color: styles.btnText, border: `1px solid ${styles.border}`, borderRadius: 6, fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
           >
@@ -385,7 +468,7 @@ export default function Page() {
               <th style={{ padding: '10px 8px', fontWeight: 700 }}>Name</th>
               <th className="hide-mobile" style={{ padding: '10px 8px', fontWeight: 700, width: 100 }}>Type</th>
               <th style={{ padding: '10px 8px', fontWeight: 700, width: 90, textAlign: 'right' }}>Size</th>
-              <th style={{ padding: '10px 8px', fontWeight: 700, width: 140, textAlign: 'center' }}>Actions</th>
+              <th style={{ padding: '10px 8px', fontWeight: 700, width: 220, textAlign: 'center' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -442,7 +525,7 @@ export default function Page() {
                   {formatSize(f.size)}
                 </td>
                 <td style={{ padding: '10px 8px', textAlign: 'center' }}>
-                  <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
+                  <div style={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
                     {f.type === 'file' && (
                       <a
                         className="action-btn"
@@ -462,6 +545,38 @@ export default function Page() {
                         Download
                       </a>
                     )}
+                    <button
+                      className="action-btn"
+                      onClick={() => handleCopy(f.path)}
+                      style={{
+                        padding: '4px 8px',
+                        background: '#15803d',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: 4,
+                        fontSize: 11,
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      Copy
+                    </button>
+                    <button
+                      className="action-btn"
+                      onClick={() => handleMove(f.path)}
+                      style={{
+                        padding: '4px 8px',
+                        background: '#b45309',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: 4,
+                        fontSize: 11,
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      Move
+                    </button>
                     <button
                       className="action-btn"
                       onClick={() => handleDelete(f.path)}
