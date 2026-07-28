@@ -54,7 +54,6 @@ export default function Page() {
       count++;
       setUploadProgress(`Uploading (${count}/${total}): ${file.name}...`);
 
-      // Enforce 4.0MB client-side limit to prevent exceeding Vercel 4.5MB payload limit after Base64 encoding
       if (file.size > 4.0 * 1024 * 1024) {
         setErrorMsg(`File "${file.name}" is ${(file.size / (1024 * 1024)).toFixed(1)}MB. Limit is 4.0MB to prevent Vercel body overflow.`);
         setUploading(false);
@@ -140,6 +139,15 @@ export default function Page() {
     }
   };
 
+  const navigateUp = () => {
+    if (!path) return;
+    const parts = path.split('/');
+    parts.pop();
+    const np = parts.join('/');
+    setPath(np);
+    fetchFiles(np);
+  };
+
   const handleDelete = async (p) => {
     if (!confirm(`Delete ${p}?`)) return;
     setErrorMsg('');
@@ -165,23 +173,51 @@ export default function Page() {
     window.location.href = '/login';
   };
 
-  return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: 24, fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1 style={{ fontSize: 24, fontWeight: 800, margin: 0 }}>🔒 Secure Storage</h1>
-        <button onClick={logout} style={{ padding: '6px 14px', background: '#27272a', color: 'white', border: 'none', borderRadius: 8, fontSize: 12, cursor: 'pointer' }}>Logout</button>
-      </div>
-      <p style={{ opacity: 0.6, fontSize: 13, marginTop: 6 }}>Path: /{path || 'root'} | {loading ? 'Loading...' : `${files.length} items`}</p>
+  const formatSize = (bytes) => {
+    if (bytes === 0 || bytes === undefined) return '-';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  };
 
-      {/* ERROR ALERT BANNER */}
+  return (
+    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 24px', fontFamily: 'monospace, system-ui, sans-serif', color: '#e4e4e7', background: '#09090b', minHeight: '100vh' }}>
+      
+      {/* Header bar with Index path and controls */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #27272a', paddingBottom: 16 }}>
+        <div>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, fontFamily: 'system-ui, sans-serif' }}>
+            Index of /{path}
+          </h1>
+          <p style={{ opacity: 0.5, fontSize: 12, margin: '4px 0 0 0' }}>
+            Directory Index Listing {loading ? '(Loading...)' : `(${files.length} items)`}
+          </p>
+        </div>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          <button
+            onClick={() => fetchFiles()}
+            style={{ padding: '6px 14px', background: '#27272a', color: 'white', border: '1px solid #3f3f46', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+          >
+            🔄 Refresh
+          </button>
+          <button
+            onClick={logout}
+            style={{ padding: '6px 14px', background: '#3f3f46', color: 'white', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+
+      {/* Error Banner */}
       {errorMsg && (
-        <div style={{ marginTop: 16, padding: '12px 16px', background: '#450a0a', border: '1px solid #991b1b', borderRadius: 10, color: '#fca5a5', fontSize: 13, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ marginTop: 16, padding: '12px 16px', background: '#450a0a', border: '1px solid #991b1b', borderRadius: 8, color: '#fca5a5', fontSize: 13, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div><b>Error:</b> {errorMsg}</div>
-          <button onClick={() => setErrorMsg('')} style={{ background: 'none', border: 'none', color: '#fca5a5', fontSize: 16, cursor: 'pointer', marginLeft: 12 }}>✕</button>
+          <button onClick={() => setErrorMsg('')} style={{ background: 'none', border: 'none', color: '#fca5a5', fontSize: 16, cursor: 'pointer' }}>✕</button>
         </div>
       )}
 
-      {/* UPLOAD SECTION - DRAG AND DROP ZONE */}
+      {/* Drag & Drop Upload Zone */}
       <div
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
@@ -189,24 +225,26 @@ export default function Page() {
         onClick={() => fileInputRef.current?.click()}
         style={{
           marginTop: 20,
-          background: isDragging ? '#27272a' : '#18181b',
-          border: `2px dashed ${isDragging ? '#3b82f6' : '#3f3f46'}`,
-          borderRadius: 16,
-          padding: '32px 24px',
-          textAlign: 'center',
-          transition: 'all 0.2s ease',
-          cursor: 'pointer'
+          background: isDragging ? '#18181b' : '#121215',
+          border: `2px dashed ${isDragging ? '#3b82f6' : '#27272a'}`,
+          borderRadius: 10,
+          padding: '20px 24px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
         }}
       >
-        <div style={{ fontSize: 36, marginBottom: 8 }}>☁️</div>
-        <h3 style={{ margin: '0 0 8px 0', fontSize: 18, fontWeight: 700 }}>
-          {uploading ? 'Uploading...' : 'Drag & Drop files here'}
-        </h3>
-        <p style={{ fontSize: 12, opacity: 0.5, margin: '0 0 16px 0' }}>
-          Supports any file format (up to 4MB per file on Vercel)
-        </p>
-
         <input ref={fileInputRef} type="file" multiple onChange={onFileChange} style={{ display: 'none' }} />
+        <div>
+          <h4 style={{ margin: 0, fontSize: 15, fontFamily: 'system-ui, sans-serif', fontWeight: 600 }}>
+            {uploading ? 'Uploading Files...' : '📁 Upload Files to Current Directory'}
+          </h4>
+          <p style={{ margin: '4px 0 0 0', fontSize: 12, opacity: 0.5 }}>
+            Drag & drop files here or click to browse (Max 4MB per file)
+          </p>
+        </div>
         <button
           type="button"
           disabled={uploading}
@@ -215,61 +253,127 @@ export default function Page() {
             fileInputRef.current?.click();
           }}
           style={{
-            padding: '10px 24px',
+            padding: '8px 18px',
             background: 'white',
             color: 'black',
-            borderRadius: 10,
-            fontWeight: 800,
-            fontSize: 14,
             border: 'none',
-            cursor: 'pointer',
-            opacity: uploading ? 0.6 : 1
+            borderRadius: 6,
+            fontSize: 13,
+            fontWeight: 700,
+            cursor: 'pointer'
           }}
         >
-          {uploading ? 'Uploading...' : '📁 Choose Files to Upload'}
+          {uploading ? 'Uploading...' : 'Browse Files'}
         </button>
-
-        {uploadProgress && <p style={{ marginTop: 12, color: '#60a5fa', fontSize: 13, fontWeight: 600 }}>{uploadProgress}</p>}
       </div>
 
-      {/* FILE LIST */}
-      <div style={{ marginTop: 20, background: '#18181b', padding: 16, borderRadius: 16, border: '1px solid #27272a' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
-          <button onClick={() => { setPath(''); fetchFiles(''); }} style={{ padding: '6px 14px', background: '#27272a', borderRadius: 8, color: 'white', border: 'none', cursor: 'pointer', fontSize: 13 }}>🏠 Root</button>
-          {path && <button onClick={() => { const parts = path.split('/'); parts.pop(); const np = parts.join('/'); setPath(np); fetchFiles(np); }} style={{ padding: '6px 14px', background: '#27272a', borderRadius: 8, color: 'white', border: 'none', cursor: 'pointer', fontSize: 13 }}>⬅ Back</button>}
-          <button onClick={() => fetchFiles()} style={{ padding: '6px 14px', background: 'white', color: 'black', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 13, fontWeight: 600 }}>{loading ? '...' : '🔄 Refresh'}</button>
+      {uploadProgress && (
+        <div style={{ marginTop: 10, fontSize: 12, color: '#60a5fa', fontWeight: 600 }}>
+          {uploadProgress}
         </div>
+      )}
 
-        {files.length === 0 && !loading && (
-          <p style={{ opacity: 0.5, textAlign: 'center', padding: '24px 0', fontSize: 13 }}>No files in this folder. Upload something above!</p>
-        )}
+      {/* Directory Index Table */}
+      <div style={{ marginTop: 24, overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
+          <thead>
+            <tr style={{ borderBottom: '2px solid #27272a', color: '#a1a1aa' }}>
+              <th style={{ padding: '10px 12px', fontWeight: 700 }}>Name</th>
+              <th style={{ padding: '10px 12px', fontWeight: 700, width: 140 }}>Type</th>
+              <th style={{ padding: '10px 12px', fontWeight: 700, width: 120, textAlign: 'right' }}>Size</th>
+              <th style={{ padding: '10px 12px', fontWeight: 700, width: 160, textAlign: 'center' }}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* Parent Directory Link */}
+            {path && (
+              <tr
+                onClick={navigateUp}
+                style={{ borderBottom: '1px solid #18181b', cursor: 'pointer', background: '#0e0e11' }}
+              >
+                <td colSpan={4} style={{ padding: '10px 12px', color: '#60a5fa', fontWeight: 600 }}>
+                  📁 Parent Directory/
+                </td>
+              </tr>
+            )}
 
-        {files.map(f => (
-          <div key={f.sha} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 14px', background: '#09090b', marginBottom: 8, borderRadius: 10, border: '1px solid #1f1f23' }}>
-            <span onClick={() => viewFolder(f)} style={{ cursor: f.type === 'dir' ? 'pointer' : 'default', flex: 1, fontSize: 14 }}>
-              {f.type === 'dir' ? '📁' : '📄'} <b>{f.name}</b> <span style={{ opacity: 0.4, fontSize: 12, marginLeft: 6 }}>({(f.size / 1024).toFixed(1)} KB)</span>
-            </span>
-            <div style={{ display: 'flex', gap: 8, marginLeft: 10 }}>
-              {f.type === 'file' && (
-                <a href={f.download_url} target="_blank" rel="noopener noreferrer" style={{ padding: '6px 12px', background: '#27272a', borderRadius: 8, fontSize: 12, textDecoration: 'none', color: 'white', fontWeight: 500 }}>
-                  ⬇ Download
-                </a>
-              )}
-              <button onClick={() => handleDelete(f.path)} style={{ padding: '6px 12px', background: '#7f1d1d', color: 'white', border: 'none', borderRadius: 8, fontSize: 12, cursor: 'pointer' }}>
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+            {files.length === 0 && !loading && (
+              <tr>
+                <td colSpan={4} style={{ padding: '24px 12px', textAlign: 'center', opacity: 0.4 }}>
+                  Directory is empty.
+                </td>
+              </tr>
+            )}
+
+            {files.map((f, idx) => (
+              <tr
+                key={f.sha || idx}
+                style={{
+                  borderBottom: '1px solid #18181b',
+                  background: idx % 2 === 0 ? '#09090b' : '#0d0d10'
+                }}
+              >
+                <td style={{ padding: '10px 12px' }}>
+                  {f.type === 'dir' ? (
+                    <span
+                      onClick={() => viewFolder(f)}
+                      style={{ cursor: 'pointer', color: '#60a5fa', fontWeight: 600 }}
+                    >
+                      📁 {f.name}/
+                    </span>
+                  ) : (
+                    <span>📄 {f.name}</span>
+                  )}
+                </td>
+                <td style={{ padding: '10px 12px', opacity: 0.6, fontSize: 12 }}>
+                  {f.type === 'dir' ? 'Directory' : 'File'}
+                </td>
+                <td style={{ padding: '10px 12px', textAlign: 'right', opacity: 0.7 }}>
+                  {formatSize(f.size)}
+                </td>
+                <td style={{ padding: '10px 12px', textAlign: 'center' }}>
+                  <div style={{ display: 'flex', gap: 6, justifyContent: 'center' }}>
+                    {f.type === 'file' && (
+                      <a
+                        href={f.download_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          padding: '4px 10px',
+                          background: '#27272a',
+                          color: '#fff',
+                          borderRadius: 4,
+                          fontSize: 11,
+                          textDecoration: 'none'
+                        }}
+                      >
+                        Download
+                      </a>
+                    )}
+                    <button
+                      onClick={() => handleDelete(f.path)}
+                      style={{
+                        padding: '4px 10px',
+                        background: '#7f1d1d',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: 4,
+                        fontSize: 11,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      <div style={{ marginTop: 20, padding: 14, background: '#1a1a2e', borderRadius: 10, fontSize: 12, color: '#a5b4fc', border: '1px solid #312e81' }}>
-        <b>Setup Requirements in Vercel Environment Variables:</b><br />
-        1. <code>GITHUB_TOKEN</code>: Personal Access Token (Classic with <code>repo</code> scope, or Fine-grained with <code>Contents: Read & Write</code>).<br />
-        2. <code>GITHUB_OWNER</code>: GitHub username (e.g., <code>pavnxet</code>).<br />
-        3. <code>GITHUB_REPO</code>: Repository name (e.g., <code>gitstorage</code>).<br />
-        4. <code>GITHUB_BRANCH</code>: Branch name (e.g., <code>main</code>).<br />
-        5. <code>SITE_PASSWORD</code>: (Optional) Password for login page protection.
+      <div style={{ marginTop: 32, paddingTop: 16, borderTop: '1px solid #18181b', opacity: 0.4, fontSize: 11, textAlign: 'center' }}>
+        Directory Listing Index • Secure GitHub Storage Server
       </div>
     </div>
   );
