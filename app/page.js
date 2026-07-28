@@ -11,6 +11,7 @@ export default function Page() {
   const [errorMsg, setErrorMsg] = useState('');
   const [theme, setTheme] = useState('dark');
   const [previewFile, setPreviewFile] = useState(null);
+  const [htmlMode, setHtmlMode] = useState('live'); // 'live' or 'code'
   const fileInputRef = useRef(null);
 
   const getAuthHeader = () => {
@@ -211,16 +212,17 @@ export default function Page() {
       return;
     }
 
+    setHtmlMode('live');
     setPreviewFile({ file: f, content: null, loading: true });
 
     const ext = f.name.split('.').pop().toLowerCase();
-    const textExts = ['txt', 'md', 'json', 'js', 'css', 'html', 'py', 'ts', 'jsx', 'tsx', 'csv', 'log', 'xml', 'yaml', 'yml'];
+    const textExts = ['txt', 'md', 'json', 'js', 'css', 'html', 'htm', 'py', 'ts', 'jsx', 'tsx', 'csv', 'log', 'xml', 'yaml', 'yml'];
 
     if (textExts.includes(ext) && f.download_url) {
       try {
         const res = await fetch(f.download_url);
         const text = await res.text();
-        setPreviewFile({ file: f, content: text.slice(0, 30000), loading: false });
+        setPreviewFile({ file: f, content: text.slice(0, 50000), loading: false });
       } catch (err) {
         setPreviewFile({ file: f, content: 'Failed to load text content.', loading: false });
       }
@@ -604,7 +606,7 @@ export default function Page() {
       {/* Online File Viewer Modal */}
       {previewFile && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 16 }}>
-          <div style={{ background: styles.cardBg, color: styles.text, border: `1px solid ${styles.border}`, borderRadius: 12, maxWidth: 900, width: '100%', maxHeight: '90vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+          <div style={{ background: styles.cardBg, color: styles.text, border: `1px solid ${styles.border}`, borderRadius: 12, maxWidth: 950, width: '100%', maxHeight: '92vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
             
             {/* Modal Header */}
             <div style={{ padding: '14px 20px', borderBottom: `1px solid ${styles.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -622,31 +624,64 @@ export default function Page() {
             </div>
 
             {/* Modal Body */}
-            <div style={{ padding: 20, overflow: 'auto', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ padding: 20, overflow: 'auto', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               {previewFile.loading ? (
-                <p style={{ opacity: 0.6 }}>Loading online preview...</p>
+                <p style={{ opacity: 0.6, margin: 'auto' }}>Loading online preview...</p>
               ) : (
                 (() => {
                   const ext = previewFile.file.name.split('.').pop().toLowerCase();
                   const imgExts = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
-                  
+
+                  if (['html', 'htm'].includes(ext) && previewFile.content !== null) {
+                    return (
+                      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        <div style={{ marginBottom: 12, display: 'flex', gap: 8 }}>
+                          <button
+                            onClick={() => setHtmlMode('live')}
+                            style={{ padding: '6px 14px', background: htmlMode === 'live' ? styles.link : styles.btnBg, color: htmlMode === 'live' ? 'white' : styles.btnText, border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
+                          >
+                            🌐 Live Rendered Preview
+                          </button>
+                          <button
+                            onClick={() => setHtmlMode('code')}
+                            style={{ padding: '6px 14px', background: htmlMode === 'code' ? styles.link : styles.btnBg, color: htmlMode === 'code' ? 'white' : styles.btnText, border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
+                          >
+                            📝 Source Code
+                          </button>
+                        </div>
+                        {htmlMode === 'live' ? (
+                          <iframe
+                            srcDoc={previewFile.content}
+                            sandbox="allow-scripts"
+                            title={previewFile.file.name}
+                            style={{ width: '100%', height: '65vh', border: 'none', background: '#ffffff', borderRadius: 8 }}
+                          />
+                        ) : (
+                          <pre style={{ width: '100%', padding: 16, background: isDark ? '#000000' : '#ffffff', border: `1px solid ${styles.border}`, borderRadius: 8, fontSize: 12, overflow: 'auto', maxHeight: '65vh', fontFamily: 'monospace', whiteSpace: 'pre-wrap', margin: 0 }}>
+                            {previewFile.content}
+                          </pre>
+                        )}
+                      </div>
+                    );
+                  }
+
                   if (imgExts.includes(ext) && previewFile.file.download_url) {
-                    return <img src={previewFile.file.download_url} alt={previewFile.file.name} style={{ maxWidth: '100%', maxHeight: '70vh', objectFit: 'contain', borderRadius: 8 }} />;
+                    return <img src={previewFile.file.download_url} alt={previewFile.file.name} style={{ maxWidth: '100%', maxHeight: '70vh', objectFit: 'contain', borderRadius: 8, margin: 'auto' }} />;
                   }
                   if (ext === 'pdf' && previewFile.file.download_url) {
                     return <iframe src={previewFile.file.download_url} title={previewFile.file.name} style={{ width: '100%', height: '70vh', border: 'none', borderRadius: 8 }} />;
                   }
                   if (['mp4', 'webm'].includes(ext) && previewFile.file.download_url) {
-                    return <video controls src={previewFile.file.download_url} style={{ maxWidth: '100%', maxHeight: '70vh', borderRadius: 8 }} />;
+                    return <video controls src={previewFile.file.download_url} style={{ maxWidth: '100%', maxHeight: '70vh', borderRadius: 8, margin: 'auto' }} />;
                   }
                   if (['mp3', 'wav', 'ogg'].includes(ext) && previewFile.file.download_url) {
-                    return <audio controls src={previewFile.file.download_url} style={{ width: '100%' }} />;
+                    return <audio controls src={previewFile.file.download_url} style={{ width: '100%', margin: 'auto' }} />;
                   }
                   if (previewFile.content !== null) {
                     return <pre style={{ width: '100%', padding: 16, background: isDark ? '#000000' : '#ffffff', border: `1px solid ${styles.border}`, borderRadius: 8, fontSize: 12, overflow: 'auto', maxHeight: '65vh', fontFamily: 'monospace', whiteSpace: 'pre-wrap', margin: 0 }}>{previewFile.content}</pre>;
                   }
                   return (
-                    <div style={{ textAlign: 'center', padding: 20 }}>
+                    <div style={{ textAlign: 'center', padding: 20, margin: 'auto' }}>
                       <p style={{ opacity: 0.7 }}>No inline viewer for .{ext} files.</p>
                       {previewFile.file.download_url && (
                         <a href={previewFile.file.download_url} target="_blank" rel="noopener noreferrer" style={{ padding: '8px 16px', background: styles.link, color: 'white', borderRadius: 6, textDecoration: 'none', fontSize: 13, fontWeight: 600, display: 'inline-block', marginTop: 10 }}>
