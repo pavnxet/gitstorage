@@ -12,19 +12,6 @@ export default function Page() {
   const [theme, setTheme] = useState('dark');
   const fileInputRef = useRef(null);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('site_theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(nextTheme);
-    localStorage.setItem('site_theme', nextTheme);
-  };
-
   const getAuthHeader = () => {
     const pw = localStorage.getItem('site_pw') || '';
     return pw ? { 'Authorization': `Bearer ${pw}` } : {};
@@ -51,10 +38,20 @@ export default function Page() {
   };
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem('site_theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
     const match = document.cookie.match(/site_auth=([^;]+)/);
     if (match) localStorage.setItem('site_pw', match[1]);
     fetchFiles('');
   }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    localStorage.setItem('site_theme', nextTheme);
+  };
 
   const uploadFiles = async (fileList) => {
     if (!fileList || !fileList.length) return;
@@ -264,7 +261,7 @@ export default function Page() {
           borderRadius: 10,
           padding: '20px 24px',
           display: 'flex',
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
           cursor: 'pointer',
           transition: 'all 0.2s ease'
@@ -313,9 +310,9 @@ export default function Page() {
           <thead>
             <tr style={{ borderBottom: `2px solid ${styles.border}`, color: styles.mutedText }}>
               <th style={{ padding: '10px 12px', fontWeight: 700 }}>Name</th>
-              <th style={{ padding: '10px 12px', fontWeight 700, width: 140 }}>Type</th>
-              <th style={{ padding: '10px 12px', fontWeight 700, width: 120, textAlign: 'right' }}>Size</th>
-              <th style={{ padding: '10px 12px', fontWeight 700, width: 160, textAlign: 'center' }}>Actions</th>
+              <th style={{ padding: '10px 12px', fontWeight: 700, width: 140 }}>Type</th>
+              <th style={{ padding: '10px 12px', fontWeight: 700, width: 120, textAlign: 'right' }}>Size</th>
+              <th style={{ padding: '10px 12px', fontWeight: 700, width: 160, textAlign: 'center' }}>Actions</th>
             </tr>
           </thead>
           <tbody>

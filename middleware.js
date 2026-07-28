@@ -6,7 +6,6 @@ export function middleware(req) {
 
   const { pathname } = req.nextUrl;
 
-  // Allow login page, auth API route, Next.js static assets, and favicon
   if (
     pathname.startsWith('/login') ||
     pathname.startsWith('/api/auth') ||
@@ -23,7 +22,6 @@ export function middleware(req) {
     return NextResponse.next();
   }
 
-  // Return 401 JSON for unauthenticated API requests
   if (pathname.startsWith('/api/')) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -32,5 +30,5 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)']
+  matcher: ['/((?!_next/static|_next/image|favicon\\.ico).*)']
 };
