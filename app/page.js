@@ -547,7 +547,7 @@ export default function Page() {
               <th style={{ padding: '10px 8px', fontWeight: 700 }}>Name</th>
               <th className="hide-mobile" style={{ padding: '10px 8px', fontWeight: 700, width: 100 }}>Type</th>
               <th style={{ padding: '10px 8px', fontWeight: 700, width: 90, textAlign: 'right' }}>Size</th>
-              <th style={{ padding: '10px 8px', fontWeight 700, width: 310, textAlign: 'center' }}>Actions</th>
+              <th style={{ padding: '10px 8px', fontWeight: 700, width: 310, textAlign: 'center' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
