@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Terminal | Tactical AMOLED Edition</title>
+    <style>
+        :root {
+            --bg-canvas: #040405;
+            --bg-surface: rgba(14, 14, 18, 0.72);
+            --border-base: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.22);
+            --text-main: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #52525b;
+            --accent-white: #fafafa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            position: relative;
+            overflow-x: hidden;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Ambient Backdrops */
+        .ambient-glow {
+            position: fixed;
+            width: 650px;
+            height: 650px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.035) 0%, transparent 68%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-texture {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 32px 32px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Focus HUD */
+        .focus-hud {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            padding: 24px 36px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: transform 1.2s ease;
+        }
+
+        .focus-hud-item {
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: #71717a;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .focus-timer-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #09090b;
+            border: 1px solid #1f1f23;
+            padding: 6px 14px;
+            border-radius: 20px;
+            color: #d4d4d8;
+        }
+
+        .focus-timer-pill.expired {
+            border-color: #7f1d1d;
+            color: #ef4444;
+            animation: pulse-warn 1.5s infinite;
+        }
+
+        @keyframes pulse-warn {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .focus-hud-exit {
+            background: #09090b;
+            border: 1px solid #27272a;
+            color: #a1a1aa;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .focus-hud-exit:hover {
+            color: #ffffff;
+            border-color: #52525b;
+            background: #18181b;
+        }
+
+        /* Focus Micro Progress Line */
+        .focus-progress-line {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            width: 0%;
+            background-color: #ffffff;
+            z-index: 101;
+            transition: width 0.25s ease, transform 1.2s ease;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 250px;
+            background-color: var(--bg-surface);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid var(--border-base);
+            border-radius: 18px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            z-index: 50;
+            transition: border-color 0.2s ease;
+        }
+
+        .sidebar:hover {
+            border-color: var(--border-hover);
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-title {
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--text-muted);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .status-dot.active {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+        }
+
+        .status-dot.expired {
+            background-color: #71717a;
+            box-shadow: 0 0 8px rgba(113, 113, 122, 0.6);
+        }
+
+        .timer-input-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border-base);
+            border-radius: 9px;
+            padding: 7px 12px;
+        }
+
+        .timer-min-input {
+            width: 50px;
+            background: transparent;
+            border: 1px solid var(--border-base);
+            border-radius: 5px;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            outline: none;
+            padding: 3px;
+        }
+
+        .timer-min-input:focus {
+            border-color: var(--border-hover);
+        }
+
+        .timer-display {
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+            text-align: center;
+            padding: 12px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-base);
+            border-radius: 12px;
+            color: var(--text-main);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .timer-display.alert {
+            color: #71717a;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .side-btn {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-base);
+            color: var(--text-secondary);
+            border-radius: 9px;
+            padding: 11px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .side-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .side-btn:active {
+            transform: scale(0.97);
+        }
+
+        .side-btn.primary {
+            background-color: var(--accent-white);
+            color: var(--bg-canvas);
+            border: none;
+            grid-column: span 2;
+            padding: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15);
+        }
+
+        .side-btn.primary:hover {
+            opacity: 0.94;
+        }
+
+        /* Center Layout */
+        .center-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .terminal-container {
+            background-color: var(--bg-surface);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid var(--border-base);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 490px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 28px 64px -16px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: border-color 0.2s ease;
+        }
+
+        .terminal-container:hover {
+            border-color: var(--border-hover);
+        }
+
+        /* Top Bar */
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .clock-badge {
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-base);
+            padding: 7px 14px;
+            border-radius: 9px;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tool-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-base);
+            color: var(--text-secondary);
+            border-radius: 9px;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.88rem;
+            transition: all 0.15s ease;
+        }
+
+        .tool-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .tool-btn.active {
+            border-color: rgba(255, 255, 255, 0.35);
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        /* Config Grid */
+        .config-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-base);
+            border-radius: 11px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .input-box {
+            width: 66px;
+            background: transparent;
+            border: 1px solid var(--border-base);
+            border-radius: 6px;
+            padding: 4px 6px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .input-box:focus {
+            border-color: var(--border-hover);
+        }
+
+        /* Core Counter Display */
+        .counter-unit {
+            text-align: center;
+            padding: 12px 0 6px;
+            position: relative;
+        }
+
+        .counter-val {
+            font-size: 6.8rem;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            font-variant-numeric: tabular-nums;
+            color: var(--text-main);
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.18);
+            transition: transform 0.08s ease, color 2s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .counter-val.pop {
+            transform: scale(1.04);
+        }
+
+        /* Progress Rail */
+        .progress-block {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.06);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-thumb {
+            height: 100%;
+            width: 0%;
+            background-color: var(--accent-white);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+            transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Telemetry Metrics */
+        .telemetry-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .metric-cell {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-base);
+            border-radius: 11px;
+            padding: 13px 8px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .metric-value {
+            font-size: 0.94rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Inputs */
+        .input-cluster {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-plus {
+            flex: 2.6;
+            background-color: var(--accent-white);
+            color: var(--bg-canvas);
+            border: none;
+            border-radius: 12px;
+            padding: 19px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px -6px rgba(255, 255, 255, 0.25);
+            transition: opacity 0.15s ease, transform 0.08s ease;
+        }
+
+        .btn-plus:hover {
+            opacity: 0.94;
+        }
+
+        .btn-plus:active {
+            transform: scale(0.98);
+        }
+
+        .btn-minus {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border: 1px solid var(--border-base);
+            border-radius: 12px;
+            padding: 19px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-minus:hover {
+            border-color: var(--border-hover);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-minus:active {
+            transform: scale(0.98);
+        }
+
+        .footer-tools {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            padding-top: 4px;
+        }
+
+        .reset-link {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.74rem;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: color 0.15s ease;
+        }
+
+        .reset-link:hover {
+            color: var(--text-secondary);
+        }
+
+        /* AMOLED Focus Mode Styles */
+        body.focus-mode {
+            background-color: #000000 !important;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body.focus-mode .ambient-glow,
+        body.focus-mode .grid-texture,
+        body.focus-mode .sidebar,
+        body.focus-mode .header-bar,
+        body.focus-mode .config-strip,
+        body.focus-mode .progress-block,
+        body.focus-mode .telemetry-board,
+        body.focus-mode .footer-tools {
+            display: none !important;
+        }
+
+        body.focus-mode .focus-hud {
+            display: flex;
+        }
+
+        body.focus-mode .focus-progress-line {
+            display: block;
+        }
+
+        body.focus-mode .center-wrapper {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        body.focus-mode .terminal-container {
+            background-color: #000000 !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            max-width: 520px;
+            padding: 0 24px;
+            gap: 40px;
+            transition: transform 1.2s ease;
+        }
+
+        body.focus-mode .counter-val {
+            font-size: 11rem;
+            font-weight: 900;
+            text-shadow: none;
+            color: #ffffff;
+        }
+
+        /* Micro-Luminance Breathing Effect */
+        body.focus-mode.burn-dim .counter-val {
+            color: #b0b0b5 !important;
+        }
+
+        body.focus-mode .btn-plus {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border-radius: 14px;
+            padding: 24px;
+            font-size: 1.25rem;
+            box-shadow: none;
+        }
+
+        body.focus-mode .btn-minus {
+            background-color: #050505 !important;
+            border: 1px solid #1c1c1f !important;
+            border-radius: 14px;
+            padding: 24px;
+            font-size: 1.25rem;
+            color: #71717a !important;
+        }
+
+        body.focus-mode .btn-minus:hover {
+            border-color: #3f3f46 !important;
+            color: #ffffff !important;
+        }
+
+        /* Modal Overlay */
+        .modal-wrap {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .modal-wrap.open {
+            display: flex;
+        }
+
+        .modal-card {
+            background: #09090b;
+            border: 1px solid var(--border-hover);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 440px;
+            padding: 26px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95);
+        }
+
+        .modal-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-title-row h2 {
+            font-size: 0.96rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .modal-text p {
+            font-size: 0.83rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .modal-text strong {
+            color: var(--text-main);
+        }
+
+        .modal-btn-done {
+            width: 100%;
+            background: var(--accent-white);
+            color: var(--bg-canvas);
+            border: none;
+            border-radius: 9px;
+            padding: 11px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 1080px) {
+            .sidebar {
+                position: static;
+                transform: none;
+                width: 100%;
+                max-width: 490px;
+                margin-bottom: 16px;
+            }
+            body {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+    <div class="grid-texture"></div>
+
+    <!-- AMOLED Focus Mode HUD -->
+    <div class="focus-progress-line" id="focusProgressLine"></div>
+    <header class="focus-hud" id="focusHud">
+        <div class="focus-hud-item" id="focusClock">--:--:-- --</div>
+        <div class="focus-timer-pill" id="focusTimerPill">
+            <span>Timer:</span>
+            <b id="focusTimerDisplay" style="color:#ffffff;">45:00</b>
+        </div>
+        <button class="focus-hud-exit" id="focusExitBtn">Exit Focus [Z]</button>
+    </header>
+
+    <!-- Left Sidebar: Countdown Timer -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-title">Countdown Focus</span>
+            <div class="status-dot" id="timerStatusDot"></div>
+        </div>
+
+        <div class="timer-input-strip">
+            <span>Interval Target:</span>
+            <div>
+                <input type="number" id="timerMinutesInput" min="1" max="720" value="45" class="timer-min-input">
+                <span style="color: var(--text-muted);">min</span>
+            </div>
+        </div>
+        
+        <div class="timer-display" id="timerDisplay">45:00</div>
+
+        <button class="side-btn primary" id="timerToggleBtn">Start Timer</button>
+        <div class="sidebar-btn-group">
+            <button class="side-btn" id="timerPauseBtn">Pause</button>
+            <button class="side-btn" id="timerResetBtn">Reset</button>
+        </div>
+    </aside>
+
+    <!-- Center Tracker Module -->
+    <main class="center-wrapper">
+        <div class="terminal-container" id="terminalContainer">
+            <div class="header-bar">
+                <div class="clock-badge" id="clockBox">--:--:-- --</div>
+                <div class="toolbar">
+                    <button class="tool-btn" id="focusToggle" title="Toggle AMOLED Focus Mode [Z]" aria-label="Toggle Focus Mode">🎯</button>
+                    <button class="tool-btn" id="muteToggle" title="Toggle Sound [M]" aria-label="Toggle Sound">🔊</button>
+                    <button class="tool-btn" id="fullToggle" title="Toggle Fullscreen [F]" aria-label="Toggle Fullscreen">⛶</button>
+                    <button class="tool-btn" id="infoToggle" title="About & Instructions [?]" aria-label="Information">?</button>
+                </div>
+            </div>
+
+            <!-- Target & Continue/Jump Setup Strip -->
+            <div class="config-strip">
+                <div class="config-item">
+                    <span>Target:</span>
+                    <div>
+                        <input type="number" id="targetInput" min="1" max="10000" value="237" class="input-box">
+                        <span style="color: var(--text-muted); font-size: 0.75rem;">Q</span>
+                    </div>
+                </div>
+                <div class="config-item">
+                    <span>Jump to:</span>
+                    <div>
+                        <input type="number" id="jumpInput" min="0" max="10000" placeholder="Set" class="input-box">
+                        <span style="color: var(--text-muted); font-size: 0.75rem;">#</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Readout -->
+            <div class="counter-unit">
+                <div class="counter-val" id="counterNumber">0</div>
+            </div>
+
+            <!-- Progress Rail -->
+            <div class="progress-block">
+                <div class="progress-track">
+                    <div class="progress-thumb" id="progressBar"></div>
+                </div>
+                <div class="progress-details">
+                    <span>Completed: <b id="countMetric" style="color:var(--text-secondary)">0</b>/<span id="targetMetric">237</span></span>
+                    <span id="percentMetric">0%</span>
+                </div>
+            </div>
+
+            <!-- Telemetry Metrics -->
+            <div class="telemetry-board">
+                <div class="metric-cell">
+                    <div class="metric-label">Session Pace</div>
+                    <div class="metric-value" id="paceMetric">0 Q/h</div>
+                </div>
+                <div class="metric-cell">
+                    <div class="metric-label">Remaining</div>
+                    <div class="metric-value" id="leftMetric">237</div>
+                </div>
+                <div class="metric-cell">
+                    <div class="metric-label">Est. Time Left</div>
+                    <div class="metric-value" id="etaMetric">--</div>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="input-cluster">
+                <button class="btn-minus" id="btnMinus" aria-label="Decrease question count">-1</button>
+                <button class="btn-plus" id="btnPlus" aria-label="Complete question">+1 Done</button>
+            </div>
+
+            <div class="footer-tools">
+                <span>Keybinds: <b>Space</b> / <b>↑</b> (+1) &nbsp; <b>↓</b> (-1)</span>
+                <button class="reset-link" id="btnReset">Reset State</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Info Modal -->
+    <div class="modal-wrap" id="infoModal">
+        <div class="modal-card">
+            <div class="modal-title-row">
+                <h2>Architecture & Purpose</h2>
+                <button class="tool-btn" id="modalClose">✕</button>
+            </div>
+            <div class="modal-text">
+                <p><strong>Anti Burn-in Engine:</strong> AMOLED/OLED पैनल्स को बर्न-इन से सुरक्षित रखने के लिए फ़ोकस मोड में दोहरी तकनीक सक्रिय रहती है:</p>
+                <p>1. <b>Pixel Shifting:</b> हर 60 सेकंड में काउंटर और इंटरफ़ेस 2 से 4 पिक्सेल सूक्ष्म रूप से ड्रिफ्ट (move) करते हैं, जिससे एक ही पिक्सेल लगातार चालू नहीं रहता।<br>
+                2. <b>Micro-Luminance Breathing:</b> हर 2 मिनट में टेक्स्ट की चमक सहज रूप से हल्की होकर वापस सामान्य हो जाती है ताकि फॉस्फोर/एलईडी लेयर पर लगातार हीट लोड न बने।</p>
+                <p><strong>Shortcut:</strong> फोकस मोड ऑन/ऑफ करने के लिए <code>Z</code> या <code>Esc</code> दबाएं।</p>
+            </div>
+            <button class="modal-btn-done" id="modalDone">Dismiss</button>
+        </div>
+    </div>
+
+    <script>
+        const soundUrls = [
+            "https://www.myinstants.com/media/sounds/indian-song.mp3",
+            "https://www.myinstants.com/media/sounds/aayein-meme.mp3",
+            "https://www.myinstants.com/media/sounds/are-baap-re-yaad-aya.mp3",
+            "https://www.myinstants.com/media/sounds/y2mate_HOnnyD0.mp3",
+            "https://www.myinstants.com/media/sounds/tmpauxfo4ff.mp3",
+            "https://www.myinstants.com/media/sounds/getfromytcom-the-angriest-scamme-1.mp3",
+            "https://www.myinstants.com/media/sounds/modi-ji-bkl.mp3",
+            "https://www.myinstants.com/media/sounds/america-kya-kehta-tha.mp3",
+            "https://www.myinstants.com/media/sounds/hello-your-computer-has-virus-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/indian-guy-laughing.mp3",
+            "https://www.myinstants.com/media/sounds/indian-guy-singing.mp3",
+            "https://www.myinstants.com/media/sounds/depression-indian.mp3",
+            "https://www.myinstants.com/media/sounds/chalti-firti-cocaine.mp3",
+            "https://www.myinstants.com/media/sounds/indian-jingle-bells.mp3",
+            "https://www.myinstants.com/media/sounds/indian-sorry.mp3",
+            "https://www.myinstants.com/media/sounds/e-inveja-chat.mp3",
+            "https://www.myinstants.com/media/sounds/ddlg-1-by-vj.mp3",
+            "https://www.myinstants.com/media/sounds/indian-song-long.mp3",
+            "https://www.myinstants.com/media/sounds/indian-christmas-2-0.mp3",
+            "https://www.myinstants.com/media/sounds/indiana-jones-theme-song.mp3",
+            "https://www.myinstants.com/media/sounds/zero-theme-by-vj.mp3",
+            "https://www.myinstants.com/media/sounds/indian-guy-meme-laugh.mp3",
+            "https://www.myinstants.com/media/sounds/virus-indian-song.mp3",
+            "https://www.myinstants.com/media/sounds/vocaroo_s00zn0s23tsd.mp3",
+            "https://www.myinstants.com/media/sounds/tudun-tadau_BJviW12.mp3",
+            "https://www.myinstants.com/media/sounds/vocaroo_s0t0qqra8hne.mp3",
+            "https://www.myinstants.com/media/sounds/bulla.mp3",
+            "https://www.myinstants.com/media/sounds/mmm-mremememew-memew-indian.mp3",
+            "https://www.myinstants.com/media/sounds/gian-hain-aap.mp3",
+            "https://www.myinstants.com/media/sounds/tum-hi-hon-theme-aashiqui-2-by-vj.mp3",
+            "https://www.myinstants.com/media/sounds/jaihind-dosto-hindustani-bhau.mp3",
+            "https://www.myinstants.com/media/sounds/indian-scammer-raging.mp3",
+            "https://www.myinstants.com/media/sounds/i-dont-give-a-sheten.mp3",
+            "https://www.myinstants.com/media/sounds/video0_8_1-1.mp3",
+            "https://www.myinstants.com/media/sounds/ddlg-2-by-vj.mp3",
+            "https://www.myinstants.com/media/sounds/neta-neta-har-koi-kheta.mp3",
+            "https://www.myinstants.com/media/sounds/are-you-out-of-your-mind-greenscreen-change-quality-and-end-wont-cut-off_2.mp3",
+            "https://www.myinstants.com/media/sounds/tf_nemesis.mp3",
+            "https://www.myinstants.com/media/sounds/faaah.mp3",
+            "https://www.myinstants.com/media/sounds/among-us-role-reveal-sound.mp3",
+            "https://www.myinstants.com/media/sounds/error_CDOxCYm.mp3",
+            "https://www.myinstants.com/media/sounds/baby-laughing-meme.mp3",
+            "https://www.myinstants.com/media/sounds/punch-gaming-sound-effect-hd_RzlG1GE.mp3",
+            "https://www.myinstants.com/media/sounds/spiderman-meme-song.mp3",
+            "https://www.myinstants.com/media/sounds/vine-boom-sound-effect_KT89XIq.mp3",
+            "https://www.myinstants.com/media/sounds/shocked-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/dun-dun-dun-sound-effect-brass_8nFBccR.mp3",
+            "https://www.myinstants.com/media/sounds/tmp_7901-951678082.mp3",
+            "https://www.myinstants.com/media/sounds/emotional-damage-meme.mp3",
+            "https://www.myinstants.com/media/sounds/galaxy-meme.mp3",
+            "https://www.myinstants.com/media/sounds/zvuk-fotoapparata.mp3",
+            "https://www.myinstants.com/media/sounds/cat-laugh-meme-1.mp3",
+            "https://www.myinstants.com/media/sounds/fart-meme-sound.mp3",
+            "https://www.myinstants.com/media/sounds/meme-de-creditos-finales.mp3",
+            "https://www.myinstants.com/media/sounds/run-vine-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/ny-video-online-audio-converter.mp3",
+            "https://www.myinstants.com/media/sounds/999-social-credit-siren.mp3",
+            "https://www.myinstants.com/media/sounds/dexter-meme.mp3",
+            "https://www.myinstants.com/media/sounds/outro-song_oqu8zAg.mp3",
+            "https://www.myinstants.com/media/sounds/snore-mimimimimimi.mp3",
+            "https://www.myinstants.com/media/sounds/huh_37bAoRo.mp3",
+            "https://www.myinstants.com/media/sounds/long-brain-fart.mp3",
+            "https://www.myinstants.com/media/sounds/oh-my-god-meme.mp3",
+            "https://www.myinstants.com/media/sounds/my-movie-6_0RlWMvM.mp3",
+            "https://www.myinstants.com/media/sounds/yt1s_wU4BGgD.mp3",
+            "https://www.myinstants.com/media/sounds/anime-wow-sound-effect-mp3cut.mp3",
+            "https://www.myinstants.com/media/sounds/french-meme-song.mp3",
+            "https://www.myinstants.com/media/sounds/meme-de-creditos-finales_qHtIjyQ.mp3",
+            "https://www.myinstants.com/media/sounds/du-bist-gut-genug.mp3",
+            "https://www.myinstants.com/media/sounds/fartmeme.mp3",
+            "https://www.myinstants.com/media/sounds/what-bottom-text-meme-sanctuary-guardian-sound-effect-hd.mp3",
+            "https://www.myinstants.com/media/sounds/deja-vu.mp3",
+            "https://www.myinstants.com/media/sounds/indian-chappal-attack-scream-sound-byte.mp3",
+            "https://www.myinstants.com/media/sounds/indian-ppap.mp3",
+            "https://www.myinstants.com/media/sounds/goofy-uhhh-indian-sound.mp3",
+            "https://www.myinstants.com/media/sounds/logitech.mp3",
+            "https://www.myinstants.com/media/sounds/gote-gale-mein-indian-reaction.mp3",
+            "https://www.myinstants.com/media/sounds/indian-sound.mp3",
+            "https://www.myinstants.com/media/sounds/india-eas-warning-sound.mp3",
+            "https://www.myinstants.com/media/sounds/indian-ring-sound.mp3",
+            "https://www.myinstants.com/media/sounds/packgod-but-edmund-hillary.mp3",
+            "https://www.myinstants.com/media/sounds/chandramuki.mp3",
+            "https://www.myinstants.com/media/sounds/car-reverse-sound-india.mp3",
+            "https://www.myinstants.com/media/sounds/india-eas-alarm.mp3",
+            "https://www.myinstants.com/media/sounds/crazy-indian-sound.mp3",
+            "https://www.myinstants.com/media/sounds/india-sound.mp3",
+            "https://www.myinstants.com/media/sounds/indian-viral-sound.mp3",
+            "https://www.myinstants.com/media/sounds/teri-galiyan.mp3",
+            "https://www.myinstants.com/media/sounds/car-reverse-sound-india-short.mp3",
+            "https://www.myinstants.com/media/sounds/simpsons-indian-meme-sound.mp3",
+            "https://www.myinstants.com/media/sounds/hey-woman.mp3",
+            "https://www.myinstants.com/media/sounds/mochekohoi.mp3",
+            "https://www.myinstants.com/media/sounds/indian-sounds.mp3",
+            "https://www.myinstants.com/media/sounds/indian-sounds-2.mp3",
+            "https://www.myinstants.com/media/sounds/oi-oi-oe-oi-a-eye-eye.mp3",
+            "https://www.myinstants.com/media/sounds/oh-no-no-no-tik-tok-song-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/let-her-go.mp3",
+            "https://www.myinstants.com/media/sounds/musica-de-sigma-estourado.mp3",
+            "https://www.myinstants.com/media/sounds/we-do-not-care_phB0mEB.mp3",
+            "https://www.myinstants.com/media/sounds/subway-surfers-bass-boosted.mp3",
+            "https://www.myinstants.com/media/sounds/fahhhhhhhhhhhhhh.mp3",
+            "https://www.myinstants.com/media/sounds/vine-boom.mp3",
+            "https://www.myinstants.com/media/sounds/chicken-on-tree-screaming.mp3",
+            "https://www.myinstants.com/media/sounds/dry-fart.mp3",
+            "https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/anime-ahh.mp3",
+            "https://www.myinstants.com/media/sounds/chalo.mp3",
+            "https://www.myinstants.com/media/sounds/matlab-wo-alag-hi-level-ka-banda-tha.mp3",
+            "https://www.myinstants.com/media/sounds/bone-crack.mp3",
+            "https://www.myinstants.com/media/sounds/gopgopgop.mp3",
+            "https://www.myinstants.com/media/sounds/romanceeeeeeeeeeeeee.mp3",
+            "https://www.myinstants.com/media/sounds/fahhh_KcgAXfs.mp3",
+            "https://www.myinstants.com/media/sounds/raja-gujjar.mp3",
+            "https://www.myinstants.com/media/sounds/rizz-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/cid-le-mdc.mp3",
+            "https://www.myinstants.com/media/sounds/nahi-nahi-saluke-yaha-kuchh-to-gadbad-hai.mp3",
+            "https://www.myinstants.com/media/sounds/maa-tari-oo-bhai.mp3",
+            "https://www.myinstants.com/media/sounds/spongebob-fail.mp3",
+            "https://www.myinstants.com/media/sounds/tmp_z5b93np.mp3",
+            "https://www.myinstants.com/media/sounds/slap-soundmaster13-49669815_4L20wGP.mp3",
+            "https://www.myinstants.com/media/sounds/ding-sound-effect_2.mp3",
+            "https://www.myinstants.com/media/sounds/is-ka-karan-narendar-modi.mp3",
+            "https://www.myinstants.com/media/sounds/eh-eh-ehhhh.mp3",
+            "https://www.myinstants.com/media/sounds/koun-hai-re_8ep4nAR.mp3",
+            "https://www.myinstants.com/media/sounds/a-few-moments-later-sponge-bob-sfx-fun.mp3",
+            "https://www.myinstants.com/media/sounds/abhi-maza-ayagga.mp3",
+            "https://www.myinstants.com/media/sounds/rizzbot-laugh.mp3",
+            "https://www.myinstants.com/media/sounds/kuchu-puchu-tum-kaha-ho.mp3",
+            "https://www.myinstants.com/media/sounds/ki-kore.mp3",
+            "https://www.myinstants.com/media/sounds/cid.mp3",
+            "https://www.myinstants.com/media/sounds/1-108.mp3",
+            "https://www.myinstants.com/media/sounds/awkward-cricket-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/chaloo.mp3",
+            "https://www.myinstants.com/media/sounds/ive-got-this-faaaaaaaaahhhhh.mp3",
+            "https://www.myinstants.com/media/sounds/modi-ji-bhojyam.mp3",
+            "https://www.myinstants.com/media/sounds/tmp8ljn9e7h.mp3",
+            "https://www.myinstants.com/media/sounds/kyu-re-madarchod-cid.mp3",
+            "https://www.myinstants.com/media/sounds/mac-quack.mp3",
+            "https://www.myinstants.com/media/sounds/tum-dum-tedau.mp3",
+            "https://www.myinstants.com/media/sounds/ab-tu-gaya-beta-ab-dekh-tu-puneet.mp3",
+            "https://www.myinstants.com/media/sounds/jo-gareeb-hove-naa.mp3",
+            "https://www.myinstants.com/media/sounds/chachaa.mp3",
+            "https://www.myinstants.com/media/sounds/movie_1.mp3",
+            "https://www.myinstants.com/media/sounds/ek-jhaat-bhar-ka-aadmi.mp3",
+            "https://www.myinstants.com/media/sounds/tuco-get-out.mp3",
+            "https://www.myinstants.com/media/sounds/applepay.mp3",
+            "https://www.myinstants.com/media/sounds/perfect-fart.mp3",
+            "https://www.myinstants.com/media/sounds/gunshotjbudden.mp3",
+            "https://www.myinstants.com/media/sounds/rom-rom-bhaiyo.mp3",
+            "https://www.myinstants.com/media/sounds/ammi-bacha-la-re.mp3",
+            "https://www.myinstants.com/media/sounds/acha-ji-aisa-hai-kya.mp3",
+            "https://www.myinstants.com/media/sounds/cid-acp-mc.mp3",
+            "https://www.myinstants.com/media/sounds/tehelka-omlette.mp3",
+            "https://www.myinstants.com/media/sounds/yooooooooooooooooooooooooo_4_objp8XX.mp3",
+            "https://www.myinstants.com/media/sounds/arkh.mp3",
+            "https://www.myinstants.com/media/sounds/kids-saying-yay-sound-effect_3.mp3",
+            "https://www.myinstants.com/media/sounds/whoooooo-yeleeee-laudeeee_Nk6JpCP.mp3",
+            "https://www.myinstants.com/media/sounds/lund-pakad-ke-tarazu-ki-tarah-cid.mp3",
+            "https://www.myinstants.com/media/sounds/ek-gand-pe-repta-mara-n-sarak-pe-hagta-firega.mp3",
+            "https://www.myinstants.com/media/sounds/duck-toy-sound.mp3",
+            "https://www.myinstants.com/media/sounds/ack.mp3",
+            "https://www.myinstants.com/media/sounds/oh-no-no-no-no-laugh.mp3",
+            "https://www.myinstants.com/media/sounds/undertakers-bell_2UwFCIe.mp3",
+            "https://www.myinstants.com/media/sounds/sad-meow-song.mp3",
+            "https://www.myinstants.com/media/sounds/lekin-ye-sala.mp3",
+            "https://www.myinstants.com/media/sounds/notification_o14egLP.mp3",
+            "https://www.myinstants.com/media/sounds/meri-jung-emotional.mp3",
+            "https://www.myinstants.com/media/sounds/mouse-click-sound.mp3",
+            "https://www.myinstants.com/media/sounds/mka-ladle-meow-gop.mp3",
+            "https://www.myinstants.com/media/sounds/comedy_sms_tonewapspell.mp3",
+            "https://www.myinstants.com/media/sounds/metal-pipe-clang.mp3",
+            "https://www.myinstants.com/media/sounds/abe-sale.mp3",
+            "https://www.myinstants.com/media/sounds/is-sajjan-ko-kya-takleef-hai-bhai.mp3",
+            "https://www.myinstants.com/media/sounds/studio-audience-awwww-sound-fx.mp3",
+            "https://www.myinstants.com/media/sounds/pop_7e9Is8L.mp3",
+            "https://www.myinstants.com/media/sounds/mlg-airhorn.mp3",
+            "https://www.myinstants.com/media/sounds/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-e-lutador.mp3",
+            "https://www.myinstants.com/media/sounds/tiki-tiki-boosted.mp3",
+            "https://www.myinstants.com/media/sounds/phir-teri-maiya-chodta-hu-cid.mp3",
+            "https://www.myinstants.com/media/sounds/core-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/family-dekhte-hain-nahi-to.mp3",
+            "https://www.myinstants.com/media/sounds/ayee-bhai-ayee-aee-aeee.mp3",
+            "https://www.myinstants.com/media/sounds/tindeck_1.mp3",
+            "https://www.myinstants.com/media/sounds/correct.mp3",
+            "https://www.myinstants.com/media/sounds/funny-sound-that-will-make-you-to-laugh_1.mp3",
+            "https://www.myinstants.com/media/sounds/kanchana.mp3",
+            "https://www.myinstants.com/media/sounds/ale-le-le.mp3",
+            "https://www.myinstants.com/media/sounds/ye-ladki-tum-bohut-bolti-ho-chapad-chapad.mp3",
+            "https://www.myinstants.com/media/sounds/heavenly-music-gaming-sound-effect-hd-mp3cut.mp3",
+            "https://www.myinstants.com/media/sounds/maro-jump-sound-effect_1.mp3",
+            "https://www.myinstants.com/media/sounds/ceeday-huh-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/shabash-beta.mp3",
+            "https://www.myinstants.com/media/sounds/hub-intro-sound.mp3",
+            "https://www.myinstants.com/media/sounds/baigan.mp3",
+            "https://www.myinstants.com/media/sounds/fahhhhh.mp3",
+            "https://www.myinstants.com/media/sounds/gunshot-one.mp3",
+            "https://www.myinstants.com/media/sounds/camera-flash-sound-effect.mp3",
+            "https://www.myinstants.com/media/sounds/baat-to-sahi-hai.mp3",
+            "https://www.myinstants.com/media/sounds/michael-jackson-hee-hee.mp3",
+            "https://www.myinstants.com/media/sounds/kya-cheda-bhosdi.mp3"
+        ];
+
+        const timerAlarmUrl = "https://www.myinstants.com/media/sounds/tada.mp3";
+
+        // State Machine
+        let targetCount = parseInt(localStorage.getItem('terminal_target'), 10) || 237;
+        let currentCount = parseInt(localStorage.getItem('terminal_count'), 10) || 0;
+        let isMuted = localStorage.getItem('terminal_muted') === 'true';
+        let sessionSolved = parseInt(localStorage.getItem('terminal_session_solved'), 10) || 0;
+        let sessionActiveSecs = parseInt(localStorage.getItem('terminal_active_secs'), 10) || 0;
+        let lastSoundIdx = -1;
+
+        // Countdown Timer State
+        let timerConfigMinutes = parseInt(localStorage.getItem('terminal_timer_cfg_min'), 10) || 45;
+        let timerRemainingSecs = parseInt(localStorage.getItem('terminal_timer_remaining'), 10);
+        if (isNaN(timerRemainingSecs) || timerRemainingSecs < 0) {
+            timerRemainingSecs = timerConfigMinutes * 60;
+        }
+
+        let timerInterval = null;
+        let isTimerRunning = false;
+        let isFocusMode = false;
+
+        // Selectors
+        const clockBox = document.getElementById('clockBox');
+        const focusClock = document.getElementById('focusClock');
+        const counterNumber = document.getElementById('counterNumber');
+        const countMetric = document.getElementById('countMetric');
+        const targetMetric = document.getElementById('targetMetric');
+        const percentMetric = document.getElementById('percentMetric');
+        const progressBar = document.getElementById('progressBar');
+        const focusProgressLine = document.getElementById('focusProgressLine');
+        const targetInput = document.getElementById('targetInput');
+        const jumpInput = document.getElementById('jumpInput');
+        const paceMetric = document.getElementById('paceMetric');
+        const leftMetric = document.getElementById('leftMetric');
+        const etaMetric = document.getElementById('etaMetric');
+        const terminalContainer = document.getElementById('terminalContainer');
+        const focusHud = document.getElementById('focusHud');
+        
+        const btnPlus = document.getElementById('btnPlus');
+        const btnMinus = document.getElementById('btnMinus');
+        const btnReset = document.getElementById('btnReset');
+        const muteToggle = document.getElementById('muteToggle');
+        const fullToggle = document.getElementById('fullToggle');
+        const infoToggle = document.getElementById('infoToggle');
+        const focusToggle = document.getElementById('focusToggle');
+        const focusExitBtn = document.getElementById('focusExitBtn');
+
+        const infoModal = document.getElementById('infoModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalDone = document.getElementById('modalDone');
+
+        const timerMinutesInput = document.getElementById('timerMinutesInput');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const focusTimerDisplay = document.getElementById('focusTimerDisplay');
+        const focusTimerPill = document.getElementById('focusTimerPill');
+        const timerToggleBtn = document.getElementById('timerToggleBtn');
+        const timerPauseBtn = document.getElementById('timerPauseBtn');
+        const timerResetBtn = document.getElementById('timerResetBtn');
+        const timerStatusDot = document.getElementById('timerStatusDot');
+
+        // Audio Units
+        const audioUnit = new Audio();
+        audioUnit.volume = 0.85;
+
+        const alarmUnit = new Audio(timerAlarmUrl);
+        alarmUnit.volume = 0.95;
+
+        // Init inputs
+        targetInput.value = targetCount;
+        jumpInput.value = currentCount;
+        timerMinutesInput.value = timerConfigMinutes;
+        updateMuteStateUI();
+
+        // 12-Hour Clock
+        function tickClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const meridiem = hours >= 12 ? 'PM' : 'AM';
+
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            const timeStr = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${meridiem}`;
+            
+            clockBox.textContent = timeStr;
+            focusClock.textContent = timeStr;
+        }
+        setInterval(tickClock, 1000);
+        tickClock();
+
+        // Anti Burn-in Engine (Pixel Shifting & Breathing)
+        let burnShiftStep = 0;
+        const shiftOffsets = [
+            { x: 0, y: 0 },
+            { x: 2, y: -3 },
+            { x: -3, y: 2 },
+            { x: 3, y: 3 },
+            { x: -2, y: -2 }
+        ];
+
+        function applyAntiBurnShift() {
+            if (!isFocusMode) return;
+            burnShiftStep = (burnShiftStep + 1) % shiftOffsets.length;
+            const offset = shiftOffsets[burnShiftStep];
+            
+            terminalContainer.style.transform = `translate(${offset.x}px, ${offset.y}px)`;
+            focusHud.style.transform = `translate(${offset.x}px, ${offset.y}px)`;
+            focusProgressLine.style.transform = `translateY(${Math.abs(offset.y) % 2}px)`;
+        }
+        setInterval(applyAntiBurnShift, 60000); // Shift every 60s
+
+        function applyLuminanceBreathing() {
+            if (!isFocusMode) return;
+            document.body.classList.add('burn-dim');
+            setTimeout(() => {
+                document.body.classList.remove('burn-dim');
+            }, 5000);
+        }
+        setInterval(applyLuminanceBreathing, 120000); // 5-sec subtle dim every 2 mins
+
+        // Countdown Timer
+        function formatCountdownTime(totalSecs) {
+            const hrs = Math.floor(totalSecs / 3600);
+            const mins = Math.floor((totalSecs % 3600) / 60);
+            const secs = totalSecs % 60;
+
+            if (hrs > 0) {
+                return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            }
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function updateCountdownUI() {
+            const formatted = formatCountdownTime(timerRemainingSecs);
+            timerDisplay.textContent = formatted;
+            focusTimerDisplay.textContent = formatted;
+
+            timerDisplay.classList.remove('alert');
+            timerStatusDot.classList.remove('active', 'expired');
+            focusTimerPill.classList.remove('expired');
+
+            if (timerRemainingSecs === 0) {
+                timerDisplay.classList.add('alert');
+                timerStatusDot.classList.add('expired');
+                focusTimerPill.classList.add('expired');
+                timerToggleBtn.textContent = 'Restart';
+            } else if (isTimerRunning) {
+                timerStatusDot.classList.add('active');
+                timerToggleBtn.textContent = 'Pause';
+            } else {
+                timerToggleBtn.textContent = timerRemainingSecs < (timerConfigMinutes * 60) ? 'Resume' : 'Start Timer';
+            }
+        }
+
+        function playTimerAlarm() {
+            if (isMuted) return;
+            try {
+                alarmUnit.pause();
+                alarmUnit.currentTime = 0;
+                const playPromise = alarmUnit.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {});
+                }
+            } catch (err) {}
+        }
+
+        function startCountdown() {
+            if (timerRemainingSecs === 0) {
+                timerRemainingSecs = timerConfigMinutes * 60;
+            }
+
+            if (!isTimerRunning) {
+                isTimerRunning = true;
+                timerInterval = setInterval(() => {
+                    if (timerRemainingSecs > 0) {
+                        timerRemainingSecs--;
+                        sessionActiveSecs++;
+                        localStorage.setItem('terminal_timer_remaining', timerRemainingSecs);
+                        localStorage.setItem('terminal_active_secs', sessionActiveSecs);
+                        updateCountdownUI();
+                        updateTelemetry();
+                    } else {
+                        pauseCountdown();
+                        playTimerAlarm();
+                        updateCountdownUI();
+                    }
+                }, 1000);
+                updateCountdownUI();
+            }
+        }
+
+        function pauseCountdown() {
+            if (isTimerRunning) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isTimerRunning = false;
+                updateCountdownUI();
+            }
+        }
+
+        function toggleCountdown() {
+            if (isTimerRunning) {
+                pauseCountdown();
+            } else {
+                startCountdown();
+            }
+        }
+
+        function resetCountdown() {
+            pauseCountdown();
+            timerRemainingSecs = timerConfigMinutes * 60;
+            localStorage.setItem('terminal_timer_remaining', timerRemainingSecs);
+            updateCountdownUI();
+        }
+
+        function handleTimerConfigChange() {
+            let parsed = parseInt(timerMinutesInput.value, 10);
+            if (isNaN(parsed) || parsed < 1) parsed = 1;
+            if (parsed > 720) parsed = 720;
+            
+            timerMinutesInput.value = parsed;
+            timerConfigMinutes = parsed;
+            localStorage.setItem('terminal_timer_cfg_min', timerConfigMinutes);
+            resetCountdown();
+        }
+
+        timerToggleBtn.addEventListener('click', toggleCountdown);
+        timerPauseBtn.addEventListener('click', pauseCountdown);
+        timerResetBtn.addEventListener('click', resetCountdown);
+        timerMinutesInput.addEventListener('change', handleTimerConfigChange);
+
+        // Telemetry Engine
+        function updateTelemetry() {
+            const remaining = Math.max(0, targetCount - currentCount);
+            leftMetric.textContent = remaining;
+
+            const activeHours = sessionActiveSecs / 3600;
+
+            if (sessionSolved > 0 && activeHours > (10 / 3600)) {
+                const pace = sessionSolved / activeHours;
+                paceMetric.textContent = `${Math.round(pace)} Q/h`;
+
+                if (remaining === 0) {
+                    etaMetric.textContent = "Done";
+                } else if (pace > 0) {
+                    const hoursLeft = remaining / pace;
+                    const minsLeft = Math.round(hoursLeft * 60);
+                    if (minsLeft < 60) {
+                        etaMetric.textContent = `~${minsLeft}m`;
+                    } else {
+                        const h = Math.floor(minsLeft / 60);
+                        const m = minsLeft % 60;
+                        etaMetric.textContent = `~${h}h ${m}m`;
+                    }
+                }
+            } else {
+                paceMetric.textContent = "0 Q/h";
+                etaMetric.textContent = "--";
+            }
+        }
+
+        // Render UI
+        function render() {
+            counterNumber.textContent = currentCount;
+            countMetric.textContent = currentCount;
+            targetMetric.textContent = targetCount;
+            jumpInput.value = currentCount;
+
+            const ratio = targetCount > 0 ? (currentCount / targetCount) : 0;
+            const pct = Math.min(Math.round(ratio * 100), 100);
+            const widthPct = `${Math.min(ratio * 100, 100)}%`;
+            
+            percentMetric.textContent = `${pct}%`;
+            progressBar.style.width = widthPct;
+            focusProgressLine.style.width = widthPct;
+
+            localStorage.setItem('terminal_count', currentCount);
+            localStorage.setItem('terminal_target', targetCount);
+            localStorage.setItem('terminal_session_solved', sessionSolved);
+
+            updateTelemetry();
+
+            counterNumber.classList.remove('pop');
+            void counterNumber.offsetWidth;
+            counterNumber.classList.add('pop');
+        }
+
+        // Sound Dispatcher with Zero-Repeat Shuffle Bag Engine
+        let soundShufflePool = [];
+
+        function initSoundShufflePool() {
+            // Generate all indices [0, 1, 2, ... soundUrls.length - 1]
+            soundShufflePool = Array.from({ length: soundUrls.length }, (_, i) => i);
+            // Fisher-Yates Shuffle
+            for (let i = soundShufflePool.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [soundShufflePool[i], soundShufflePool[j]] = [soundShufflePool[j], soundShufflePool[i]];
+            }
+            // Ensure the first sound of new bag doesn't immediately repeat the previous last sound
+            if (soundShufflePool.length > 1 && soundShufflePool[0] === lastSoundIdx) {
+                const swapIdx = 1 + Math.floor(Math.random() * (soundShufflePool.length - 1));
+                [soundShufflePool[0], soundShufflePool[swapIdx]] = [soundShufflePool[swapIdx], soundShufflePool[0]];
+            }
+        }
+
+        function playFeedback() {
+            if (isMuted) return;
+
+            // Replenish bag when exhausted so all sounds play before repeating
+            if (!soundShufflePool || soundShufflePool.length === 0) {
+                initSoundShufflePool();
+            }
+
+            const idx = soundShufflePool.pop();
+            lastSoundIdx = idx;
+
+            try {
+                audioUnit.pause();
+                audioUnit.src = soundUrls[idx];
+                audioUnit.currentTime = 0;
+                const playPromise = audioUnit.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {});
+                }
+            } catch (err) {}
+        }
+
+        function modify(delta) {
+            const next = currentCount + delta;
+            if (next < 0 || next > targetCount) return;
+
+            currentCount = next;
+            if (delta > 0) {
+                sessionSolved++;
+                playFeedback();
+                if (!isTimerRunning && timerRemainingSecs > 0) {
+                    startCountdown();
+                }
+            } else if (delta < 0 && sessionSolved > 0) {
+                sessionSolved--;
+            }
+            render();
+        }
+
+        // Continue / Jump Feature
+        function handleJump() {
+            let val = parseInt(jumpInput.value, 10);
+            if (isNaN(val)) {
+                jumpInput.value = currentCount;
+                return;
+            }
+
+            if (val < 0) val = 0;
+            if (val > targetCount) val = targetCount;
+
+            currentCount = val;
+            render();
+            jumpInput.blur();
+        }
+
+        // Target Configuration
+        function handleTargetChange() {
+            let parsed = parseInt(targetInput.value, 10);
+            if (isNaN(parsed) || parsed < 1) {
+                parsed = 1;
+                targetInput.value = 1;
+            }
+            targetCount = parsed;
+            if (currentCount > targetCount) {
+                currentCount = targetCount;
+            }
+            render();
+        }
+
+        function resetState() {
+            if (confirm('क्या आप प्रोग्रेस और काउंटडाउन टाइमर को रीसेट करना चाहते हैं?')) {
+                currentCount = 0;
+                sessionSolved = 0;
+                sessionActiveSecs = 0;
+                localStorage.setItem('terminal_active_secs', 0);
+                resetCountdown();
+                render();
+            }
+        }
+
+        function updateMuteStateUI() {
+            muteToggle.textContent = isMuted ? '🔇' : '🔊';
+            muteToggle.classList.toggle('active', isMuted);
+            localStorage.setItem('terminal_muted', isMuted);
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            updateMuteStateUI();
+        }
+
+        // Fullscreen API Helper
+        function enterFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            }
+        }
+
+        function exitFullscreen() {
+            if (document.fullscreenElement && document.exitFullscreen) {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                enterFullscreen();
+            } else {
+                exitFullscreen();
+            }
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            const isFull = !!document.fullscreenElement;
+            fullToggle.classList.toggle('active', isFull);
+            if (!isFull && isFocusMode) {
+                setFocusMode(false, false);
+            }
+        });
+
+        // Focus Mode Engine
+        function setFocusMode(active, manageFullscreen = true) {
+            isFocusMode = active;
+            document.body.classList.toggle('focus-mode', isFocusMode);
+            focusToggle.classList.toggle('active', isFocusMode);
+
+            if (!isFocusMode) {
+                terminalContainer.style.transform = 'none';
+                focusHud.style.transform = 'none';
+                focusProgressLine.style.transform = 'none';
+                document.body.classList.remove('burn-dim');
+            }
+
+            if (manageFullscreen) {
+                if (isFocusMode) {
+                    enterFullscreen();
+                } else {
+                    exitFullscreen();
+                }
+            }
+            render();
+        }
+
+        focusToggle.addEventListener('click', () => setFocusMode(!isFocusMode));
+        focusExitBtn.addEventListener('click', () => setFocusMode(false));
+
+        // Modal Controls
+        const openModal = () => infoModal.classList.add('open');
+        const closeModal = () => infoModal.classList.remove('open');
+
+        // Event Bindings
+        btnPlus.addEventListener('click', () => modify(1));
+        btnMinus.addEventListener('click', () => modify(-1));
+        btnReset.addEventListener('click', resetState);
+        targetInput.addEventListener('change', handleTargetChange);
+        targetInput.addEventListener('blur', handleTargetChange);
+
+        jumpInput.addEventListener('change', handleJump);
+        jumpInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') handleJump();
+        });
+
+        muteToggle.addEventListener('click', toggleMute);
+        fullToggle.addEventListener('click', toggleFullScreen);
+        infoToggle.addEventListener('click', openModal);
+        modalClose.addEventListener('click', closeModal);
+        modalDone.addEventListener('click', closeModal);
+
+        infoModal.addEventListener('click', (e) => {
+            if (e.target === infoModal) closeModal();
+        });
+
+        // Global Keyboard Routing
+        window.addEventListener('keydown', (e) => {
+            if (document.activeElement === targetInput || 
+                document.activeElement === jumpInput || 
+                document.activeElement === timerMinutesInput) return;
+
+            if (e.key === 'Escape') {
+                if (infoModal.classList.contains('open')) {
+                    closeModal();
+                    return;
+                }
+                if (isFocusMode) {
+                    setFocusMode(false);
+                    return;
+                }
+            }
+
+            if (infoModal.classList.contains('open')) return;
+
+            if (e.code === 'Space' || e.key === 'ArrowUp' || e.key === '+') {
+                e.preventDefault();
+                modify(1);
+            } else if (e.key === 'ArrowDown' || e.key === '-') {
+                e.preventDefault();
+                modify(-1);
+            } else if (e.key.toLowerCase() === 'z') {
+                setFocusMode(!isFocusMode);
+            } else if (e.key.toLowerCase() === 'm') {
+                toggleMute();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullScreen();
+            } else if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+                openModal();
+            }
+        });
+
+        // Boot
+        render();
+        updateCountdownUI();
+    </script>
+</body>
+</html>
