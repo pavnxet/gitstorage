@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title id="page-title">लोक वाद्य यंत्र दिशा questions</title>
+<style>
+:root{
+  --primary:#4f46e5;--primary-light:#818cf8;--primary-dark:#3730a3;
+  --success:#16a34a;--danger:#dc2626;--warning:#d97706;
+  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;
+  --text:#1e293b;--muted:#64748b;
+  --hindi-bg:#fdf4ff;--hindi-border:#e9d5ff;--hindi-text:#7c3aed;
+  --match-bg:#fffbeb;--match-border:#fde68a;--match-text:#92400e;
+  --r:12px;--sh:0 4px 24px rgba(0,0,0,.08);--sh-sm:0 1px 6px rgba(0,0,0,.06);
+}
+body.dark{
+  --bg:#0f172a;--surface:#1e293b;--border:#334155;
+  --text:#f1f5f9;--muted:#94a3b8;
+  --hindi-bg:#1e1b33;--hindi-border:#4c1d95;--hindi-text:#a78bfa;
+  --match-bg:#1c1a08;--match-border:#78350f;--match-text:#fcd34d;
+  --sh:0 4px 24px rgba(0,0,0,.4);--sh-sm:0 1px 6px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .2s,color .2s}
+nav{background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:54px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(79,70,229,.35);gap:8px}
+.logo{font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.quiz-title-edit{outline:none;border-bottom:1px dashed rgba(255,255,255,.4);min-width:60px;max-width:200px;white-space:nowrap;overflow:hidden;cursor:text;transition:border .15s}
+.quiz-title-edit:focus{border-bottom:1px solid #fff;background:rgba(255,255,255,.1);border-radius:4px;padding:1px 4px}
+.nav-tabs{display:flex;gap:2px;flex-shrink:0}
+.nav-tab{background:transparent;border:none;color:rgba(255,255,255,.75);cursor:pointer;padding:5px 10px;border-radius:7px;font-size:.8rem;font-weight:500;transition:.15s;white-space:nowrap}
+.nav-tab:hover{background:rgba(255,255,255,.15);color:#fff}
+.nav-tab.active{background:rgba(255,255,255,.22);color:#fff;font-weight:700}
+.nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.icon-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:.15s}
+.icon-btn:hover{background:rgba(255,255,255,.28)}
+.bilingual-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;padding:3px 9px;border-radius:99px;font-size:.72rem;font-weight:700;white-space:nowrap}
+.page{display:none;padding:18px;max-width:860px;margin:0 auto}
+.page.active{display:block}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh-sm);padding:20px;margin-bottom:16px}
+.home-hero{text-align:center;padding:28px 12px 20px}
+.home-hero h1{font-size:1.7rem;color:var(--primary);margin-bottom:5px}
+.home-hero p{color:var(--muted);font-size:.9rem}
+.bilingual-pill{display:inline-block;background:linear-gradient(90deg,#4f46e5 50%,#7c3aed 50%);color:#fff;border-radius:99px;padding:2px 14px;font-size:.75rem;font-weight:700;margin-top:7px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:18px 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center;box-shadow:var(--sh-sm)}
+.stat-card .value{font-size:1.8rem;font-weight:800;color:var(--primary)}
+.stat-card .label{font-size:.76rem;color:var(--muted);margin-top:3px}
+.filter-row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.filter-row label{font-size:.86rem;font-weight:600;color:var(--muted)}
+select,input[type=number],input[type=checkbox]{border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:.86rem;background:var(--surface);color:var(--text);outline:none;transition:.15s}
+input[type=checkbox]{width:18px;height:18px;padding:0;cursor:pointer}
+select:focus,input:focus{border-color:var(--primary)}
+body.dark select,body.dark input[type=number]{background:var(--surface);color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:5px;border:none;border-radius:7px;padding:8px 16px;font-size:.86rem;font-weight:600;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
+.btn-outline:hover{background:var(--primary);color:#fff}
+.btn-sm{padding:5px 11px;font-size:.79rem}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover{background:#15803d;transform:translateY(-1px)}
+.marking-info{display:inline-flex;gap:10px;padding:5px 12px;border-radius:99px;background:var(--bg);border:1px solid var(--border);font-size:.78rem;color:var(--muted);margin-bottom:14px}
+.marking-info .pos{color:var(--success);font-weight:700}
+.marking-info .neg{color:var(--danger);font-weight:700}
+#quiz-progress-bar-wrap{background:var(--border);border-radius:99px;height:6px;margin-bottom:16px;overflow:hidden}
+#quiz-progress-bar{background:linear-gradient(90deg,var(--primary),#7c3aed);height:100%;border-radius:99px;transition:width .3s;width:0%}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:.81rem;color:var(--muted)}
+#quiz-timer{background:var(--primary);color:#fff;border-radius:20px;padding:3px 12px;font-weight:700;font-size:.9rem;transition:background .3s}
+#quiz-timer.warning{background:var(--warning)}
+#quiz-timer.danger{background:var(--danger);animation:timerPulse .7s infinite alternate}
+@keyframes timerPulse{from{opacity:1}to{opacity:.5}}
+.question-tag{display:inline-block;font-size:.71rem;background:#ede9fe;color:var(--primary);padding:2px 10px;border-radius:99px;margin-bottom:9px;font-weight:600}
+body.dark .question-tag{background:#2e1065;color:#a78bfa}
+.question-block{margin-bottom:16px}
+.q-image{width:100%;max-height:260px;object-fit:contain;border-radius:8px;margin:6px 0 12px;border:1px solid var(--border)}
+.q-english{font-size:1.03rem;font-weight:700;line-height:1.55;color:var(--text);margin-bottom:7px}
+.q-hindi{font-size:.95rem;font-weight:500;line-height:1.6;color:var(--hindi-text);background:var(--hindi-bg);border-left:3px solid var(--hindi-border);padding:7px 12px;border-radius:0 8px 8px 0}
+.lang-divider{display:flex;align-items:center;gap:7px;margin:6px 0;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.lang-divider::before,.lang-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.match-table-wrap{margin:10px 0 14px;border:1.5px solid var(--match-border);border-radius:9px;overflow:hidden;background:var(--match-bg)}
+.match-table-header{background:var(--match-border);padding:5px 12px;font-size:.72rem;font-weight:700;color:var(--match-text);text-transform:uppercase;letter-spacing:.05em}
+.match-tbl{width:100%;border-collapse:collapse;font-size:.86rem}
+.match-tbl td{padding:7px 12px;border-bottom:1px solid var(--match-border);color:var(--match-text);vertical-align:top;line-height:1.45}
+.match-tbl tr:last-child td{border-bottom:none}
+.match-tbl td:first-child{font-weight:700;width:48%;border-right:1px solid var(--match-border)}
+.match-tbl.single-col td:first-child{border-right:none;width:100%}
+.match-col-hdr{background:rgba(0,0,0,.04);font-weight:700;font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+body.dark .match-col-hdr{background:rgba(255,255,255,.04)}
+.match-hi td{background:var(--hindi-bg);color:var(--hindi-text);font-size:.82rem;border-color:var(--hindi-border)}
+.options-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.option-item{border:2px solid var(--border);border-radius:9px;padding:10px 13px;cursor:pointer;transition:.15s;display:flex;align-items:flex-start;gap:10px}
+.option-item:hover:not(.disabled){border-color:var(--primary-light);background:#ede9fe18}
+.option-item.selected{border-color:var(--primary);background:#ede9fe33}
+.option-item.correct{border-color:var(--success);background:#dcfce7}
+.option-item.wrong{border-color:var(--danger);background:#fee2e2}
+.option-item.disabled{cursor:default}
+body.dark .option-item.correct{background:#14532d33}
+body.dark .option-item.wrong{background:#7f1d1d33}
+.option-letter{width:29px;height:29px;border-radius:50%;background:var(--bg);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0;margin-top:2px}
+.option-item.correct .option-letter{background:var(--success);border-color:var(--success);color:#fff}
+.option-item.wrong .option-letter{background:var(--danger);border-color:var(--danger);color:#fff}
+.option-item.selected .option-letter{background:var(--primary);border-color:var(--primary);color:#fff}
+.option-texts{display:flex;flex-direction:column;gap:2px}
+.opt-english{font-size:.91rem;font-weight:600;color:var(--text)}
+.opt-hindi{font-size:.81rem;color:var(--hindi-text)}
+.explanation-box{margin-top:14px;border-radius:9px;overflow:hidden;display:none;border:1px solid var(--border)}
+.explanation-box.show{display:block}
+.exp-english{padding:11px 15px;background:#f0fdf4;border-left:4px solid var(--success);font-size:.86rem;line-height:1.6;color:#14532d}
+.exp-hindi{padding:11px 15px;background:var(--hindi-bg);border-left:4px solid var(--hindi-border);font-size:.86rem;line-height:1.6;color:var(--hindi-text);border-top:1px solid var(--border)}
+body.dark .exp-english{background:#052e16;color:#86efac}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:8px;flex-wrap:wrap}
+.quiz-nav-left{display:flex;gap:6px;flex-wrap:wrap}
+.question-nav-grid{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.q-dot{width:30px;height:30px;border-radius:6px;border:2px solid var(--border);background:var(--surface);cursor:pointer;font-size:.76rem;font-weight:600;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:.12s;position:relative}
+.q-dot:hover{border-color:var(--primary);color:var(--primary)}
+.q-dot.current{border-color:var(--primary);background:var(--primary);color:#fff}
+.q-dot.answered{border-color:var(--success);background:#dcfce7;color:var(--success)}
+.q-dot.wrong-answered{border-color:var(--danger);background:#fee2e2;color:var(--danger)}
+.q-dot.skipped{border-color:var(--warning);background:#fef9c3;color:var(--warning)}
+.q-dot.flagged::after{content:'⭐';position:absolute;top:-6px;right:-6px;font-size:.52rem;line-height:1}
+body.dark .q-dot.answered{background:#14532d44}
+body.dark .q-dot.wrong-answered{background:#7f1d1d44}
+.flag-btn{background:transparent;border:2px solid var(--border);border-radius:7px;cursor:pointer;font-size:1rem;padding:4px 9px;transition:.15s;color:var(--muted)}
+.flag-btn.flagged{border-color:#f59e0b;background:#fef9c3;color:#92400e}
+.flag-btn:hover{border-color:#f59e0b}
+.kbd-hint{font-size:.69rem;color:var(--muted);text-align:center;margin-top:8px;opacity:.7}
+.kbd{display:inline-block;background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:0 4px;font-size:.67rem;font-family:monospace}
+.result-hero{text-align:center;padding:24px 0}
+.result-score-ring{width:128px;height:128px;border-radius:50%;border:10px solid var(--border);display:inline-flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:12px}
+.score-pct{font-size:1.9rem;font-weight:900;color:var(--primary)}
+.score-label{font-size:.7rem;color:var(--muted);font-weight:600}
+.marks-display{margin-top:8px;font-size:1rem;font-weight:700;color:var(--text)}
+.marks-display span{color:var(--primary)}
+.result-bars{margin-top:12px}
+.result-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.84rem}
+.result-bar-label{width:75px;color:var(--muted)}
+.result-bar-track{flex:1;background:var(--border);border-radius:99px;height:7px;overflow:hidden}
+.result-bar-fill{height:100%;border-radius:99px}
+.result-bar-count{width:34px;text-align:right;font-weight:700}
+.review-summary{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.rsm-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:99px;font-size:.79rem;font-weight:700;border:1.5px solid}
+.rsm-correct{background:#dcfce7;color:#16a34a;border-color:#86efac}
+.rsm-wrong{background:#fee2e2;color:#dc2626;border-color:#fca5a5}
+.rsm-skipped{background:#fef9c3;color:#d97706;border-color:#fde68a}
+.rsm-flagged{background:#fef3c7;color:#92400e;border-color:#fcd34d}
+.review-q{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.review-q .q-number{font-size:.76rem;color:var(--muted);margin-bottom:5px}
+.review-q .q-english{font-weight:700;margin-bottom:4px;line-height:1.5;font-size:.98rem}
+.review-q .q-hindi{font-size:.88rem;color:var(--hindi-text);margin-bottom:10px}
+.review-option{padding:7px 12px;border-radius:7px;border:2px solid var(--border);margin-bottom:5px;display:flex;align-items:flex-start;gap:8px;font-size:.86rem}
+.review-option.correct-opt{border-color:var(--success);background:#dcfce7}
+.review-option.user-wrong{border-color:var(--danger);background:#fee2e2}
+body.dark .review-option.correct-opt{background:#052e16}
+body.dark .review-option.user-wrong{background:#450a0a}
+.review-exp-en{padding:8px 12px;background:#f0fdf4;border-left:4px solid var(--success);font-size:.83rem;line-height:1.55}
+.review-exp-hi{padding:8px 12px;background:var(--hindi-bg);border-left:4px solid var(--hindi-border);font-size:.83rem;line-height:1.55;color:var(--hindi-text);border-top:1px solid var(--border)}
+body.dark .review-exp-en{background:#052e16;color:#86efac}
+.review-exp-wrap{margin-top:9px;border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.badge{display:inline-block;padding:2px 7px;border-radius:99px;font-size:.7rem;font-weight:700}
+.badge-correct{background:#dcfce7;color:var(--success)}
+.badge-wrong{background:#fee2e2;color:var(--danger)}
+.badge-skipped{background:#fef9c3;color:var(--warning)}
+.badge-flagged{background:#fef3c7;color:#92400e}
+.history-item{display:flex;align-items:center;gap:9px;padding:9px 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:7px;font-size:.86rem}
+.h-score{font-weight:800;font-size:1rem;color:var(--primary)}
+.h-detail{color:var(--muted);font-size:.78rem;flex:1}
+.h-date{color:var(--muted);font-size:.75rem}
+.sub-row{display:grid;grid-template-columns:1fr 65px 65px;gap:7px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;align-items:center}
+.sub-row:last-child{border-bottom:none}
+.sub-name{font-weight:600}
+.sub-pct{text-align:center;font-weight:700;color:var(--primary)}
+.sub-total{text-align:center;color:var(--muted)}
+.section-title{font-size:1rem;font-weight:700;margin-bottom:13px;color:var(--text);display:flex;align-items:center;gap:6px}
+.divider{border:none;border-top:1px solid var(--border);margin:16px 0}
+.empty-state{text-align:center;padding:32px 16px;color:var(--muted)}
+.empty-state .icon{font-size:2.6rem;margin-bottom:9px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:9px 20px;border-radius:99px;font-size:.84rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+@media print{nav,#quiz-page,.quiz-nav,.kbd-hint,#q-nav-grid,.card:has(.section-title){display:none!important}.review-q{break-inside:avoid}body{background:#fff!important}}
+@media(max-width:600px){nav{padding:0 9px;gap:5px}.logo{font-size:.82rem}.nav-tab{padding:4px 7px;font-size:.73rem}.page{padding:10px}.quiz-title-edit{max-width:110px}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<nav>
+  <div class="logo">
+    <span>🎓</span>
+    <span class="quiz-title-edit" id="quiz-title" contenteditable="true"
+          title="Click to rename">लोक वाद्य यंत्र दिशा questions</span>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tab-home">Home</button>
+    <button class="nav-tab" id="tab-quiz">Quiz</button>
+    <button class="nav-tab" id="tab-review">Review</button>
+    <button class="nav-tab" id="tab-stats">Stats</button>
+  </div>
+  <div class="nav-right">
+    <div class="bilingual-badge">EN + हिं</div>
+    <button class="icon-btn" id="dark-btn" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div id="home" class="page active">
+  <div class="home-hero">
+    <h1 id="hero-title">लोक वाद्य यंत्र दिशा questions</h1>
+    <p>Bilingual quiz · English &amp; Hindi together</p>
+    <div class="bilingual-pill">ENGLISH + हिंदी</div>
+  </div>
+  <div class="stats-grid" id="home-stats"></div>
+  <div class="card"><div class="section-title">📈 Last Performance</div><div id="home-overview"></div></div>
+  <div class="card"><div class="section-title">🕐 Recent Sessions</div><div id="home-recent"></div></div>
+</div>
+
+<div id="quiz-setup" class="page">
+  <div class="card">
+    <div class="section-title">⚙️ Quiz Settings</div>
+    <div class="filter-row"><label>Subject</label><select id="filter-subject"><option value="">All Subjects</option></select></div>
+    <div class="filter-row"><label>Topic</label><select id="filter-topic"><option value="">All Topics</option></select></div>
+    <div class="filter-row">
+      <label>Questions</label>
+      <input type="number" id="q-count" min="1" max="500" value="20" style="width:72px"/>
+      <span style="font-size:.81rem;color:var(--muted)" id="q-available"></span>
+    </div>
+    <div class="filter-row">
+      <label>Timer</label>
+      <select id="quiz-mode">
+        <option value="timed">60s per question</option>
+        <option value="custom">Custom timer</option>
+        <option value="free">No timer</option>
+      </select>
+      <input type="number" id="custom-time" min="10" max="600" value="60" style="width:72px;display:none"/>
+      <span id="custom-time-unit" style="font-size:.8rem;color:var(--muted);display:none">sec</span>
+    </div>
+    <div class="filter-row"><label>Order</label><select id="quiz-order"><option value="random">Random</option><option value="sequential">Sequential</option></select></div>
+    <div class="filter-row">
+      <label>Scramble options</label>
+      <input type="checkbox" id="scramble-opts" title="Shuffle A/B/C/D order each question"/>
+      <span style="font-size:.78rem;color:var(--muted)">Shuffle answer order (anti-memorisation)</span>
+    </div>
+    <hr class="divider"/>
+    <div class="section-title" style="margin-bottom:10px">🏅 Marking Scheme</div>
+    <div class="filter-row">
+      <label>✅ Correct</label>
+      <input type="number" id="mark-correct" min="0.25" max="10" step="0.25" value="1" style="width:72px"/>
+      <label style="margin-left:8px">marks</label>
+    </div>
+    <div class="filter-row">
+      <label>❌ Wrong</label>
+      <input type="number" id="mark-neg" min="0" max="10" step="0.25" value="0" style="width:72px"/>
+      <label style="margin-left:8px">marks deducted</label>
+    </div>
+    <div id="marking-preview" style="font-size:.82rem;color:var(--muted);margin-bottom:14px"></div>
+    <hr class="divider"/>
+    <button class="btn btn-primary" id="start-quiz-btn">▶ Start Quiz</button>
+    <span id="setup-msg" style="margin-left:9px;font-size:.81rem;color:var(--danger)"></span>
+  </div>
+</div>
+
+<div id="quiz-page" class="page">
+  <div id="quiz-progress-bar-wrap"><div id="quiz-progress-bar"></div></div>
+  <div class="quiz-meta">
+    <span id="quiz-meta-left"></span>
+    <span id="quiz-timer">60</span>
+    <button class="btn btn-sm btn-outline" id="finish-early-btn">Finish Early</button>
+  </div>
+  <div class="card">
+    <div id="quiz-marking-badge" class="marking-info"></div>
+    <div class="question-tag" id="q-tag"></div>
+    <div class="question-block">
+      <img id="q-image" class="q-image" src="" alt="" style="display:none"/>
+      <div class="q-english" id="q-english"></div>
+      <div class="lang-divider" id="hindi-divider">हिंदी</div>
+      <div class="q-hindi" id="q-hindi"></div>
+    </div>
+    <div id="match-container"></div>
+    <ul class="options-list" id="options-list"></ul>
+    <div class="explanation-box" id="explanation-box">
+      <div class="exp-english" id="exp-english"></div>
+      <div class="exp-hindi" id="exp-hindi"></div>
+    </div>
+    <div class="quiz-nav">
+      <div class="quiz-nav-left">
+        <button class="btn btn-outline btn-sm" id="prev-btn">← Prev</button>
+        <button class="btn btn-sm" id="skip-btn" style="background:#fef9c3;color:#92400e;border:2px solid #fbbf24;">Skip</button>
+        <button class="flag-btn" id="flag-btn" title="Flag for review (*)">⭐</button>
+      </div>
+      <button class="btn btn-primary btn-sm" id="next-btn">Next →</button>
+    </div>
+    <div class="kbd-hint">
+      <span class="kbd">1</span>–<span class="kbd">4</span> pick &nbsp;·&nbsp;
+      <span class="kbd">←</span><span class="kbd">→</span> navigate &nbsp;·&nbsp;
+      <span class="kbd">S</span> skip &nbsp;·&nbsp;
+      <span class="kbd">*</span> flag &nbsp;·&nbsp;
+      <span class="kbd">F</span> finish
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">
+      Question Navigator &nbsp;·&nbsp; <span id="flag-count-label" style="color:#92400e"></span>
+    </div>
+    <div class="question-nav-grid" id="q-nav-grid"></div>
+  </div>
+</div>
+
+<div id="results-page" class="page">
+  <div class="card result-hero">
+    <div class="result-score-ring" id="score-ring">
+      <span class="score-pct" id="result-pct">0%</span>
+      <span class="score-label">Accuracy</span>
+    </div>
+    <h2 id="result-heading"></h2>
+    <div class="marks-display" id="marks-display"></div>
+    <p id="result-summary" style="color:var(--muted);margin-top:5px;font-size:.88rem;"></p>
+  </div>
+  <div class="card"><div class="section-title">📊 Breakdown</div><div class="result-bars" id="result-bars"></div></div>
+  <div class="card"><div class="section-title">📚 Subject Performance</div><div id="result-subject-breakdown"></div></div>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px">
+    <button class="btn btn-primary" id="go-review-btn">🔍 Review</button>
+    <button class="btn btn-outline" id="retake-btn">🔁 Retake</button>
+    <button class="btn btn-outline" id="new-quiz-btn">🔄 New Quiz</button>
+    <button class="btn btn-success" id="copy-results-btn">📋 Copy Results</button>
+    <button class="btn btn-outline" id="print-btn">🖨️ Print Review</button>
+    <button class="btn btn-outline" id="results-home-btn">🏠 Home</button>
+  </div>
+</div>
+
+<div id="review-page" class="page">
+  <div class="card">
+    <div class="section-title">🔍 Review (EN + हिं)</div>
+    <div id="review-summary-bar" class="review-summary"></div>
+    <div class="filter-row">
+      <label>Subject</label>
+      <select id="review-subject"></select>
+      <label>Show</label>
+      <select id="review-filter">
+        <option value="all">All</option>
+        <option value="wrong">Wrong</option>
+        <option value="correct">Correct</option>
+        <option value="skipped">Skipped</option>
+        <option value="flagged">Flagged ⭐</option>
+      </select>
+    </div>
+  </div>
+  <div id="review-list"></div>
+</div>
+
+<div id="stats-page" class="page">
+  <div class="stats-grid" id="stats-grid"></div>
+  <div class="card"><div class="section-title">📊 Subject-wise Accuracy</div><div id="stats-subject"></div></div>
+  <div class="card">
+    <div class="section-title">🕐 Session History</div>
+    <div id="stats-history"></div>
+    <button class="btn btn-sm btn-outline" id="clear-history-btn"
+      style="margin-top:9px;border-color:var(--danger);color:var(--danger)">🗑 Clear History</button>
+  </div>
+</div>
+
+<!-- FIX: data island — browser never executes this as JS, so </script> inside
+     question text is completely harmless and cannot break the page. -->
+<script type="application/json" id="q-data">[{"qEnglish":"Which is the state musical instrument of Rajasthan?","qHindi":"राजस्थान का राज्य वाद्य है-","optionsEnglish":["Iktara","Algoza","Naubat","Tasha"],"optionsHindi":["इकतारा","अलगोजा","नौबत","ताशा"],"correct":1,"explanationEnglish":"Algoza is the state musical instrument of Rajasthan, resembling a flute and played by blowing into two pipes simultaneously.","explanationHindi":"अलगोजा राजस्थान का राज्यवाद्य है जो बांसुरी की तरह होता है। इसे मुँह में रखकर फूँक के माध्यम से बजाया जाता है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"How many holes are there in the Algoza instrument?","qHindi":"अलगोजा वाद्य यंत्र में कितने छिद्र होते हैं?","optionsEnglish":["4","5","6","7"],"optionsHindi":["4","5","6","7"],"correct":0,"explanationEnglish":"Algoza generally has four or seven holes.","explanationHindi":"अलगोजा में सात अथवा चार छिद्र होते हैं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following musical instruments is like a flute?","qHindi":"निम्न में से कौनसा वाद्य यंत्र बांसुरी की तरह होता है-","optionsEnglish":["Algoza","Bhapang","Ravanahatha","Tandoora"],"optionsHindi":["अलगोजा","भपंग","रावण हत्था","तंदूरा"],"correct":0,"explanationEnglish":"Algoza is a wind instrument similar to a flute.","explanationHindi":"अलगोजा राजस्थान का राज्यवाद्य है जो बांसुरी की तरह होता है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which musical instrument is played by mouth?","qHindi":"मुँह से बजाया जाने वाला वाद्य यंत्र है?","optionsEnglish":["Iktara","Algoza","Naubat","Tasha"],"optionsHindi":["इकतारा","अलगोजा","नौबत","ताशा"],"correct":1,"explanationEnglish":"Algoza is a wind instrument (Sushir Vadya) played with the mouth.","explanationHindi":"अलगोजा फूँक के माध्यम से मुँह से बजाया जाने वाला सुषिर वाद्ययंत्र है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is a wind instrument (Sushir Vadya)?","qHindi":"कौनसा सुषिर वाद्य है?","optionsEnglish":["Algoza","Kamayacha","Tandoora","Ravanahatha"],"optionsHindi":["अलगोजा","कामायचा","तंदूरा","रावणहत्था"],"correct":0,"explanationEnglish":"Algoza is a Sushir (wind) instrument.","explanationHindi":"अलगोजा फूँक से बजाया जाने वाला सुषिर वाद्ययंत्र है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Match the following appropriately:","qHindi":"सुमेलित कीजिए-","matchItemsEnglish":{"col1Label":"Musical Instrument","col2Label":"Type of Instrument","col1":["Iktara","Algoza","Jhanjh","Mandal"],"col2":["Ghan Vadya","Tat Vadya","Sushir Vadya","Avanaddh Vadya"]},"matchItemsHindi":{"col1Label":"लोक वाद्य","col2Label":"प्रकार","col1":["इकतारा","अलगोजा","झांझ","मांदल"],"col2":["घन वाद्य","तत् वाद्य","सुषिर वाद्य","अवनद्ध वाद्य"]},"optionsEnglish":["A-2, B-3, C-1, D-4","A-1, B-2, C-3, D-4","A-2, B-3, C-4, D-1","A-3, B-4, C-2, D-1"],"optionsHindi":["A-2, B-3, C-1, D-4","A-1, B-2, C-3, D-4","A-2, B-3, C-4, D-1","A-3, B-4, C-2, D-1"],"correct":0,"explanationEnglish":"Iktara is Tat, Algoza is Sushir, Jhanjh is Ghan, and Mandal is Avanaddh vadya.","explanationHindi":"इकतारा तत् वाद्य है, अलगोजा सुषिर वाद्य है, झांझ घन वाद्य है तथा मांदल अवनद्ध वाद्य है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is NOT a wind instrument played by mouth?","qHindi":"मुँह के द्वारा बजाए जाने वाले वाद्य यंत्रों में निम्नलिखित में से कौनसा नहीं है-","optionsEnglish":["Algoza","Satara","Mashak","Rawaj"],"optionsHindi":["अलगोजा","सतारा","मशक","रवाज"],"correct":3,"explanationEnglish":"Rawaj is a stringed (Tat) instrument, not a wind instrument.","explanationHindi":"रवाज एक तत् वाद्ययंत्र है, यह मुँह से फूँककर नहीं बजाया जाता।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following instruments belongs to the Avanaddh (membranophone) category?","qHindi":"निम्न में से कौनसा वाद्य अवनद्ध श्रेणी में आता है-","optionsEnglish":["Mandal","Manjira","Jantar","Tandoora"],"optionsHindi":["मांदल","मंजीरा","जंतर","तंदूरा"],"correct":0,"explanationEnglish":"Mandal is covered with leather and is an Avanaddh instrument.","explanationHindi":"मांदल चमड़े से मढ़ा हुआ अवनद्ध (ताल) वाद्य है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is NOT a Ghan (idiophone) folk musical instrument?","qHindi":"निम्नलिखित में से कौनसा घन लोक वाद्य यंत्र नहीं है-","optionsEnglish":["Manjira","Chimpiya","Bankiya","Haankal"],"optionsHindi":["मंजीरा","चींपिया","बांकिया","हांकल"],"correct":2,"explanationEnglish":"Bankiya is a wind (Sushir) instrument, not a Ghan instrument.","explanationHindi":"बांकिया सुषिर वाद्ययंत्र की श्रेणी में आता है, घन वाद्य नहीं है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Bankiya, Singi and Tota folk instruments are associated with which tradition?","qHindi":"बाँकिया, सिंगी और टोटा लोकवाद्य किस परम्परा से सम्बद्ध है-","optionsEnglish":["Tat Vadya","Avanaddh Vadya","Ghan Vadya","Sushir Vadya"],"optionsHindi":["तत् वाद्य","अवनद्ध वाद्य","घन वाद्य","सुषिर वाद्य"],"correct":3,"explanationEnglish":"Bankiya, Singi, and Tota are all wind (Sushir) instruments.","explanationHindi":"बाँकिया, सिंगी और टोटो फूँक से बजाए जाने वाले सुषिर वाद्य हैं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"'Ramjhol' is what type of folk musical instrument?","qHindi":"'रमझोल' किस प्रकार का लोक वाद्य यंत्र है?","optionsEnglish":["Avanaddh","Tat","Sushir","Ghan"],"optionsHindi":["अवनद्ध","तत्","सुषिर","घन"],"correct":3,"explanationEnglish":"Ramjhol is made of metal and falls under the Ghan instrument category.","explanationHindi":"रमझोल धातु से निर्मित घन वाद्ययंत्र है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is NOT a stringed instrument?","qHindi":"निम्न में से कौन, तार वाला वाद्य यंत्र नहीं है?","optionsEnglish":["Surmandal","Ravanahatha","Tasha","Kamayacha"],"optionsHindi":["सुरमण्डल","रावणहत्था","ताशा","कमायचा"],"correct":2,"explanationEnglish":"Tasha is an Avanaddh instrument made with leather, not a stringed instrument.","explanationHindi":"ताशा अवनद्ध वाद्य यंत्र है जिसमें चमड़ा मढ़ा होता है, यह तार वाला वाद्य नहीं है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following are NOT wind instruments (Sushir Vadya)?\n1. Surnai 2. Algoza 3. Nagphani 4. Kamayacha","qHindi":"कौनसे सुषिर वाद्य नहीं हैं?\n1. सुरनाई 2. अलगोजा 3. नागफणी 4. कमायचा","optionsEnglish":["Only 4","2, 3 and 4","1 and 3","3 and 4"],"optionsHindi":["केवल 4","2, 3 और 4","1 और 3","3 और 4"],"correct":0,"explanationEnglish":"Kamayacha is a stringed (Tat) instrument, whereas Surnai, Algoza, and Nagphani are wind instruments.","explanationHindi":"कमायचा तत् वाद्य यंत्र है, जबकि सुरनाई, अलगोजा और नागफणी सुषिर वाद्य हैं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Rabab, Chikara, and Chautara are what kind of musical instruments?","qHindi":"रबाब, चिकारा और चौतारा किस प्रकार के वाद्य यंत्र हैं?","optionsEnglish":["Tat Vadya","Ghan Vadya","Avanaddh Vadya","Sushir Vadya"],"optionsHindi":["तत् वाद्य","घन वाद्य","अवनद्ध वाद्य","सुषिर वाद्य"],"correct":0,"explanationEnglish":"Rabab, Chikara, and Chautara are stringed (Tat) instruments.","explanationHindi":"रबाब, चिकारा और चौतारा तत् (तार वाले) वाद्य यंत्र हैं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which musical instrument is made of wire/strings?","qHindi":"तार से निर्मित वाद्ययंत्र कौनसा है?","optionsEnglish":["Ravanahatha","Algoza","Morchang","Chang"],"optionsHindi":["रावण हत्था","अलगोजा","मोरचंग","चंग"],"correct":0,"explanationEnglish":"Ravanahatha is a stringed instrument having 9 strings.","explanationHindi":"रावण हत्था एक तत् वाद्ययंत्र है जिसमें नौ तार बँधे होते हैं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is a Tat (stringed) instrument?","qHindi":"कौनसा तत् वाद्य है?","optionsEnglish":["Satara","Morchang","Rawaj","Bankiya"],"optionsHindi":["सतारा","मोरचंग","रवाज","बांकिया"],"correct":2,"explanationEnglish":"Rawaj is a stringed (Tat) instrument.","explanationHindi":"रवाज तत् वाद्य यंत्रों की श्रेणी में आता है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Chautara and Kamayacha are associated with which folk instrument tradition?","qHindi":"चौतारा, कामायचा कौनसे लोकवाद्य परम्परा से जुड़े हैं-","optionsEnglish":["Tat Vadya","Avanaddh Vadya","Ghan Vadya","Sushir Vadya"],"optionsHindi":["तत् वाद्य","अवनद्ध वाद्य","घन वाद्य","सुषिर वाद्य"],"correct":0,"explanationEnglish":"Both Chautara and Kamayacha are Tat (stringed) instruments.","explanationHindi":"चौतारा और कामायचा दोनों तत् वाद्य परम्परा से जुड़े हैं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is NOT a Tat folk musical instrument?","qHindi":"निम्न में से कौनसा तत् लोकवाद्य यंत्र नहीं है?","optionsEnglish":["Ravanahatha","Rawaj","Bhapang","Mandal"],"optionsHindi":["रावणहत्था","रवाज","भपंग","मांदल"],"correct":3,"explanationEnglish":"Mandal is an Avanaddh instrument covered with skin, not a stringed instrument.","explanationHindi":"मांदल अवनद्ध वाद्य यंत्र है, तत् वाद्य नहीं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following are Tat instruments?\n1. Jantar 2. Rawaj 3. Bhapang","qHindi":"निम्न में से तत् वाद्य है -\n1. जन्तर 2. रवाज 3. भपंग","optionsEnglish":["Only 1","Only 3","Only 1 and 3","1, 2 and 3"],"optionsHindi":["केवल 1","केवल 3","केवल 1 एवं 3","1, 2 एवं 3"],"correct":3,"explanationEnglish":"Jantar, Rawaj, and Bhapang are all stringed (Tat) instruments.","explanationHindi":"जन्तर, रवाज और भपंग तीनों ही तत् वाद्य यंत्र हैं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is NOT a Tat (stringed) instrument?","qHindi":"निम्नलिखित में से कौनसा तत् वाद्य यंत्र नहीं है-","optionsEnglish":["Kamayacha","Bhapang","Jantar","Bankiya"],"optionsHindi":["कामायचा","भपंग","जन्तर","बाँकिया"],"correct":3,"explanationEnglish":"Bankiya is a Sushir (wind) instrument.","explanationHindi":"बाँकिया एक सुषिर वाद्य यंत्र है, तत् वाद्य नहीं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is a Ghan (idiophone) instrument?","qHindi":"कौनसा घनवाद्य है ?","optionsEnglish":["Kundi","Kala","Peli","Tankora"],"optionsHindi":["कुंडी","कला","पेली","टंकोरा"],"correct":3,"explanationEnglish":"Tankora is a metal-made Ghan instrument.","explanationHindi":"टंकोरा धातु से निर्मित घन वाद्ययंत्र है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is NOT a Tat (stringed) instrument?","qHindi":"कौनसा तत् वाद्य नहीं है?","optionsEnglish":["Satara","Rawaj","Jantar","Chautara"],"optionsHindi":["सतारा","रवाज़","जन्तर","चौतारा"],"correct":0,"explanationEnglish":"Satara is a Sushir (wind) instrument combined of flute, algoza, and shehnai elements.","explanationHindi":"सतारा सुषिर वाद्ययंत्र बाँसुरी, अलगोजा व शहनाई का मिश्रित रूप होता है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which is a Sushir (wind) instrument?","qHindi":"कौनसा सुषिर वाद्य है-","optionsEnglish":["Ravanahatha","Jantar","Satara","Surmandal"],"optionsHindi":["रावणहत्था","जंतर","सतारा","सूरमण्डल"],"correct":2,"explanationEnglish":"Satara is a Sushir (wind) instrument.","explanationHindi":"सतारा फूँक से बजाया जाने वाला सुषिर वाद्ययंत्र है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which of the following is NOT a Tat instrument?","qHindi":"कौनसा तत्वाद्य नहीं है?","optionsEnglish":["Ravanahatha","Jantar","Algoza","Kamayacha"],"optionsHindi":["रावण हत्था","जंतर","अलगोजा","कामायचा"],"correct":2,"explanationEnglish":"Algoza is a Sushir (wind) instrument made of bamboo.","explanationHindi":"बाँस नली से निर्मित अलगोजा सुषिर वाद्ययंत्र है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"What type of musical instrument is 'Ravanahatha'?","qHindi":"'रावणहत्या' किस प्रकार का वाद्य यंत्र है-","optionsEnglish":["Tat","Sushir Kashta","Avanaddh","Ghan"],"optionsHindi":["तत्","सुषिर काष्ठ","अवनद्ध","घन"],"correct":0,"explanationEnglish":"Ravanahatha is a traditional Tat (stringed) instrument.","explanationHindi":"रावणहत्था नारियल की कटोरी व बाँस से बना तत् वाद्य यंत्र है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Whose main musical instrument is Ravanahatha?","qHindi":"रावण हत्था किसका मुख्य वाद्य यंत्र है?","optionsEnglish":["Bhil","Kalbelia","Mirasi","Bhopa"],"optionsHindi":["भील","कालबेलिया","मिरासी","भोपा"],"correct":3,"explanationEnglish":"Ravanahatha is primarily used by Bhopas while narrating heroic tales.","explanationHindi":"इस वाद्य यंत्र का प्रयोग पाबूजी के अनुयायी थोरिया भोपें, डूंगरजी जवाहरजी के भोपे कथाएँ बाँचते समय करते हैं।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which musical instrument is used by Pabuji's Bhopas while narrating the Phad?","qHindi":"फड़ बाँचते समय पाबूजी के भोपों का वाद्ययंत्र है?","optionsEnglish":["Morchang","Algoza","Khadtaal","Ravanahatha"],"optionsHindi":["मोरचंग","अलगोजा","खड़ताल","रावण हत्था"],"correct":3,"explanationEnglish":"Bhopas of Pabuji use Ravanahatha while reciting Phad.","explanationHindi":"पाबूजी की फड़ का वाचन करते समय भोपों द्वारा रावण हत्था का प्रयोग किया जाता है।","subject":"इतिहास","topic":"राजस्थान का इतिहास"},{"qEnglish":"Which musical instrument is played by the Bhopas of Pabuji while reciting the Phad?","qHindi":"फड़ बाँचते समय पाबूजी के भोपों का वाद्ययंत्र है?","optionsEnglish":["Morchang","Algoza","Khadtal","Ravanhattha"],"optionsHindi":["मोरचंग","अलगोजा","खड़ताल","रावण हत्था"],"correct":3,"explanationEnglish":"Ravanhattha is played by the Bhopas of Pabuji while reading or reciting the Phad.","explanationHindi":"पाबूजी की फड़ बाँचते समय भोपों द्वारा रावणहत्था वाद्ययंत्र बजाया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Ravanhattha is made of:","qHindi":"रावण हत्था बनाया जाता है?","optionsEnglish":["Coconut","Steel vessel","Glass vessel","Neem wood"],"optionsHindi":["नारियल","इस्पात का बर्तन","काँच का बर्तन","नीम की लकड़ी"],"correct":0,"explanationEnglish":"Ravanhattha is made using half a coconut shell covered with goat skin attached to a long bamboo stick.","explanationHindi":"रावणहत्था आधे कटे नारियल की कटोरी पर बकरे की खाल मढ़कर बनाया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following folk musical instruments consists of a long bamboo stick joined to a half coconut shell covered with goat skin?","qHindi":"निम्नलिखित में से किस लोक वाद्य यंत्र में बाँस का लंबा तना होता है जिसमें बकरी के चमड़े की परत से ढका आधे नारियल का खोल जुड़ा होता है?","optionsEnglish":["Ravanhattha","Dhap","Algoza","Bhapang"],"optionsHindi":["रावणहत्था","धाप","अलगोजा","भपंग"],"correct":0,"explanationEnglish":"Ravanhattha is constructed with a bamboo stalk attached to a half-coconut shell covered with goat skin.","explanationHindi":"रावणहत्था में बाँस का एक लंबा डंडा होता है जिस पर बकरे की खाल से मढ़ा हुआ आधा नारियल का खोल जुड़ा होता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following is NOT a chordophone (Tat Vadya)?","qHindi":"कौनसा तत् वाद्य नहीं है?","optionsEnglish":["Bhapang","Dukaka","Jantar","Nagphani"],"optionsHindi":["भपंग","दुकाका","जन्तर","नागफनी"],"correct":3,"explanationEnglish":"Nagphani is an aerophone (Sushir Vadya) made of serpentine brass, not a chordophone (Tat Vadya).","explanationHindi":"नागफनी एक सुषिर वाद्य है जो सर्पाकार पीतल का बना होता है, यह तत् वाद्य नहीं है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following is a stringed instrument?","qHindi":"तार लगा वाद्य यन्त्र है?","optionsEnglish":["Algoza","Khadtal","Deru","Jantar"],"optionsHindi":["अलगोजा","खड़ताल","डेरू","जन्तर"],"correct":3,"explanationEnglish":"Jantar is a stringed instrument (Tat Vadya) resembling a Veena with two gourds.","explanationHindi":"जन्तर वीणा की तरह दो तुम्बों वाला एक तत् (तार लगा) वाद्ययंत्र है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which musical instrument is used during the recitation of Devnarayan Ji's Phad?","qHindi":"देवनारायण जी की फड़ के वाचन के साथ किस वाद्य यंत्र का प्रयोग किया जाता है-","optionsEnglish":["Manjira","Mandal","Jantar","Kundi"],"optionsHindi":["मंजीरा","मांदल","जंतर","कुंडी"],"correct":2,"explanationEnglish":"Jantar is used by the Gurjar Bhopas while reciting Devnarayan Ji's Phad.","explanationHindi":"देवनारायण जी की फड़ के वाचन के समय गुर्जर भोपों द्वारा जंतर वाद्य यंत्र का प्रयोग किया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"By whom is the 'Jantar' musical instrument played?","qHindi":"'जंतर' वाद्य यंत्र किसके द्वारा बजाया जाता है?","optionsEnglish":["Bhopas of Devnarayan Ji","Bhopas of Pabuji","Garasia caste","Bhil caste"],"optionsHindi":["देवनारायण जी भोपे","पाबू जी के भोपे","गरासिया जाति","भील जाति"],"correct":0,"explanationEnglish":"Jantar is played by the Bhopas of Devnarayan Ji hanging it around their neck.","explanationHindi":"जंतर वाद्ययंत्र देवनारायण जी के भोपों द्वारा गले में लटकाकर बजाया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following folk musics is NOT related to Rajasthan?","qHindi":"निम्नलिखित में से किस संगीत का संबंध राजस्थान से नहीं है-","optionsEnglish":["Baul","Manganiyar","Bhopa","Langa"],"optionsHindi":["बाउल","मांगणियार","भोपा","लंगा"],"correct":0,"explanationEnglish":"Baul is a traditional spiritual folk music form of Bengal, not Rajasthan.","explanationHindi":"बाउल पश्चिम बंगाल का आध्यात्मिक लोक गीत/संगीत है, इसका संबंध राजस्थान से नहीं है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following statements about Kamaycha is false?","qHindi":"कमायचा के बारे में निम्नलिखित में से कौनसा कथन असत्य है?","optionsEnglish":["It is a chordophone (Tat Vadya).","It has 27 strings.","Its main players are Manganiyars.","It is prevalent mainly in eastern Rajasthan."],"optionsHindi":["यह एक तत् वाद्य है।","इसमें 27 तार होते हैं।","इसके मुख्य प्रयोगकर्ता मांगणियार हैं।","यह पूर्वी राजस्थान में मुख्यतः प्रचलित है।"],"correct":1,"explanationEnglish":"Kamaycha has 17 strings (not 27), and it is primarily played in western Rajasthan (Jaisalmer and Barmer). Both options (2) and (4) contain errors in general context.","explanationHindi":"कमायचा में कुल 17 तार होते हैं (27 नहीं) तथा यह पश्चिमी राजस्थान में प्रचलित है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which statement is FALSE regarding Kamaycha?","qHindi":"कमायचा के बारे में असत्य है।","optionsEnglish":["Kamaycha is widely used by the Manganiyar community.","It is made from a single piece of wood.","Its 3 main strings are made of goat intestine.","Kamaycha is considered the precursor to the violin."],"optionsHindi":["कमायचा माँगंणियार समुदाय के द्वारा बहुतायत से प्रयोग किया जाता है।","यह लकड़ी के एकल टुकड़े से बनाया जाता है।","इसके 3 मुख्य तंतु बकरे की आँत के बने होते हैं।","कमायचा को वायलिन का अग्रगामी माना जाता है।"],"correct":3,"explanationEnglish":"Ravanhattha, not Kamaycha, is traditionally considered the precursor/ancestor of the violin.","explanationHindi":"वायलिन का अग्रगामी रावणहत्था को माना जाता है, कमायचा को नहीं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"The musical instrument named 'Kamaycha' is played by which community of Rajasthan?","qHindi":"'कमायचा' नाम का वाद्य राजस्थान के किस सम्प्रदाय के द्वारा बजाया जाता है-","optionsEnglish":["Manganiyar","Jogi","Kalbelia","Langa"],"optionsHindi":["मांगणियार","जोगी","कालबेलिया","लंगा"],"correct":0,"explanationEnglish":"Kamaycha is predominantly played by the Manganiyar community of western Rajasthan.","explanationHindi":"कमायचा पश्चिमी राजस्थान की मांगणियार जाति द्वारा बजाया जाने वाला प्रमुख वाद्य है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following is NOT an aerophone (Sushir Vadya)?","qHindi":"कौनसा सुषिर वाद्य यंत्र नहीं है-","optionsEnglish":["Algoza","Satara","Morchang","Surmandal"],"optionsHindi":["अलगोजा","सतारा","मोरचंग","सुरमण्डल"],"correct":3,"explanationEnglish":"Surmandal is a chordophone (Tat Vadya), not a wind instrument (Sushir Vadya).","explanationHindi":"सुरमण्डल एक तत् वाद्य यंत्र है, सुषिर वाद्य नहीं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Morchang (Jew's Harp) is a:","qHindi":"मोरचंग (ज्यूज हार्प ) है-","optionsEnglish":["Dance style","Singing style","Musical instrument","Painting style"],"optionsHindi":["नृत्य शैली","गायन शैली","वाद्य यंत्र","चित्र शैली"],"correct":2,"explanationEnglish":"Morchang is a traditional aerophone (wind musical instrument), also known as the Jew's Harp.","explanationHindi":"मोरचंग (ज्यूज हार्प) एक पारंपरिक सुषिर वाद्य यंत्र है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which folk instrument of Rajasthan is also called Jew's Harp?","qHindi":"राजस्थान के किस लोक वाद्य को ज्यूज हार्प भी कहा जाता है-","optionsEnglish":["Morchang","Ravanhattha","Kamaycha","Khadtal"],"optionsHindi":["मोरचंग","रावण हत्था","कमायचा","खड़ताल"],"correct":0,"explanationEnglish":"Morchang is popularly known in English as the Jew's Harp.","explanationHindi":"मोरचंग को 'ज्यूज हार्प' (Jew's Harp) भी कहा जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following statements is/are correct about 'Morchang' instrument?\n1. It is a small instrument made of iron.\n2. Morchang is played by holding it between the lips.\n3. It comes under the category of aerophone (Sushir Vadya).\n4. It has 27 strings.","qHindi":"'मोरचंग वाद्य' के बारे में कौनसा/कौनसे कथन कथन सही हैं-\n1. यह लोहे का बना छोटा-सा वाद्य है।\n2. मोरचंग को होठों के बीच रखकर बजाया जाता है।\n3. यह सुषिर वाद्य की श्रेणी में आता है।\n4. इसमें 27 तार होते हैं।","optionsEnglish":["Only 1","Only 2, 3","Only 1, 2, 3","All of the above"],"optionsHindi":["केवल 1","केवल 2, 3","केवल 1, 2, 3","उपर्युक्त सभी"],"correct":2,"explanationEnglish":"Statements 1, 2, and 3 are correct. Sarangi has 27 strings, not Morchang.","explanationHindi":"कथन 1, 2 और 3 सही हैं। सारंगी में 27 तार होते हैं, मोरचंग में नहीं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"..... is an instrument made of iron and leather which is played in temples during prayer time and during festivals and religious celebrations.","qHindi":".....एक लोहे और चमड़े से बना वाद्य है जो मंदिरों में प्रार्थना के समय तथा त्योहारों और धार्मिक उत्सवों के समय बजाया जाता है-","optionsEnglish":["Sarangi","Tabla","Sitar","Naubat"],"optionsHindi":["सारंगी","तबला","सितार","नौबत"],"correct":3,"explanationEnglish":"Naubat is an egg-shaped metal vessel covered with buffalo hide played with wooden sticks at temples and festivities.","explanationHindi":"नौबत धातु की कुंडी पर चमड़ा मढ़कर बनाया जाने वाला अवनद्ध वाद्य है, जो मंदिरों व धार्मिक उत्सवों में बजाया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which pair is correct?","qHindi":"कौन-सा युग्म सही है?","optionsEnglish":["Khadtal - Sushir Vadya","Rabab - Tat Vadya","Bankiya - Ghan Vadya","Deru - Sushir Vadya"],"optionsHindi":["खड़ताल - सुषिर वाद्य","रबाब - तत् वाद्य","बाँकिया - घन वाद्य","डेरू - सुषिर वाद्य"],"correct":1,"explanationEnglish":"Rabab is a chordophone (Tat Vadya). Khadtal is a Ghan Vadya, Bankiya is a Sushir Vadya, and Deru is an Avanaddh Vadya.","explanationHindi":"रबाब एक तत् वाद्य है। खड़ताल घन वाद्य, बाँकिया सुषिर वाद्य और डेरू अवनद्ध वाद्य है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which is the famous musical instrument played on the occasion of Muharram?","qHindi":"मुहर्रम के अवसर पर प्रयोग में लिया जाने वाला प्रसिद्ध वाद्ययंत्र कौन-सा है?","optionsEnglish":["Nagada","Tasha","Mandal","Manjira"],"optionsHindi":["नगाड़ा","ताशा","मांदल","मंजीरा"],"correct":1,"explanationEnglish":"Tasha is played on the occasion of Muharram using bamboo sticks.","explanationHindi":"ताशा तांबे की चपटी परात पर बकरे का चमड़ा मढ़कर बनाया जाता है, जिसे मुहर्रम के अवसर पर बजाया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Musical instrument 'Tamak' is associated with which region?","qHindi":"वाद्ययंत्र 'टामक' का संबंध .....क्षेत्र से है-","optionsEnglish":["Mewat","Marwar","Merwara","Mewar"],"optionsHindi":["मेवात","मारवाड़","मेरवाड़ा","मेवाड़"],"correct":0,"explanationEnglish":"Tamak (or Bam) is a huge drum related to the Mewat region, historically played in war.","explanationHindi":"टामक (बम) वाद्ययंत्र का संबंध मुख्य रूप से मेवात क्षेत्र से है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which musical instruments are required during Ghoomar dance?","qHindi":"घूमर नृत्य के समय कौनसे वाद्य यंत्रों की आवश्यकता होती है-","optionsEnglish":["Dholak and Veena","Manjira and Veena","Only Dholak","Dholak and Manjira"],"optionsHindi":["ढोलक एवं वीणा","मंजीरा और वीणा","केवल ढोलक","ढोलक और मंजीरा"],"correct":3,"explanationEnglish":"During Ghoomar dance, Dholak and Manjira are primarily used.","explanationHindi":"घूमर नृत्य के समय मुख्य रूप से ढोलक तथा मंजीरा वाद्य यंत्रों का उपयोग किया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"'Tarpi' musical instrument is mainly used by which caste/tribe?","qHindi":"'तारपी' वाद्ययंत्र का प्रयोग मुख्यतः किस जाति के द्वारा किया जाता है-","optionsEnglish":["Kathodis","Manganiyars","Nats","Jogis"],"optionsHindi":["कथोड़ियों","मांगणियारों","नटों","जोगियों"],"correct":0,"explanationEnglish":"Tarpi is an aerophone traditionally used by the Kathodi community.","explanationHindi":"तारपी वाद्ययंत्र का प्रयोग मुख्यतः कथौड़ी जाति के लोगों द्वारा किया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"In which dance are the musical instruments Manjira, Tanpura, and Chautara used?","qHindi":"मंजीरा, तानपुरा, चौतारा वाद्य यंत्रों का प्रयोग किस नृत्य में किया जाता है?","optionsEnglish":["Gawari","Terah Taali","Walar","Ghoomar"],"optionsHindi":["गवरी","तेरहताली","वालर","घूमर"],"correct":1,"explanationEnglish":"In the Terah Taali dance, the main musical instruments used are Ektara, Chautara, Manjira, and Tandura (Tanpura).","explanationHindi":"तेरहताली नृत्य में मुख्य वाद्य यंत्र एकतारा, चौतारा, मंजीरा व तंदूरा (तानपुरा) होते हैं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following instruments is not used in the Terah Taali dance of Rajasthan?","qHindi":"निम्न में से कौन-सा यंत्र राजस्थान के तेरहताली नृत्य में काम नहीं आता?","optionsEnglish":["Manjira","Tanpura","Chautara","Deru"],"optionsHindi":["मंजीरा","तानपुरा","चौतारा","डेरू"],"correct":3,"explanationEnglish":"Manjira, Tanpura, and Chautara are used in Terah Taali dance, whereas Deru is not used.","explanationHindi":"तेरहताली नृत्य में मंजीरा, तानपुरा और चौतारा प्रयुक्त होते हैं, जबकि डेरू का प्रयोग नहीं किया जाता।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"What is 'Deru'?","qHindi":"'डेरू' क्या है-","optionsEnglish":["A type of craft art","A stopping place","A bird","A musical instrument"],"optionsHindi":["शिल्प कला का प्रकार","रुकने का स्थान","एक पक्षी","वाद्य यंत्र"],"correct":3,"explanationEnglish":"Deru is a percussion/membranophone musical instrument made by stretching leather on both sides of mango wood.","explanationHindi":"डेरू आम की लकड़ी पर दोनों ओर चमड़ा मढ़कर बनाया जाने वाला एक अवनद्ध वाद्य यंत्र है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which class was responsible for writing genealogies generation after generation?","qHindi":"वंशावलियों की पीढ़ी-दर-पीढ़ी लेखन करने वाला कौन वर्ग था?","optionsEnglish":["Mahajan","Jaga","Pujari","All of these"],"optionsHindi":["महाजन","जागा","पुजारी","ये सभी"],"correct":1,"explanationEnglish":"People of the Bhat/Jaga class maintain records of family genealogies across generations.","explanationHindi":"भाट/जागा जाति के लोग विभिन्न परिवारों की वंशावली का अभिलेख पीढ़ी-दर-पीढ़ी रखते हैं।","subject":"इतिहास","topic":"सामाजिक-सांस्कृतिक मुद्दे"},{"qEnglish":"What are the main functions of the 'Bhat' caste?","qHindi":"'भाट' जाति के मुख्य कार्य हैं?","optionsEnglish":["Maintaining records of genealogies of various families","Singing songs on wedding occasions","Playing drum and dhol at festivals","Dancing at festivals"],"optionsHindi":["विभिन्न परिवारों की वंशावली का अभिलेख रखना","शादी के अवसर पर गीत गाना","उत्सव व ढोल बजाना","उत्सव पर नाच दिखाना"],"correct":0,"explanationEnglish":"The primary work of the Bhat community is keeping genealogical records of various families and earning their livelihood by reciting them to descendants.","explanationHindi":"भाट जाति के लोग विभिन्न परिवारों की वंशावली का अभिलेख रखते हैं और उनके वंशजों को सुनाकर अपनी आजीविका चलाते हैं।","subject":"इतिहास","topic":"सामाजिक-सांस्कृतिक मुद्दे"},{"qEnglish":"The folk musical instrument 'Bhapang' is associated with which region of Rajasthan?","qHindi":"लोक वाद्य यंत्र 'भपंग' राजस्थान के किस क्षेत्र से सम्बन्धित है?","optionsEnglish":["Mewat","Mewar","Merwara","Marwar"],"optionsHindi":["मेवात","मेवाड़","मेरवाड़ा","मारवाड़"],"correct":0,"explanationEnglish":"Bhapang is mainly played by Jogis of the Mewat (Alwar) region.","explanationHindi":"भपंग मुख्यतया मेवात (अलवर) क्षेत्र के जोगी बजाते हैं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"People of the Jogi caste in Alwar district play which of the following musical instruments?","qHindi":"अलवर जिले के जोगी जाति के लोग निम्न में से किस वाद्य को बजाते हैं-","optionsEnglish":["Rawaj","Bhapang","Sarangi","Jantar"],"optionsHindi":["रवाज","भपंग","सारंगी","जन्तर"],"correct":1,"explanationEnglish":"Jogis of the Alwar region primarily play the Bhapang instrument.","explanationHindi":"अलवर क्षेत्र के जोगी मुख्य रूप से भपंग वाद्य यंत्र बजाते हैं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which musical instrument is played by the Jogis of Marwar while singing Khayals of Gopichand, Bharthari, Nihalde, etc.?","qHindi":"मारवाड़ के जोगियों द्वारा गोपीचन्द भर्तृहरि, निहालदे आदि के ख्याल गाते समय निम्नलिखित में से किस वाद्य का प्रयोग किया जाता है-","optionsEnglish":["Chang","Sarangi","Nagara","Algoza"],"optionsHindi":["चंग","सारंगी","नगाड़ा","अलगोजा"],"correct":1,"explanationEnglish":"Sarangi (specifically Dhani Sarangi) is used by Jogis while singing narratives and Khayals like Gopichand, Bharthari, and Nihalde.","explanationHindi":"मारवाड़ के जोगियों द्वारा गोपीचन्द, भर्तृहरि, निहालदे आदि की कथा/ख्याल गाते समय सारंगी का प्रयोग किया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which type of Sarangi is played by the Jogis of Alwar-Bharatpur?","qHindi":"अलवर-भरतपुर के जोगियों द्वारा किस प्रकार की सारंगी बजाई जाती है-","optionsEnglish":["Jogiya Sarangi","Sindhi Sarangi","Jadi Sarangi","Gujratan Sarangi"],"optionsHindi":["जोगिया सारंगी","सिंधी सारंगी","जड़ी सारंगी","गुजरातन सारंगी"],"correct":0,"explanationEnglish":"Jogiya Sarangi is played by the Bharthari Jogis of Alwar-Bharatpur along with Bhapang.","explanationHindi":"जोगिया सारंगी अलवर-भरतपुर के भरथरी जोगियों द्वारा भपंग के साथ प्रयुक्त की जाती है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Karna Bheel was a famous player of which musical instrument?","qHindi":"करणा भील किस वाद्य का प्रसिद्ध वादक था?","optionsEnglish":["Nad","Morchang","Satara","Karna"],"optionsHindi":["नड़","मोरचंग","सतारा","करणा"],"correct":0,"explanationEnglish":"Karna Bheel of Jaisalmer was an internationally famous player of the Nad instrument.","explanationHindi":"करणा भील नड़ वाद्य यंत्र के विख्यात वादक थे।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which pair is not correctly matched?","qHindi":"कौनसा युग्म सही नहीं है?","optionsEnglish":["Rajab Ali Khan - Veena player","Aamir Khan - Sitar player","Allah Jilai Bai - Maand singer","Ravi Shankar - Nad player"],"optionsHindi":["रजब अली खान - वीणा वादक","आमिर खान - सितार वादक","अल्लाह जिलाई बाई - मांड गायिका","रवि शंकर - नड़ वादक"],"correct":3,"explanationEnglish":"Pt. Ravi Shankar was a world-renowned Sitar player, not a Nad player (Karna Bheel is associated with Nad).","explanationHindi":"पंडित रवि शंकर विश्व प्रसिद्ध सितार वादक थे, नड़ वादक नहीं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"What is 'Nad'?","qHindi":"नड़ क्या है-","optionsEnglish":["A long flute","Four wooden strips","Twin flutes","A single-stringed instrument"],"optionsHindi":["एक लम्बी बांसुरी","लकड़ी की चार पट्टियाँ","जुड़वाँ बांसुरियाँ","एक तार वाला वाद्य"],"correct":0,"explanationEnglish":"Nad is a wind musical instrument resembling a long flute made of Kangore wood.","explanationHindi":"नड़ सुषिर वाद्य यंत्र है जो लम्बी बांसुरी की तरह होता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"What is 'Ghuraliyo'?","qHindi":"'घुरालियों' क्या है?","optionsEnglish":["A dance style","A musical instrument of Kalbeliyas","An ornament of tribal Bheels","A folk drama"],"optionsHindi":["एक नृत्य शैली","कालबेलियों का वाद्य यंत्र","आदिवासी भीलों का आभूषण","लोक नाट्य"],"correct":1,"explanationEnglish":"Ghuraliyo is a musical instrument made from bamboo splints, played by Kalbeliya and Garasia communities.","explanationHindi":"घुरालियो बांस की खपच्ची से बना वाद्य यंत्र है, जो कालबेलिया व गरासिया जाति का प्रमुख वाद्य है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which is the only folk musical instrument of Rajasthan in whose cord wooden pegs (gutke) like a Pakhawaj are inserted for tension?","qHindi":"राजस्थान का एकमात्र ऐसा लोकवाद्य जिसकी डोरी में तनाव के लिए पखावज की तरह लकड़ी के गुटके डाले जाते हैं-","optionsEnglish":["Tasa","Rawalon ka Madal","Dhaka","Deru"],"optionsHindi":["तासा","रावलों का मादल","ढाका","डेरू"],"correct":1,"explanationEnglish":"Rawalon ka Madal is the only folk instrument where wooden pegs are used in its cords for tuning and tension like a Pakhawaj.","explanationHindi":"रावलों की मादल राजस्थान का ऐसा वाद्य है जिसकी डोरी में पखावज की भाँति लकड़ी के गट्टों (गुटके) का प्रयोग तनाव हेतु किया जाता है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which musical instrument is played by the people of Kamad caste in Rajasthan?","qHindi":"राजस्थान में कामड़ जाति के लोगों द्वारा कौनसा संगीत वाद्य बजाया जाता है?","optionsEnglish":["Tandura","Surinda","Gujari","None of these"],"optionsHindi":["तन्दूरा","सुरिन्दा","गुजरी","इनमें से कोई नहीं"],"correct":0,"explanationEnglish":"Tandura (also called Chautara or Veno) has 4 strings and is played by the Kamad community.","explanationHindi":"तंदूरा (वेणो/चौतारा) लकड़ी का बना 4 तारों वाला वाद्य यंत्र है जिसे कामड़ जाति के लोग बजाते हैं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which statement regarding the folk musical instruments of Rajasthan is not correct?","qHindi":"राजस्थान के लोक वाद्य यंत्रों के विषय में कौनसा कथन सही नहीं है?","optionsEnglish":["Both Bhapang and Ravanhattha are Tat vadya (stringed instruments).","Both Algoza and Morchang are wind instruments.","Dholak, Naubat, Nagada, and Chang are percussion (Avanaddha) instruments.","Wind instruments Bankiya and Karna are not played on auspicious occasions."],"optionsHindi":["भपंग एवं रावणहत्था दोनों तत् वाद्य यंत्र हैं।","अलगोजा एवं मोरचंग दोनों फूँक वाद्य यंत्र हैं।","ढोलक, नौबत, नगाड़ा एवं चंग थाप वाद्य यंत्र हैं।","फूँक वाद्य यंत्र बाँकिया एवं करणा को मांगलिक अवसरों पर नहीं बजाया जाता है।"],"correct":3,"explanationEnglish":"Bankiya is a traditional instrument of the Sargada caste and is played specifically on auspicious occasions, making statement 4 incorrect.","explanationHindi":"बाँकिया सरगड़ा जाति का वाद्य है और इसे मांगलिक अवसरों पर बजाया जाता है, अतः कथन (4) असत्य है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Match the folk instruments with their prominent artists:","qHindi":"सुमेलित कीजिए (लोक वाद्य यंत्र तथा प्रख्यात कलाकार):","matchItemsEnglish":{"col1Label":"Folk Instrument","col2Label":"Renowned Artist","col1":["Bhapang","Nad","Algoza","Khadtal"],"col2":["Sadeek Khan","Zahoor Khan","Karna Bheel","Ramnath Chaudhary"]},"matchItemsHindi":{"col1Label":"लोक वाद्य यंत्र","col2Label":"प्रख्यात कलाकार","col1":["भपंग","नड़","अलगोजा","खड़ताल"],"col2":["सदीक खाँ","जहूर खाँ","करणा भील","रामनाथ चौधरी"]},"optionsEnglish":["A-2, B-3, C-4, D-1","A-4, B-2, C-3, D-1","A-1, B-2, C-3, D-4","A-2, B-1, C-3, D-4"],"optionsHindi":["A-2, B-3, C-4, D-1","A-4, B-2, C-3, D-1","A-1, B-2, C-3, D-4","A-2, B-1, C-3, D-4"],"correct":0,"explanationEnglish":"Bhapang - Zahoor Khan Mewati; Nad - Karna Bheel; Algoza - Ramnath Chaudhary; Khadtal - Sadeek Khan.","explanationHindi":"भपंग - जहूर खाँ; नड़ - करणा भील; अलगोजा - रामनाथ चौधरी; खड़ताल - सदीक खाँ।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Ramnath Chaudhary is associated with which musical instrument?","qHindi":"रामनाथ चौधरी का संबंध किस वाद्य यंत्र से है-","optionsEnglish":["Dholak","Algoza","Poongi","None of these"],"optionsHindi":["ढोलक","अलगोजा","पूंजी","इनमें से कोई नहीं"],"correct":1,"explanationEnglish":"Ramnath Chaudhary from Padampura village, Jaipur plays Algoza through his nose.","explanationHindi":"जयपुर निवासी रामनाथ चौधरी नाक से अलगोजा बजाने के लिए विख्यात हैं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Zahoor Khan is associated with which folk instrument?","qHindi":"जहूर खान किस लोकवाद्य से सम्बन्धित हैं?","optionsEnglish":["Bhapang","Nad","Algoza","Khadtal"],"optionsHindi":["भपंग","नड़","अलगोजा","खड़ताल"],"correct":0,"explanationEnglish":"Zahoor Khan Mewati is known as the 'Magician of Bhapang'. Bhapang is a famous stringed folk instrument popular in the Mewat region (Alwar) of Rajasthan.","explanationHindi":"जहूर खान मेवाती को 'भपंग का जादूगर' कहा जाता है। भपंग मेवात क्षेत्र (अलवर) का एक अत्यंत लोकप्रिय तत् (तार वाला) लोक वाद्य यंत्र है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"For mastery in which folk musical instrument was Sakar Khan awarded the Padma Shri in 2012?","qHindi":"किस लोकवाद्य में महारथ होने से साकर खान को 2012 में पद्मश्री से सम्मानित किया गया?","optionsEnglish":["Kamayacha","Sarangi","Morchang","Khadtal"],"optionsHindi":["कमायचा","सारंगी","मोरचंग","खड़ताल"],"correct":0,"explanationEnglish":"Kamal Sakar Khan of Jaisalmer was a renowned folk artist of the Manganiyar community who had extraordinary mastery over the Kamayacha. He was awarded the Padma Shri in 2012.","explanationHindi":"जैसलमेर निवासी कमल साकर खाँ मांगणियार जाति के प्रसिद्ध लोक कलाकार थे, जिन्हें कमायचा वादन में महारथ हासिल थी। इन्हें वर्ष 2012 में भारत सरकार द्वारा पद्मश्री से सम्मानित किया गया था।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Who is the famous Pakhawaj player of Rajasthan?","qHindi":"राजस्थान के प्रसिद्ध पखावज वादक हैं?","optionsEnglish":["Pt. Ram Narayan","Pt. Purushottam Das","Ustad Asad Ali Khan","Ustad Hidayat Khan"],"optionsHindi":["पं. रामनारायण","पं. पुरुषोत्तम दास","उस्ताद असदअली खां","उस्ताद हिदायत खां"],"correct":1,"explanationEnglish":"Pt. Purushottam Das of Nathdwara was a legendary Pakhawaj player. The Government of India honored him with the Padma Shri, and he documented his vast expertise in the book 'Mridang Vadan'.","explanationHindi":"नाथद्वारा के पं. पुरुषोत्तम दास प्रसिद्ध पखावज वादक थे। भारत सरकार ने इन्हें पद्मश्री से अलंकृत किया तथा इन्होंने अपने समस्त ज्ञान को 'मृदंग वादन' नामक पुस्तक में संकलित किया।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Bhand, Dholi, and Manganiyar are Rajasthan's...?","qHindi":"भांड, ढोली और मांगणियार राजस्थान के.... हैं?","optionsEnglish":["Traditional folk musicians","Folk art forms","Religious groups","Sports persons"],"optionsHindi":["पारंपरिक लोक संगीतकार","लोककला","धार्मिक समूह","खिलाड़ी"],"correct":0,"explanationEnglish":"Bhand, Dholi, Langa, and Manganiyar are hereditary musical communities of Rajasthan. Manganiyars excel in Kamayacha and Khadtal, while Dholis specialize in playing the Dhol.","explanationHindi":"भांड, ढोली, लंगा और मांगणियार राजस्थान की पारंपरिक संगीतकार जातियां हैं। मांगणियार मुख्य रूप से कमायचा, खड़ताल व सुरणाई तथा ढोली ढोल वादन में पारंगत होते हैं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Renowned classical instrumentalists of Rajasthan origin, Ram Narayan and Sultan Khan, are associated with which musical instrument?","qHindi":"राजस्थान मूल के प्रख्यात शास्त्रीय वादक रामनारायण तथा सुल्तान खाँ का सम्बन्ध किस वाद्य यन्त्र से है?","optionsEnglish":["Kamayacha","Sitar","Sarangi","Tabla"],"optionsHindi":["कमायचा","सितार","सारंगी","तबला"],"correct":2,"explanationEnglish":"Pandit Ram Narayan and Padma Bhushan Ustad Sultan Khan are world-renowned Sarangi maestros hailing from Rajasthan. Ustad Sultan Khan was born in Sikar, Rajasthan.","explanationHindi":"पंडित रामनारायण तथा पद्मभूषण से सम्मानित उस्ताद सुल्तान खाँ दोनों ही राजस्थान के विश्वविख्यात सारंगी वादक हैं। उस्ताद सुल्तान खाँ का जन्म सीकर में हुआ था।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following is not correctly matched?","qHindi":"सही सुमेलित नहीं है?","optionsEnglish":["Vishwa Mohan Bhatt - Mohan Veena","Chatur Lal - Tabla","Sultan Khan - Kamayacha","Zia Fariduddin Dagar - Dhrupad"],"optionsHindi":["विश्वमोहन भट्ट - मोहन वीणा","चतुर लाल - तबला","सुल्तान खां - कमायचा","जिया फरीदुद्दीन डागर - ध्रुपद"],"correct":2,"explanationEnglish":"Ustad Sultan Khan was an acclaimed Sarangi player, not a Kamayacha player. All the other pairs are correctly matched.","explanationHindi":"उस्ताद सुल्तान खाँ का सम्बन्ध सारंगी वादन से था, न कि कमायचा से। अतः विकल्प (3) सही सुमेलित नहीं है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which folk instrument of the snake charmer community (Sapera) is famous?","qHindi":"सपेरों का कौनसा लोक वाद्य प्रसिद्ध है?","optionsEnglish":["Pungi","Shehnai","Bansuri","Manjira"],"optionsHindi":["पूँगी","शहनाई","बांसुरी","मंजीरा"],"correct":0,"explanationEnglish":"Pungi (also known as Been) is crafted from a dried gourd (tumba) with two pipes and is the traditional wind instrument played by snake charmers.","explanationHindi":"पूँगी (बीन) का निर्माण विशेष प्रकार के सूखे तुम्बे से किया जाता है जिसमें दो नलियां लगी होती हैं। यह मुख्य रूप से सपेरा जाति का प्रसिद्ध सुषिर वाद्य यंत्र है।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which of the following musical instruments is also known as 'Bheri'?","qHindi":"निम्नलिखित में से किस वाद्य यंत्र को 'भेरी' भी कहा जाता है?","optionsEnglish":["Bankiya","Bhungal","Mashak","Pungi"],"optionsHindi":["बांकिया","भूंगल","मशक","पूँगी"],"correct":1,"explanationEnglish":"Bhungal is also referred to as 'Ranbheri' or 'Bheri'. It is a brass trumpet-like instrument played by Bhavai artists of Mewar and was historically blown as a war bugle.","explanationHindi":"भूंगल को 'रणभेरी' या 'भेरी' भी कहा जाता है। यह पीतल की लम्बी नली का बना वाद्य है जिसे मेवाड़ के भवाई खेल शुरू करने से पहले बजाते हैं। युद्ध काल में इसे युद्ध शुरू होने से पहले बजाया जाता था।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"},{"qEnglish":"Which musical instrument is different from the others?","qHindi":"कौनसा वाद्य यंत्र अलग है?","optionsEnglish":["Shehnai","Mashak","Khadtal","Algoza"],"optionsHindi":["शहनाई","मशक","खड़ताल","अलगोजा"],"correct":2,"explanationEnglish":"Khadtal is a percussion/idiophone instrument (Ghana vadya), whereas Shehnai, Mashak, and Algoza are all wind instruments (Sushir vadya).","explanationHindi":"खड़ताल एक घन वाद्य यंत्र है, जबकि शहनाई, मशक और अलगोजा तीनों फूँक मारकर बजाए जाने वाले सुषिर वाद्य यंत्र हैं।","subject":"इतिहास","topic":"कला, संस्कृति, साहित्य एवं स्थापत्य"}]</script>
+
+<script>
+// ── Bootstrap: read questions from the safe data island ──────────────────────
+const ALL_QUESTIONS = JSON.parse(document.getElementById('q-data').textContent);
+// FIX: titleJs is a proper JSON string so & etc. are not double-escaped
+const _TITLE = "लोक वाद्य यंत्र दिशा questions";
+
+let currentSession = null, quizHistory = [];
+
+// ── Utility ──────────────────────────────────────────────────────────────────
+function esc(s) {
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+let _toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function applyDark(on) {
+  document.body.classList.toggle('dark', on);
+  document.getElementById('dark-btn').textContent = on ? '☀️' : '🌙';
+  localStorage.setItem('quiz_theme', on ? 'dark' : 'light');
+}
+function toggleDark() { applyDark(!document.body.classList.contains('dark')); }
+function initDark() {
+  const s = localStorage.getItem('quiz_theme');
+  if (s === 'dark') applyDark(true);
+  else if (!s && window.matchMedia('(prefers-color-scheme:dark)').matches) applyDark(true);
+}
+
+// ── Title editing ─────────────────────────────────────────────────────────────
+const titleEl  = document.getElementById('quiz-title');
+const heroEl   = document.getElementById('hero-title');
+titleEl.addEventListener('input', () => {
+  heroEl.textContent = titleEl.textContent.trim() || _TITLE;
+  document.title = titleEl.textContent.trim() || _TITLE;
+});
+titleEl.addEventListener('blur', () => {
+  if (!titleEl.textContent.trim()) titleEl.textContent = _TITLE;
+  heroEl.textContent = titleEl.textContent.trim();
+  document.title = titleEl.textContent.trim();
+});
+titleEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); titleEl.blur(); }
+});
+
+// ── History persistence ───────────────────────────────────────────────────────
+function saveHistory()  { localStorage.setItem('quiz_history_v3', JSON.stringify(quizHistory)); }
+function loadHistory()  { try { quizHistory = JSON.parse(localStorage.getItem('quiz_history_v3') || '[]'); } catch(e) { quizHistory = []; } }
+function clearHistory() {
+  if (!confirm('Clear all history?')) return;
+  quizHistory = []; saveHistory(); renderStatsPage(); renderHomePage();
+}
+
+// ── Page routing ──────────────────────────────────────────────────────────────
+const PAGE_TAB_MAP = { home: 0, 'quiz-setup': 1, 'quiz-page': 1, 'results-page': 1, 'review-page': 2, 'stats-page': 3 };
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach((t, i) => t.classList.toggle('active', i === PAGE_TAB_MAP[id]));
+  if (id === 'home')         renderHomePage();
+  if (id === 'review-page')  renderReview();
+  if (id === 'stats-page')   renderStatsPage();
+  if (id === 'results-page') renderResults();
+}
+
+// ── Filters / setup helpers ───────────────────────────────────────────────────
+function getSubjects() { return [...new Set(ALL_QUESTIONS.map(q => q.subject).filter(Boolean))].sort(); }
+function getTopics(sub) { return [...new Set(ALL_QUESTIONS.filter(q => !sub || q.subject === sub).map(q => q.topic).filter(Boolean))].sort(); }
+
+function populateFilters() {
+  const subSel  = document.getElementById('filter-subject');
+  const revSub  = document.getElementById('review-subject');
+  // seed review-subject with All option
+  const allOpt = document.createElement('option'); allOpt.value = ''; allOpt.textContent = 'All'; revSub.appendChild(allOpt);
+  getSubjects().forEach(s => {
+    [subSel, revSub].forEach(el => {
+      const o = document.createElement('option'); o.value = s; o.textContent = s; el.appendChild(o);
+    });
+  });
+  subSel.addEventListener('change', () => {
+    const topSel = document.getElementById('filter-topic');
+    topSel.innerHTML = '<option value="">All Topics</option>';
+    getTopics(subSel.value).forEach(t => {
+      const o = document.createElement('option'); o.value = t; o.textContent = t; topSel.appendChild(o);
+    });
+    updateAvailable();
+  });
+  document.getElementById('filter-topic').addEventListener('change', updateAvailable);
+  document.getElementById('q-count').addEventListener('input', updateAvailable);
+  document.getElementById('mark-correct').addEventListener('input', updateMarkingPreview);
+  document.getElementById('mark-neg').addEventListener('input', updateMarkingPreview);
+  updateAvailable();
+  updateMarkingPreview();
+}
+
+function updateAvailable() {
+  const sub  = document.getElementById('filter-subject').value;
+  const top  = document.getElementById('filter-topic').value;
+  const pool = ALL_QUESTIONS.filter(q => (!sub || q.subject === sub) && (!top || q.topic === top));
+  document.getElementById('q-available').textContent = '(' + pool.length + ' available)';
+  document.getElementById('q-count').max = pool.length;
+}
+function updateMarkingPreview() {
+  const mc = parseFloat(document.getElementById('mark-correct').value) || 1;
+  const mn = parseFloat(document.getElementById('mark-neg').value) || 0;
+  document.getElementById('marking-preview').textContent = 'Correct = +' + mc + '  ·  Wrong = −' + mn + '  ·  Skip = 0';
+}
+
+// ── Match-table renderer ──────────────────────────────────────────────────────
+function buildMatchHtml(q) {
+  const itemsEn = q.matchItemsEnglish || q.matchItems || q.matchObjects || null;
+  const itemsHi = q.matchItemsHindi  || q.matchObjectsHindi || null;
+  if (!itemsEn) return '';
+  let rows = [], singleCol = false, c1Lbl = 'Column 1', c2Lbl = 'Column 2';
+  if (typeof itemsEn === 'string') {
+    rows = itemsEn.split(/[,\n]/).map(s => s.trim()).filter(Boolean).map(p => [p]); singleCol = true;
+  } else if (Array.isArray(itemsEn)) {
+    if (itemsEn.length && Array.isArray(itemsEn[0])) rows = itemsEn;
+    else { rows = itemsEn.map(s => ([String(s)])); singleCol = true; }
+  } else if (itemsEn && typeof itemsEn === 'object') {
+    const c1 = itemsEn.col1 || itemsEn.column1 || itemsEn.left  || [];
+    const c2 = itemsEn.col2 || itemsEn.column2 || itemsEn.right || [];
+    c1Lbl = itemsEn.col1Label || itemsEn.label1 || 'Column 1';
+    c2Lbl = itemsEn.col2Label || itemsEn.label2 || 'Column 2';
+    for (let i = 0; i < Math.max(c1.length, c2.length); i++) rows.push([c1[i] || '', c2[i] || '']);
+  }
+  if (!rows.length) return '';
+  let hiRows = [];
+  if (itemsHi) {
+    if (typeof itemsHi === 'string') hiRows = itemsHi.split(/[,\n]/).map(s => s.trim()).filter(Boolean).map(p => [p]);
+    else if (Array.isArray(itemsHi)) hiRows = Array.isArray(itemsHi[0]) ? itemsHi : itemsHi.map(s => ([String(s)]));
+  }
+  const tblCls = 'match-tbl' + (singleCol ? ' single-col' : '');
+  let h = '<div class="match-table-wrap"><div class="match-table-header">🔗 Match the Following</div><table class="' + tblCls + '">';
+  if (!singleCol) h += '<tr class="match-col-hdr"><td>' + esc(c1Lbl) + '</td><td>' + esc(c2Lbl) + '</td></tr>';
+  rows.forEach((row, i) => {
+    h += '<tr><td>' + esc(row[0] || '') + '</td>' + (singleCol ? '' : '<td>' + esc(row[1] || '') + '</td>') + '</tr>';
+    if (hiRows[i]) h += '<tr class="match-hi"><td>' + esc(hiRows[i][0] || '') + '</td>' + (singleCol ? '' : '<td>' + esc(hiRows[i][1] || '') + '</td>') + '</tr>';
+  });
+  return h + '</table></div>';
+}
+
+// ── Quiz start ────────────────────────────────────────────────────────────────
+function startQuiz() {
+  const sub      = document.getElementById('filter-subject').value;
+  const top      = document.getElementById('filter-topic').value;
+  const cnt      = parseInt(document.getElementById('q-count').value) || 20;
+  const mode     = document.getElementById('quiz-mode').value;
+  const ord      = document.getElementById('quiz-order').value;
+  const cust     = parseInt(document.getElementById('custom-time').value) || 60;
+  const mc       = parseFloat(document.getElementById('mark-correct').value) || 1;
+  const mn       = parseFloat(document.getElementById('mark-neg').value) || 0;
+  const scramble = document.getElementById('scramble-opts').checked;
+
+  let pool = ALL_QUESTIONS.filter(q => (!sub || q.subject === sub) && (!top || q.topic === top));
+  if (!pool.length) { document.getElementById('setup-msg').textContent = 'No questions match.'; return; }
+  if (cnt > pool.length) { document.getElementById('setup-msg').textContent = 'Only ' + pool.length + ' available.'; return; }
+  document.getElementById('setup-msg').textContent = '';
+
+  let qs = [...pool];
+  if (ord === 'random') qs = qs.sort(() => Math.random() - .5);
+  qs = qs.slice(0, cnt);
+
+  if (scramble) {
+    qs = qs.map(q => {
+      const optsEn = q.optionsEnglish || []; if (!optsEn.length) return q;
+      const optsHi = q.optionsHindi || [];
+      const order  = [...Array(optsEn.length).keys()].sort(() => Math.random() - .5);
+      return { ...q,
+        optionsEnglish: order.map(i => optsEn[i]),
+        optionsHindi:   order.map(i => optsHi[i] || ''),
+        correct:        order.indexOf(q.correct) };
+    });
+  }
+
+  const secPerQ = mode === 'timed' ? 60 : mode === 'custom' ? cust : null;
+  currentSession = {
+    questions: qs,
+    answers:   new Array(qs.length).fill(null),
+    revealed:  new Array(qs.length).fill(false),
+    flagged:   new Array(qs.length).fill(false),
+    currentIdx: 0,
+    startTime: Date.now(),
+    secPerQ, timeLeft: secPerQ, timerInterval: null,
+    subject: sub || 'All', topic: top || 'All',
+    markCorrect: mc, markNeg: mn,
+    _lastSettings: { sub, top, cnt, mode, ord, cust, mc, mn, scramble }
+  };
+  buildQuizNav();
+  showPage('quiz-page');
+  renderQuestion();
+  if (secPerQ !== null) startTimer();
+}
+
+function retakeQuiz() {
+  if (!currentSession?._lastSettings) return;
+  const ls = currentSession._lastSettings;
+  document.getElementById('filter-subject').value = ls.sub;
+  const topSel = document.getElementById('filter-topic');
+  topSel.innerHTML = '<option value="">All Topics</option>';
+  getTopics(ls.sub).forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; topSel.appendChild(o); });
+  topSel.value = ls.top;
+  document.getElementById('q-count').value    = ls.cnt;
+  document.getElementById('quiz-mode').value  = ls.mode;
+  document.getElementById('custom-time').value = ls.cust;
+  document.getElementById('quiz-order').value = ls.ord;
+  document.getElementById('mark-correct').value = ls.mc;
+  document.getElementById('mark-neg').value   = ls.mn;
+  document.getElementById('scramble-opts').checked = ls.scramble || false;
+  document.getElementById('custom-time').style.display      = ls.mode === 'custom' ? '' : 'none';
+  document.getElementById('custom-time-unit').style.display = ls.mode === 'custom' ? '' : 'none';
+  startQuiz();
+}
+
+// ── Flag helpers ──────────────────────────────────────────────────────────────
+function toggleFlag() {
+  const s = currentSession; if (!s) return;
+  s.flagged[s.currentIdx] = !s.flagged[s.currentIdx];
+  updateNavDots(); updateFlagBtn(); updateFlagCountLabel();
+  showToast(s.flagged[s.currentIdx] ? '⭐ Flagged' : 'Unflagged');
+}
+function updateFlagBtn() {
+  const s = currentSession; if (!s) return;
+  const btn = document.getElementById('flag-btn');
+  btn.classList.toggle('flagged', !!s.flagged[s.currentIdx]);
+  btn.title = s.flagged[s.currentIdx] ? 'Remove flag' : 'Flag for review (*)';
+}
+function updateFlagCountLabel() {
+  const s = currentSession; if (!s) return;
+  const cnt = s.flagged.filter(Boolean).length;
+  document.getElementById('flag-count-label').textContent = cnt ? cnt + ' flagged ⭐' : '';
+}
+
+// ── Navigator dots ────────────────────────────────────────────────────────────
+function buildQuizNav() {
+  const grid = document.getElementById('q-nav-grid'); grid.innerHTML = '';
+  currentSession.questions.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'q-dot'; d.textContent = i + 1;
+    d.addEventListener('click', () => jumpTo(i));
+    grid.appendChild(d);
+  });
+}
+function updateNavDots() {
+  const s = currentSession;
+  document.querySelectorAll('.q-dot').forEach((d, i) => {
+    d.className = 'q-dot';
+    if (i === s.currentIdx) d.classList.add('current');
+    else if (s.answers[i] === -1) d.classList.add('skipped');
+    else if (s.answers[i] !== null) d.classList.add(s.answers[i] === s.questions[i].correct ? 'answered' : 'wrong-answered');
+    if (s.flagged[i]) d.classList.add('flagged');
+  });
+}
+
+// ── Render one question ───────────────────────────────────────────────────────
+function renderQuestion() {
+  const s = currentSession, q = s.questions[s.currentIdx], total = s.questions.length;
+  const answered = s.answers.filter(a => a !== null).length;
+  document.getElementById('quiz-progress-bar').style.width = ((s.currentIdx + 1) / total * 100) + '%';
+  document.getElementById('quiz-meta-left').textContent = 'Q ' + (s.currentIdx + 1) + '/' + total + '  ·  Done: ' + answered;
+  document.getElementById('quiz-marking-badge').innerHTML =
+    '<span class="pos">+' + s.markCorrect + ' correct</span>' +
+    (s.markNeg > 0 ? '<span class="neg">−' + s.markNeg + ' wrong</span>' : '<span>No negative</span>');
+  document.getElementById('q-tag').textContent = [q.subject, q.topic].filter(Boolean).join(' › ');
+  document.getElementById('q-english').textContent = q.qEnglish || '';
+  document.getElementById('q-hindi').textContent   = q.qHindi   || '';
+  const hasHindi = !!q.qHindi;
+  document.getElementById('hindi-divider').style.display = hasHindi ? '' : 'none';
+  document.getElementById('q-hindi').style.display       = hasHindi ? '' : 'none';
+  const imgEl = document.getElementById('q-image');
+  if (q.imageUrl) { imgEl.src = q.imageUrl; imgEl.style.display = ''; }
+  else { imgEl.src = ''; imgEl.style.display = 'none'; }
+  document.getElementById('match-container').innerHTML = buildMatchHtml(q);
+
+  const optsEn = q.optionsEnglish || [], optsHi = q.optionsHindi || [];
+  const ul = document.getElementById('options-list'); ul.innerHTML = '';
+  const chosen = s.answers[s.currentIdx], revealed = s.revealed[s.currentIdx];
+  optsEn.forEach((opt, i) => {
+    const li = document.createElement('li'); li.className = 'option-item';
+    if (revealed) {
+      li.classList.add('disabled');
+      if (i === q.correct) li.classList.add('correct');
+      else if (i === chosen && chosen !== q.correct) li.classList.add('wrong');
+    } else if (i === chosen) li.classList.add('selected');
+    const hiOpt = optsHi[i] || '';
+    li.innerHTML = '<span class="option-letter">' + String.fromCharCode(65 + i) + '</span>' +
+      '<span class="option-texts"><span class="opt-english">' + esc(opt) + '</span>' +
+      (hiOpt ? '<span class="opt-hindi">' + esc(hiOpt) + '</span>' : '') + '</span>';
+    if (!revealed) li.addEventListener('click', () => selectOption(i));
+    ul.appendChild(li);
+  });
+
+  const expBox = document.getElementById('explanation-box');
+  if (revealed) {
+    document.getElementById('exp-english').textContent = q.explanationEnglish || '';
+    const expHi = document.getElementById('exp-hindi');
+    expHi.textContent    = q.explanationHindi || '';
+    expHi.style.display  = q.explanationHindi ? '' : 'none';
+    expBox.classList.add('show');
+  } else expBox.classList.remove('show');
+
+  document.getElementById('prev-btn').disabled = s.currentIdx === 0;
+  const isLast = s.currentIdx === total - 1;
+  const nb = document.getElementById('next-btn');
+  nb.textContent = isLast ? '✓ Finish' : 'Next →';
+  // Handled via central listeners in DOMContentLoaded
+  const skipBtn = document.getElementById('skip-btn');
+  if (revealed) { skipBtn.style.display = 'none'; }
+  else if (isLast) { skipBtn.textContent = '✓ Finish'; skipBtn.style.display = ''; }
+  else { skipBtn.textContent = 'Skip'; skipBtn.style.display = ''; }
+
+  if (s.secPerQ !== null) { s.timeLeft = s.secPerQ; updateTimerDisplay(); }
+  updateNavDots(); updateFlagBtn(); updateFlagCountLabel();
+}
+
+function selectOption(i) {
+  const s = currentSession; if (s.revealed[s.currentIdx]) return;
+  s.answers[s.currentIdx]  = i;
+  s.revealed[s.currentIdx] = true;
+  renderQuestion();
+  if (s.currentIdx < s.questions.length - 1) setTimeout(() => goQuestion(1), 1400);
+}
+function goQuestion(dir) {
+  const s = currentSession, next = s.currentIdx + dir;
+  if (next < 0 || next >= s.questions.length) return;
+  s.currentIdx = next;
+  if (s.secPerQ !== null) { clearInterval(s.timerInterval); s.timeLeft = s.secPerQ; startTimer(); }
+  renderQuestion();
+}
+function jumpTo(i) {
+  const s = currentSession; s.currentIdx = i;
+  if (s.secPerQ !== null) { clearInterval(s.timerInterval); s.timeLeft = s.secPerQ; startTimer(); }
+  renderQuestion();
+}
+function skipQuestion() {
+  const s = currentSession;
+  if (s.answers[s.currentIdx] === null) s.answers[s.currentIdx] = -1;
+  goQuestion(1);
+}
+function endQuizEarly() { if (confirm('End quiz now and see results?')) finishQuiz(); }
+
+// ── Timer ─────────────────────────────────────────────────────────────────────
+function startTimer() {
+  const s = currentSession; if (s.secPerQ === null) return;
+  clearInterval(s.timerInterval);
+  s.timerInterval = setInterval(() => {
+    s.timeLeft--; updateTimerDisplay();
+    if (s.timeLeft <= 0) {
+      clearInterval(s.timerInterval);
+      if (s.answers[s.currentIdx] === null) s.answers[s.currentIdx] = -1;
+      s.revealed[s.currentIdx] = true; renderQuestion();
+      if (s.currentIdx < s.questions.length - 1) setTimeout(() => goQuestion(1), 1100);
+      else setTimeout(finishQuiz, 1100);
+    }
+  }, 1000);
+}
+function updateTimerDisplay() {
+  const s = currentSession, el = document.getElementById('quiz-timer');
+  if (s.secPerQ === null) { el.style.display = 'none'; return; }
+  el.style.display = '';
+  const t = s.timeLeft;
+  el.textContent = Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
+  el.className = t > s.secPerQ * .5 ? '' : t > 10 ? 'warning' : 'danger';
+}
+
+// ── Keyboard shortcuts ────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  const tag = document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA' || document.activeElement.isContentEditable) return;
+  if (!currentSession || !document.getElementById('quiz-page').classList.contains('active')) return;
+  const s = currentSession;
+  if (e.key === 'ArrowRight') { e.preventDefault(); goQuestion(1);  return; }
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); goQuestion(-1); return; }
+  if ((e.key === 's' || e.key === 'S') && !s.revealed[s.currentIdx]) { e.preventDefault(); skipQuestion(); return; }
+  if (e.key === 'f' || e.key === 'F') { e.preventDefault(); endQuizEarly(); return; }
+  if (e.key === '*') { e.preventDefault(); toggleFlag(); return; }
+  const n = parseInt(e.key);
+  if (n >= 1 && n <= 4 && !s.revealed[s.currentIdx]) {
+    const opts = s.questions[s.currentIdx].optionsEnglish || [];
+    if (n - 1 < opts.length) { e.preventDefault(); selectOption(n - 1); }
+  }
+});
+
+// ── Finish quiz ───────────────────────────────────────────────────────────────
+function finishQuiz() {
+  const s = currentSession; clearInterval(s.timerInterval);
+  let correct = 0, wrong = 0, skipped = 0, totalScore = 0;
+  const subjectStats = {};
+  const maxScore = s.questions.length * s.markCorrect;
+  s.questions.forEach((q, i) => {
+    const a = s.answers[i], sub = q.subject || 'Other';
+    if (!subjectStats[sub]) subjectStats[sub] = { correct: 0, total: 0 };
+    subjectStats[sub].total++;
+    if (a === -1 || a === null) skipped++;
+    else if (a === q.correct) { correct++; subjectStats[sub].correct++; totalScore += s.markCorrect; }
+    else { wrong++; totalScore -= s.markNeg; }
+  });
+  totalScore = Math.round(Math.max(0, totalScore) * 100) / 100;
+  const pct     = Math.round(correct / s.questions.length * 100);
+  const elapsed = Math.round((Date.now() - s.startTime) / 1000);
+  const result  = {
+    date: new Date().toISOString(), total: s.questions.length,
+    correct, wrong, skipped, pct, totalScore, maxScore,
+    markCorrect: s.markCorrect, markNeg: s.markNeg, elapsed,
+    subject: s.subject, topic: s.topic, subjectStats,
+    answers: [...s.answers], flagged: [...s.flagged],
+    questions: s.questions.map(q => ({
+      qEnglish: q.qEnglish, qHindi: q.qHindi, imageUrl: q.imageUrl || null,
+      optionsEnglish: q.optionsEnglish, optionsHindi: q.optionsHindi,
+      correct: q.correct, explanationEnglish: q.explanationEnglish,
+      explanationHindi: q.explanationHindi, subject: q.subject, topic: q.topic,
+      matchItemsEnglish: q.matchItemsEnglish, matchItemsHindi: q.matchItemsHindi,
+      matchItems: q.matchItems, matchObjects: q.matchObjects, matchObjectsHindi: q.matchObjectsHindi
+    }))
+  };
+  quizHistory.unshift(result);
+  if (quizHistory.length > 50) quizHistory = quizHistory.slice(0, 50);
+  saveHistory();
+  currentSession._lastResult = result;
+  showPage('results-page');
+}
+
+// ── Render results ────────────────────────────────────────────────────────────
+function renderResults() {
+  if (!currentSession?._lastResult) return;
+  const r = currentSession._lastResult;
+  document.getElementById('result-pct').textContent = r.pct + '%';
+  const color = r.pct >= 80 ? '#16a34a' : r.pct >= 60 ? '#4f46e5' : '#dc2626';
+  document.getElementById('score-ring').style.borderColor = color;
+  document.getElementById('result-pct').style.color = color;
+  document.getElementById('result-heading').textContent = r.pct >= 80 ? '🎉 Excellent!' : r.pct >= 60 ? '👍 Good Job!' : '💪 Keep Practicing!';
+  document.getElementById('marks-display').innerHTML = 'Score: <span>' + r.totalScore + ' / ' + r.maxScore + '</span> marks &nbsp;·&nbsp; +' + r.markCorrect + ' correct' + (r.markNeg > 0 ? ', −' + r.markNeg + ' wrong' : '');
+  document.getElementById('result-summary').textContent = r.correct + ' correct · ' + r.wrong + ' wrong · ' + r.skipped + ' skipped · ' + fmtTime(r.elapsed);
+  document.getElementById('result-bars').innerHTML = barRow('Correct', r.correct, r.total, '#16a34a') + barRow('Wrong', r.wrong, r.total, '#dc2626') + barRow('Skipped', r.skipped, r.total, '#d97706');
+  const sb = document.getElementById('result-subject-breakdown');
+  sb.innerHTML = '<div class="sub-row" style="font-weight:700;font-size:.76rem;color:var(--muted)"><span>Subject</span><span style="text-align:center">Acc.</span><span style="text-align:center">Qs</span></div>';
+  Object.entries(r.subjectStats).forEach(([sub, st]) => {
+    const p = Math.round(st.correct / st.total * 100);
+    sb.innerHTML += '<div class="sub-row"><span class="sub-name">' + esc(sub) + '</span><span class="sub-pct">' + p + '%</span><span class="sub-total">' + st.total + '</span></div>';
+  });
+}
+
+function barRow(label, val, total, color) {
+  const pct = total ? Math.round(val / total * 100) : 0;
+  return '<div class="result-bar-row"><span class="result-bar-label">' + label + '</span>' +
+    '<div class="result-bar-track"><div class="result-bar-fill" style="width:' + pct + '%;background:' + color + '"></div></div>' +
+    '<span class="result-bar-count">' + val + '</span></div>';
+}
+
+function copyResults() {
+  const r = currentSession?._lastResult; if (!r) { showToast('No results yet'); return; }
+  const lines = [
+    '📊 Quiz Results — ' + r.subject,
+    '━━━━━━━━━━━━━━━━━━━━━━━',
+    '🎯 Score:   ' + r.pct + '%  (' + r.totalScore + '/' + r.maxScore + ' marks)',
+    '✅ Correct: ' + r.correct + '/' + r.total,
+    '❌ Wrong:   ' + r.wrong,
+    '⏭️ Skipped: ' + r.skipped,
+    '⏱️ Time:    ' + fmtTime(r.elapsed),
+  ];
+  Object.entries(r.subjectStats || {}).forEach(([sub, st]) => {
+    lines.push('📚 ' + sub + ': ' + Math.round(st.correct / st.total * 100) + '% (' + st.correct + '/' + st.total + ')');
+  });
+  navigator.clipboard.writeText(lines.join('\n'))
+    .then(() => showToast('✅ Copied to clipboard!'))
+    .catch(() => showToast('❌ Copy failed'));
+}
+
+// ── Review page ───────────────────────────────────────────────────────────────
+function renderReview() {
+  const filterSub  = document.getElementById('review-subject').value;
+  const filterType = document.getElementById('review-filter').value;
+  let items = [];
+  if (currentSession?._lastResult) {
+    const r = currentSession._lastResult;
+    r.questions.forEach((q, i) => {
+      const a = r.answers[i];
+      const isFlagged = r.flagged?.[i] || false;
+      const status = (a === -1 || a === null) ? 'skipped' : a === q.correct ? 'correct' : 'wrong';
+      items.push({ q, a, status, flagged: isFlagged });
+    });
+  } else {
+    ALL_QUESTIONS.forEach(q => items.push({ q, a: null, status: 'unanswered', flagged: false }));
+  }
+  const nC = items.filter(x => x.status === 'correct').length;
+  const nW = items.filter(x => x.status === 'wrong').length;
+  const nS = items.filter(x => x.status === 'skipped' || x.status === 'unanswered').length;
+  const nF = items.filter(x => x.flagged).length;
+  document.getElementById('review-summary-bar').innerHTML =
+    '<span class="rsm-pill rsm-correct">✓ ' + nC + ' correct</span>' +
+    (nW ? '<span class="rsm-pill rsm-wrong">✗ ' + nW + ' wrong</span>' : '') +
+    (nS ? '<span class="rsm-pill rsm-skipped">→ ' + nS + ' skipped</span>' : '') +
+    (nF ? '<span class="rsm-pill rsm-flagged">⭐ ' + nF + ' flagged</span>' : '');
+  if (filterSub) items = items.filter(it => it.q.subject === filterSub);
+  if (filterType === 'wrong')   items = items.filter(it => it.status === 'wrong');
+  else if (filterType === 'correct') items = items.filter(it => it.status === 'correct');
+  else if (filterType === 'skipped') items = items.filter(it => it.status === 'skipped' || it.status === 'unanswered');
+  else if (filterType === 'flagged') items = items.filter(it => it.flagged);
+  const list = document.getElementById('review-list');
+  list.innerHTML = items.length
+    ? items.map((it, n) => reviewCard(it, n + 1)).join('')
+    : '<div class="empty-state"><div class="icon">🔍</div><p>No questions match this filter.</p></div>';
+}
+
+function reviewCard({ q, a, status, flagged }, n) {
+  const optsEn = q.optionsEnglish || [], optsHi = q.optionsHindi || [];
+  const optRows = optsEn.map((opt, i) => {
+    let cls = '';
+    if (i === q.correct) cls = 'correct-opt';
+    else if (a != null && a !== -1 && i === a && a !== q.correct) cls = 'user-wrong';
+    const icon  = i === q.correct ? '✓' : (a != null && a !== -1 && i === a) ? '✗' : '○';
+    const hiOpt = optsHi[i] || '';
+    return '<div class="review-option ' + cls + '"><span style="font-weight:700;flex-shrink:0;width:22px">' + icon + String.fromCharCode(65 + i) + '</span>' +
+      '<span class="option-texts"><span class="opt-english">' + esc(opt) + '</span>' + (hiOpt ? '<span class="opt-hindi">' + esc(hiOpt) + '</span>' : '') + '</span></div>';
+  }).join('');
+  const badgeCls = status === 'correct' ? 'badge-correct' : status === 'wrong' ? 'badge-wrong' : 'badge-skipped';
+  const badgeTxt = status === 'correct' ? 'Correct'       : status === 'wrong' ? 'Wrong'       : 'Skipped';
+  const subTop   = [q.subject, q.topic].filter(Boolean).join(' › ');
+  return '<div class="review-q">' +
+    '<div class="q-number">Q' + n + ' — ' + esc(subTop) +
+    ' <span class="badge ' + badgeCls + '">' + badgeTxt + '</span>' +
+    (flagged ? ' <span class="badge badge-flagged">⭐ Flagged</span>' : '') + '</div>' +
+    (q.imageUrl ? '<img src="' + esc(q.imageUrl) + '" class="q-image" alt=""/>' : '') +
+    '<div class="q-english">' + esc(q.qEnglish || '') + '</div>' +
+    (q.qHindi ? '<div class="q-hindi">' + esc(q.qHindi) + '</div>' : '') +
+    buildMatchHtml(q) + optRows +
+    '<div class="review-exp-wrap">' +
+    (q.explanationEnglish ? '<div class="review-exp-en">💡 ' + esc(q.explanationEnglish) + '</div>' : '') +
+    (q.explanationHindi   ? '<div class="review-exp-hi">💡 ' + esc(q.explanationHindi)   + '</div>' : '') +
+    '</div></div>';
+}
+
+// ── Stats page ────────────────────────────────────────────────────────────────
+function renderStatsPage() {
+  if (!quizHistory.length) {
+    document.getElementById('stats-grid').innerHTML = '';
+    document.getElementById('stats-subject').innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>Take a quiz first!</p></div>';
+    document.getElementById('stats-history').innerHTML = '';
+    return;
+  }
+  const totalQ  = quizHistory.reduce((s, r) => s + r.total, 0);
+  const avgPct  = Math.round(quizHistory.reduce((s, r) => s + r.pct, 0) / quizHistory.length);
+  const best    = Math.max(...quizHistory.map(r => r.pct));
+  const bestMk  = Math.max(...quizHistory.map(r => r.totalScore || 0));
+  document.getElementById('stats-grid').innerHTML =
+    '<div class="stat-card"><div class="value">' + quizHistory.length + '</div><div class="label">Sessions</div></div>' +
+    '<div class="stat-card"><div class="value">' + totalQ  + '</div><div class="label">Attempted</div></div>' +
+    '<div class="stat-card"><div class="value">' + avgPct  + '%</div><div class="label">Avg Accuracy</div></div>' +
+    '<div class="stat-card"><div class="value">' + best    + '%</div><div class="label">Best Score</div></div>' +
+    '<div class="stat-card"><div class="value">' + bestMk  + '</div><div class="label">Best Marks</div></div>';
+  const subAcc = {};
+  quizHistory.forEach(r => Object.entries(r.subjectStats || {}).forEach(([sub, st]) => {
+    if (!subAcc[sub]) subAcc[sub] = { correct: 0, total: 0 };
+    subAcc[sub].correct += st.correct; subAcc[sub].total += st.total;
+  }));
+  const subEl = document.getElementById('stats-subject');
+  subEl.innerHTML = '<div class="sub-row" style="font-weight:700;font-size:.76rem;color:var(--muted)"><span>Subject</span><span style="text-align:center">Acc.</span><span style="text-align:center">Qs</span></div>';
+  Object.entries(subAcc).sort((a, b) => b[1].total - a[1].total).forEach(([sub, st]) => {
+    const p = Math.round(st.correct / st.total * 100);
+    subEl.innerHTML += '<div class="sub-row"><span class="sub-name">' + esc(sub) + '</span><span class="sub-pct">' + p + '%</span><span class="sub-total">' + st.total + '</span></div>';
+  });
+  document.getElementById('stats-history').innerHTML = quizHistory.slice(0, 20).map(r => {
+    const d   = new Date(r.date);
+    const ds  = d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const clr = r.pct >= 80 ? '#16a34a' : r.pct >= 60 ? '#4f46e5' : '#dc2626';
+    const mk  = r.totalScore !== undefined ? ' · ' + r.totalScore + '/' + r.maxScore + ' marks' : '';
+    return '<div class="history-item"><span class="h-score" style="color:' + clr + '">' + r.pct + '%</span>' +
+      '<span class="h-detail">' + r.correct + '/' + r.total + mk + ' · ' + esc(r.subject) + '</span>' +
+      '<span class="h-date">' + ds + '</span></div>';
+  }).join('');
+}
+
+// ── Home page ─────────────────────────────────────────────────────────────────
+function renderHomePage() {
+  loadHistory();
+  const best = quizHistory.length ? Math.max(...quizHistory.map(r => r.pct)) : null;
+  const avg  = quizHistory.length ? Math.round(quizHistory.reduce((s, r) => s + r.pct, 0) / quizHistory.length) : null;
+  document.getElementById('home-stats').innerHTML =
+    '<div class="stat-card"><div class="value">' + ALL_QUESTIONS.length + '</div><div class="label">Questions</div></div>' +
+    '<div class="stat-card"><div class="value">' + getSubjects().length + '</div><div class="label">Subjects</div></div>' +
+    '<div class="stat-card"><div class="value">' + quizHistory.length  + '</div><div class="label">Sessions</div></div>' +
+    (best !== null ? '<div class="stat-card"><div class="value">' + best + '%</div><div class="label">Best</div></div>' : '') +
+    (avg  !== null ? '<div class="stat-card"><div class="value">' + avg  + '%</div><div class="label">Avg</div></div>'  : '');
+  const ov = document.getElementById('home-overview');
+  if (!quizHistory.length) {
+    ov.innerHTML = '<div class="empty-state"><div class="icon">🎯</div><p>No sessions yet. Click <strong>Quiz</strong> to start!</p></div>';
+  } else {
+    const last  = quizHistory[0];
+    const color = last.pct >= 80 ? '#16a34a' : last.pct >= 60 ? '#4f46e5' : '#dc2626';
+    const mk    = last.totalScore !== undefined ? ' · <strong>' + last.totalScore + '/' + last.maxScore + ' marks</strong>' : '';
+    ov.innerHTML = '<p style="font-size:.86rem;color:var(--muted);margin-bottom:10px">Last: <strong style="color:' + color + '">' + last.pct + '%</strong>' + mk + ' — ' + last.correct + '/' + last.total + ' correct</p>' +
+      barRow('Correct', last.correct, last.total, '#16a34a') + barRow('Wrong', last.wrong, last.total, '#dc2626') + barRow('Skipped', last.skipped, last.total, '#d97706');
+  }
+  document.getElementById('home-recent').innerHTML = quizHistory.length
+    ? quizHistory.slice(0, 5).map(r => {
+        const color = r.pct >= 80 ? '#16a34a' : r.pct >= 60 ? '#4f46e5' : '#dc2626';
+        const mk    = r.totalScore !== undefined ? ' · ' + r.totalScore + ' marks' : '';
+        return '<div class="history-item"><span class="h-score" style="color:' + color + '">' + r.pct + '%</span>' +
+          '<span class="h-detail">' + r.correct + '/' + r.total + mk + ' · ' + esc(r.subject) + '</span>' +
+          '<span class="h-date">' + new Date(r.date).toLocaleDateString() + '</span></div>';
+      }).join('')
+    : '<div style="color:var(--muted);font-size:.86rem">No sessions yet.</div>';
+}
+
+function fmtTime(s) { if (!s) return '—'; const m = Math.floor(s / 60); return m > 0 ? m + 'm ' + (s % 60) + 's' : s + 's'; }
+
+// ── Wire up all buttons via addEventListener (no inline onclick) ──────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const on = (id, event, fn) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener(event, fn);
+    // [L4] silent no-op — missing UI elements are non-fatal
+  };
+
+  on('tab-home', 'click', () => showPage('home'));
+  on('tab-quiz', 'click', () => showPage('quiz-setup'));
+  on('tab-review', 'click', () => showPage('review-page'));
+  on('tab-stats', 'click', () => showPage('stats-page'));
+
+  on('dark-btn', 'click', toggleDark);
+  on('start-quiz-btn', 'click', startQuiz);
+  on('finish-early-btn', 'click', endQuizEarly);
+  on('prev-btn', 'click', () => goQuestion(-1));
+  on('next-btn', 'click', () => {
+    const s = currentSession; if (!s) return;
+    if (s.currentIdx === s.questions.length - 1) finishQuiz();
+    else goQuestion(1);
+  });
+  on('skip-btn', 'click', () => {
+    const s = currentSession; if (!s) return;
+    if (s.currentIdx === s.questions.length - 1) finishQuiz();
+    else skipQuestion();
+  });
+  on('flag-btn', 'click', toggleFlag);
+
+  on('go-review-btn', 'click', () => showPage('review-page'));
+  on('retake-btn', 'click', retakeQuiz);
+  on('new-quiz-btn', 'click', () => showPage('quiz-setup'));
+  on('copy-results-btn', 'click', copyResults);
+  on('print-btn', 'click', () => window.print());
+  on('results-home-btn', 'click', () => showPage('home'));
+  on('clear-history-btn', 'click', clearHistory);
+
+  on('review-subject', 'change', renderReview);
+  on('review-filter', 'change', renderReview);
+
+  const quizMode = document.getElementById('quiz-mode');
+  if (quizMode) {
+    quizMode.addEventListener('change', function () {
+      const show = this.value === 'custom';
+      const ct = document.getElementById('custom-time');
+      const cu = document.getElementById('custom-time-unit');
+      if (ct) ct.style.display = show ? '' : 'none';
+      if (cu) cu.style.display = show ? '' : 'none';
+    });
+  }
+
+  initDark();
+  loadHistory();
+  populateFilters();
+  renderHomePage();
+});
+</script>
+</body>
+</html>
