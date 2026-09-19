@@ -1,0 +1,1641 @@
+[
+  {
+    "qEnglish": "Which is the state musical instrument of Rajasthan?",
+    "qHindi": "राजस्थान का राज्य वाद्य है-",
+    "optionsEnglish": [
+      "Iktara",
+      "Algoza",
+      "Naubat",
+      "Tasha"
+    ],
+    "optionsHindi": [
+      "इकतारा",
+      "अलगोजा",
+      "नौबत",
+      "ताशा"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Algoza is the state musical instrument of Rajasthan, resembling a flute and played by blowing into two pipes simultaneously.",
+    "explanationHindi": "अलगोजा राजस्थान का राज्यवाद्य है जो बांसुरी की तरह होता है। इसे मुँह में रखकर फूँक के माध्यम से बजाया जाता है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "How many holes are there in the Algoza instrument?",
+    "qHindi": "अलगोजा वाद्य यंत्र में कितने छिद्र होते हैं?",
+    "optionsEnglish": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "optionsHindi": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Algoza generally has four or seven holes.",
+    "explanationHindi": "अलगोजा में सात अथवा चार छिद्र होते हैं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following musical instruments is like a flute?",
+    "qHindi": "निम्न में से कौनसा वाद्य यंत्र बांसुरी की तरह होता है-",
+    "optionsEnglish": [
+      "Algoza",
+      "Bhapang",
+      "Ravanahatha",
+      "Tandoora"
+    ],
+    "optionsHindi": [
+      "अलगोजा",
+      "भपंग",
+      "रावण हत्था",
+      "तंदूरा"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Algoza is a wind instrument similar to a flute.",
+    "explanationHindi": "अलगोजा राजस्थान का राज्यवाद्य है जो बांसुरी की तरह होता है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which musical instrument is played by mouth?",
+    "qHindi": "मुँह से बजाया जाने वाला वाद्य यंत्र है?",
+    "optionsEnglish": [
+      "Iktara",
+      "Algoza",
+      "Naubat",
+      "Tasha"
+    ],
+    "optionsHindi": [
+      "इकतारा",
+      "अलगोजा",
+      "नौबत",
+      "ताशा"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Algoza is a wind instrument (Sushir Vadya) played with the mouth.",
+    "explanationHindi": "अलगोजा फूँक के माध्यम से मुँह से बजाया जाने वाला सुषिर वाद्ययंत्र है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is a wind instrument (Sushir Vadya)?",
+    "qHindi": "कौनसा सुषिर वाद्य है?",
+    "optionsEnglish": [
+      "Algoza",
+      "Kamayacha",
+      "Tandoora",
+      "Ravanahatha"
+    ],
+    "optionsHindi": [
+      "अलगोजा",
+      "कामायचा",
+      "तंदूरा",
+      "रावणहत्था"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Algoza is a Sushir (wind) instrument.",
+    "explanationHindi": "अलगोजा फूँक से बजाया जाने वाला सुषिर वाद्ययंत्र है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Match the following appropriately:",
+    "qHindi": "सुमेलित कीजिए-",
+    "matchItemsEnglish": {
+      "col1Label": "Musical Instrument",
+      "col2Label": "Type of Instrument",
+      "col1": [
+        "Iktara",
+        "Algoza",
+        "Jhanjh",
+        "Mandal"
+      ],
+      "col2": [
+        "Ghan Vadya",
+        "Tat Vadya",
+        "Sushir Vadya",
+        "Avanaddh Vadya"
+      ]
+    },
+    "matchItemsHindi": {
+      "col1Label": "लोक वाद्य",
+      "col2Label": "प्रकार",
+      "col1": [
+        "इकतारा",
+        "अलगोजा",
+        "झांझ",
+        "मांदल"
+      ],
+      "col2": [
+        "घन वाद्य",
+        "तत् वाद्य",
+        "सुषिर वाद्य",
+        "अवनद्ध वाद्य"
+      ]
+    },
+    "optionsEnglish": [
+      "A-2, B-3, C-1, D-4",
+      "A-1, B-2, C-3, D-4",
+      "A-2, B-3, C-4, D-1",
+      "A-3, B-4, C-2, D-1"
+    ],
+    "optionsHindi": [
+      "A-2, B-3, C-1, D-4",
+      "A-1, B-2, C-3, D-4",
+      "A-2, B-3, C-4, D-1",
+      "A-3, B-4, C-2, D-1"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Iktara is Tat, Algoza is Sushir, Jhanjh is Ghan, and Mandal is Avanaddh vadya.",
+    "explanationHindi": "इकतारा तत् वाद्य है, अलगोजा सुषिर वाद्य है, झांझ घन वाद्य है तथा मांदल अवनद्ध वाद्य है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is NOT a wind instrument played by mouth?",
+    "qHindi": "मुँह के द्वारा बजाए जाने वाले वाद्य यंत्रों में निम्नलिखित में से कौनसा नहीं है-",
+    "optionsEnglish": [
+      "Algoza",
+      "Satara",
+      "Mashak",
+      "Rawaj"
+    ],
+    "optionsHindi": [
+      "अलगोजा",
+      "सतारा",
+      "मशक",
+      "रवाज"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Rawaj is a stringed (Tat) instrument, not a wind instrument.",
+    "explanationHindi": "रवाज एक तत् वाद्ययंत्र है, यह मुँह से फूँककर नहीं बजाया जाता।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following instruments belongs to the Avanaddh (membranophone) category?",
+    "qHindi": "निम्न में से कौनसा वाद्य अवनद्ध श्रेणी में आता है-",
+    "optionsEnglish": [
+      "Mandal",
+      "Manjira",
+      "Jantar",
+      "Tandoora"
+    ],
+    "optionsHindi": [
+      "मांदल",
+      "मंजीरा",
+      "जंतर",
+      "तंदूरा"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Mandal is covered with leather and is an Avanaddh instrument.",
+    "explanationHindi": "मांदल चमड़े से मढ़ा हुआ अवनद्ध (ताल) वाद्य है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is NOT a Ghan (idiophone) folk musical instrument?",
+    "qHindi": "निम्नलिखित में से कौनसा घन लोक वाद्य यंत्र नहीं है-",
+    "optionsEnglish": [
+      "Manjira",
+      "Chimpiya",
+      "Bankiya",
+      "Haankal"
+    ],
+    "optionsHindi": [
+      "मंजीरा",
+      "चींपिया",
+      "बांकिया",
+      "हांकल"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Bankiya is a wind (Sushir) instrument, not a Ghan instrument.",
+    "explanationHindi": "बांकिया सुषिर वाद्ययंत्र की श्रेणी में आता है, घन वाद्य नहीं है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Bankiya, Singi and Tota folk instruments are associated with which tradition?",
+    "qHindi": "बाँकिया, सिंगी और टोटा लोकवाद्य किस परम्परा से सम्बद्ध है-",
+    "optionsEnglish": [
+      "Tat Vadya",
+      "Avanaddh Vadya",
+      "Ghan Vadya",
+      "Sushir Vadya"
+    ],
+    "optionsHindi": [
+      "तत् वाद्य",
+      "अवनद्ध वाद्य",
+      "घन वाद्य",
+      "सुषिर वाद्य"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Bankiya, Singi, and Tota are all wind (Sushir) instruments.",
+    "explanationHindi": "बाँकिया, सिंगी और टोटो फूँक से बजाए जाने वाले सुषिर वाद्य हैं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "'Ramjhol' is what type of folk musical instrument?",
+    "qHindi": "'रमझोल' किस प्रकार का लोक वाद्य यंत्र है?",
+    "optionsEnglish": [
+      "Avanaddh",
+      "Tat",
+      "Sushir",
+      "Ghan"
+    ],
+    "optionsHindi": [
+      "अवनद्ध",
+      "तत्",
+      "सुषिर",
+      "घन"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Ramjhol is made of metal and falls under the Ghan instrument category.",
+    "explanationHindi": "रमझोल धातु से निर्मित घन वाद्ययंत्र है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is NOT a stringed instrument?",
+    "qHindi": "निम्न में से कौन, तार वाला वाद्य यंत्र नहीं है?",
+    "optionsEnglish": [
+      "Surmandal",
+      "Ravanahatha",
+      "Tasha",
+      "Kamayacha"
+    ],
+    "optionsHindi": [
+      "सुरमण्डल",
+      "रावणहत्था",
+      "ताशा",
+      "कमायचा"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Tasha is an Avanaddh instrument made with leather, not a stringed instrument.",
+    "explanationHindi": "ताशा अवनद्ध वाद्य यंत्र है जिसमें चमड़ा मढ़ा होता है, यह तार वाला वाद्य नहीं है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following are NOT wind instruments (Sushir Vadya)?\n1. Surnai 2. Algoza 3. Nagphani 4. Kamayacha",
+    "qHindi": "कौनसे सुषिर वाद्य नहीं हैं?\n1. सुरनाई 2. अलगोजा 3. नागफणी 4. कमायचा",
+    "optionsEnglish": [
+      "Only 4",
+      "2, 3 and 4",
+      "1 and 3",
+      "3 and 4"
+    ],
+    "optionsHindi": [
+      "केवल 4",
+      "2, 3 और 4",
+      "1 और 3",
+      "3 और 4"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Kamayacha is a stringed (Tat) instrument, whereas Surnai, Algoza, and Nagphani are wind instruments.",
+    "explanationHindi": "कमायचा तत् वाद्य यंत्र है, जबकि सुरनाई, अलगोजा और नागफणी सुषिर वाद्य हैं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Rabab, Chikara, and Chautara are what kind of musical instruments?",
+    "qHindi": "रबाब, चिकारा और चौतारा किस प्रकार के वाद्य यंत्र हैं?",
+    "optionsEnglish": [
+      "Tat Vadya",
+      "Ghan Vadya",
+      "Avanaddh Vadya",
+      "Sushir Vadya"
+    ],
+    "optionsHindi": [
+      "तत् वाद्य",
+      "घन वाद्य",
+      "अवनद्ध वाद्य",
+      "सुषिर वाद्य"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Rabab, Chikara, and Chautara are stringed (Tat) instruments.",
+    "explanationHindi": "रबाब, चिकारा और चौतारा तत् (तार वाले) वाद्य यंत्र हैं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which musical instrument is made of wire/strings?",
+    "qHindi": "तार से निर्मित वाद्ययंत्र कौनसा है?",
+    "optionsEnglish": [
+      "Ravanahatha",
+      "Algoza",
+      "Morchang",
+      "Chang"
+    ],
+    "optionsHindi": [
+      "रावण हत्था",
+      "अलगोजा",
+      "मोरचंग",
+      "चंग"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Ravanahatha is a stringed instrument having 9 strings.",
+    "explanationHindi": "रावण हत्था एक तत् वाद्ययंत्र है जिसमें नौ तार बँधे होते हैं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is a Tat (stringed) instrument?",
+    "qHindi": "कौनसा तत् वाद्य है?",
+    "optionsEnglish": [
+      "Satara",
+      "Morchang",
+      "Rawaj",
+      "Bankiya"
+    ],
+    "optionsHindi": [
+      "सतारा",
+      "मोरचंग",
+      "रवाज",
+      "बांकिया"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Rawaj is a stringed (Tat) instrument.",
+    "explanationHindi": "रवाज तत् वाद्य यंत्रों की श्रेणी में आता है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Chautara and Kamayacha are associated with which folk instrument tradition?",
+    "qHindi": "चौतारा, कामायचा कौनसे लोकवाद्य परम्परा से जुड़े हैं-",
+    "optionsEnglish": [
+      "Tat Vadya",
+      "Avanaddh Vadya",
+      "Ghan Vadya",
+      "Sushir Vadya"
+    ],
+    "optionsHindi": [
+      "तत् वाद्य",
+      "अवनद्ध वाद्य",
+      "घन वाद्य",
+      "सुषिर वाद्य"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Both Chautara and Kamayacha are Tat (stringed) instruments.",
+    "explanationHindi": "चौतारा और कामायचा दोनों तत् वाद्य परम्परा से जुड़े हैं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is NOT a Tat folk musical instrument?",
+    "qHindi": "निम्न में से कौनसा तत् लोकवाद्य यंत्र नहीं है?",
+    "optionsEnglish": [
+      "Ravanahatha",
+      "Rawaj",
+      "Bhapang",
+      "Mandal"
+    ],
+    "optionsHindi": [
+      "रावणहत्था",
+      "रवाज",
+      "भपंग",
+      "मांदल"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Mandal is an Avanaddh instrument covered with skin, not a stringed instrument.",
+    "explanationHindi": "मांदल अवनद्ध वाद्य यंत्र है, तत् वाद्य नहीं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following are Tat instruments?\n1. Jantar 2. Rawaj 3. Bhapang",
+    "qHindi": "निम्न में से तत् वाद्य है -\n1. जन्तर 2. रवाज 3. भपंग",
+    "optionsEnglish": [
+      "Only 1",
+      "Only 3",
+      "Only 1 and 3",
+      "1, 2 and 3"
+    ],
+    "optionsHindi": [
+      "केवल 1",
+      "केवल 3",
+      "केवल 1 एवं 3",
+      "1, 2 एवं 3"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Jantar, Rawaj, and Bhapang are all stringed (Tat) instruments.",
+    "explanationHindi": "जन्तर, रवाज और भपंग तीनों ही तत् वाद्य यंत्र हैं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is NOT a Tat (stringed) instrument?",
+    "qHindi": "निम्नलिखित में से कौनसा तत् वाद्य यंत्र नहीं है-",
+    "optionsEnglish": [
+      "Kamayacha",
+      "Bhapang",
+      "Jantar",
+      "Bankiya"
+    ],
+    "optionsHindi": [
+      "कामायचा",
+      "भपंग",
+      "जन्तर",
+      "बाँकिया"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Bankiya is a Sushir (wind) instrument.",
+    "explanationHindi": "बाँकिया एक सुषिर वाद्य यंत्र है, तत् वाद्य नहीं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is a Ghan (idiophone) instrument?",
+    "qHindi": "कौनसा घनवाद्य है ?",
+    "optionsEnglish": [
+      "Kundi",
+      "Kala",
+      "Peli",
+      "Tankora"
+    ],
+    "optionsHindi": [
+      "कुंडी",
+      "कला",
+      "पेली",
+      "टंकोरा"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Tankora is a metal-made Ghan instrument.",
+    "explanationHindi": "टंकोरा धातु से निर्मित घन वाद्ययंत्र है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is NOT a Tat (stringed) instrument?",
+    "qHindi": "कौनसा तत् वाद्य नहीं है?",
+    "optionsEnglish": [
+      "Satara",
+      "Rawaj",
+      "Jantar",
+      "Chautara"
+    ],
+    "optionsHindi": [
+      "सतारा",
+      "रवाज़",
+      "जन्तर",
+      "चौतारा"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Satara is a Sushir (wind) instrument combined of flute, algoza, and shehnai elements.",
+    "explanationHindi": "सतारा सुषिर वाद्ययंत्र बाँसुरी, अलगोजा व शहनाई का मिश्रित रूप होता है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which is a Sushir (wind) instrument?",
+    "qHindi": "कौनसा सुषिर वाद्य है-",
+    "optionsEnglish": [
+      "Ravanahatha",
+      "Jantar",
+      "Satara",
+      "Surmandal"
+    ],
+    "optionsHindi": [
+      "रावणहत्था",
+      "जंतर",
+      "सतारा",
+      "सूरमण्डल"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Satara is a Sushir (wind) instrument.",
+    "explanationHindi": "सतारा फूँक से बजाया जाने वाला सुषिर वाद्ययंत्र है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which of the following is NOT a Tat instrument?",
+    "qHindi": "कौनसा तत्वाद्य नहीं है?",
+    "optionsEnglish": [
+      "Ravanahatha",
+      "Jantar",
+      "Algoza",
+      "Kamayacha"
+    ],
+    "optionsHindi": [
+      "रावण हत्था",
+      "जंतर",
+      "अलगोजा",
+      "कामायचा"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Algoza is a Sushir (wind) instrument made of bamboo.",
+    "explanationHindi": "बाँस नली से निर्मित अलगोजा सुषिर वाद्ययंत्र है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "What type of musical instrument is 'Ravanahatha'?",
+    "qHindi": "'रावणहत्या' किस प्रकार का वाद्य यंत्र है-",
+    "optionsEnglish": [
+      "Tat",
+      "Sushir Kashta",
+      "Avanaddh",
+      "Ghan"
+    ],
+    "optionsHindi": [
+      "तत्",
+      "सुषिर काष्ठ",
+      "अवनद्ध",
+      "घन"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Ravanahatha is a traditional Tat (stringed) instrument.",
+    "explanationHindi": "रावणहत्था नारियल की कटोरी व बाँस से बना तत् वाद्य यंत्र है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Whose main musical instrument is Ravanahatha?",
+    "qHindi": "रावण हत्था किसका मुख्य वाद्य यंत्र है?",
+    "optionsEnglish": [
+      "Bhil",
+      "Kalbelia",
+      "Mirasi",
+      "Bhopa"
+    ],
+    "optionsHindi": [
+      "भील",
+      "कालबेलिया",
+      "मिरासी",
+      "भोपा"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Ravanahatha is primarily used by Bhopas while narrating heroic tales.",
+    "explanationHindi": "इस वाद्य यंत्र का प्रयोग पाबूजी के अनुयायी थोरिया भोपें, डूंगरजी जवाहरजी के भोपे कथाएँ बाँचते समय करते हैं।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which musical instrument is used by Pabuji's Bhopas while narrating the Phad?",
+    "qHindi": "फड़ बाँचते समय पाबूजी के भोपों का वाद्ययंत्र है?",
+    "optionsEnglish": [
+      "Morchang",
+      "Algoza",
+      "Khadtaal",
+      "Ravanahatha"
+    ],
+    "optionsHindi": [
+      "मोरचंग",
+      "अलगोजा",
+      "खड़ताल",
+      "रावण हत्था"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Bhopas of Pabuji use Ravanahatha while reciting Phad.",
+    "explanationHindi": "पाबूजी की फड़ का वाचन करते समय भोपों द्वारा रावण हत्था का प्रयोग किया जाता है।",
+    "subject": "इतिहास",
+    "topic": "राजस्थान का इतिहास"
+  },
+  {
+    "qEnglish": "Which musical instrument is played by the Bhopas of Pabuji while reciting the Phad?",
+    "qHindi": "फड़ बाँचते समय पाबूजी के भोपों का वाद्ययंत्र है?",
+    "optionsEnglish": [
+      "Morchang",
+      "Algoza",
+      "Khadtal",
+      "Ravanhattha"
+    ],
+    "optionsHindi": [
+      "मोरचंग",
+      "अलगोजा",
+      "खड़ताल",
+      "रावण हत्था"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Ravanhattha is played by the Bhopas of Pabuji while reading or reciting the Phad.",
+    "explanationHindi": "पाबूजी की फड़ बाँचते समय भोपों द्वारा रावणहत्था वाद्ययंत्र बजाया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Ravanhattha is made of:",
+    "qHindi": "रावण हत्था बनाया जाता है?",
+    "optionsEnglish": [
+      "Coconut",
+      "Steel vessel",
+      "Glass vessel",
+      "Neem wood"
+    ],
+    "optionsHindi": [
+      "नारियल",
+      "इस्पात का बर्तन",
+      "काँच का बर्तन",
+      "नीम की लकड़ी"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Ravanhattha is made using half a coconut shell covered with goat skin attached to a long bamboo stick.",
+    "explanationHindi": "रावणहत्था आधे कटे नारियल की कटोरी पर बकरे की खाल मढ़कर बनाया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following folk musical instruments consists of a long bamboo stick joined to a half coconut shell covered with goat skin?",
+    "qHindi": "निम्नलिखित में से किस लोक वाद्य यंत्र में बाँस का लंबा तना होता है जिसमें बकरी के चमड़े की परत से ढका आधे नारियल का खोल जुड़ा होता है?",
+    "optionsEnglish": [
+      "Ravanhattha",
+      "Dhap",
+      "Algoza",
+      "Bhapang"
+    ],
+    "optionsHindi": [
+      "रावणहत्था",
+      "धाप",
+      "अलगोजा",
+      "भपंग"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Ravanhattha is constructed with a bamboo stalk attached to a half-coconut shell covered with goat skin.",
+    "explanationHindi": "रावणहत्था में बाँस का एक लंबा डंडा होता है जिस पर बकरे की खाल से मढ़ा हुआ आधा नारियल का खोल जुड़ा होता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following is NOT a chordophone (Tat Vadya)?",
+    "qHindi": "कौनसा तत् वाद्य नहीं है?",
+    "optionsEnglish": [
+      "Bhapang",
+      "Dukaka",
+      "Jantar",
+      "Nagphani"
+    ],
+    "optionsHindi": [
+      "भपंग",
+      "दुकाका",
+      "जन्तर",
+      "नागफनी"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Nagphani is an aerophone (Sushir Vadya) made of serpentine brass, not a chordophone (Tat Vadya).",
+    "explanationHindi": "नागफनी एक सुषिर वाद्य है जो सर्पाकार पीतल का बना होता है, यह तत् वाद्य नहीं है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following is a stringed instrument?",
+    "qHindi": "तार लगा वाद्य यन्त्र है?",
+    "optionsEnglish": [
+      "Algoza",
+      "Khadtal",
+      "Deru",
+      "Jantar"
+    ],
+    "optionsHindi": [
+      "अलगोजा",
+      "खड़ताल",
+      "डेरू",
+      "जन्तर"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Jantar is a stringed instrument (Tat Vadya) resembling a Veena with two gourds.",
+    "explanationHindi": "जन्तर वीणा की तरह दो तुम्बों वाला एक तत् (तार लगा) वाद्ययंत्र है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which musical instrument is used during the recitation of Devnarayan Ji's Phad?",
+    "qHindi": "देवनारायण जी की फड़ के वाचन के साथ किस वाद्य यंत्र का प्रयोग किया जाता है-",
+    "optionsEnglish": [
+      "Manjira",
+      "Mandal",
+      "Jantar",
+      "Kundi"
+    ],
+    "optionsHindi": [
+      "मंजीरा",
+      "मांदल",
+      "जंतर",
+      "कुंडी"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Jantar is used by the Gurjar Bhopas while reciting Devnarayan Ji's Phad.",
+    "explanationHindi": "देवनारायण जी की फड़ के वाचन के समय गुर्जर भोपों द्वारा जंतर वाद्य यंत्र का प्रयोग किया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "By whom is the 'Jantar' musical instrument played?",
+    "qHindi": "'जंतर' वाद्य यंत्र किसके द्वारा बजाया जाता है?",
+    "optionsEnglish": [
+      "Bhopas of Devnarayan Ji",
+      "Bhopas of Pabuji",
+      "Garasia caste",
+      "Bhil caste"
+    ],
+    "optionsHindi": [
+      "देवनारायण जी भोपे",
+      "पाबू जी के भोपे",
+      "गरासिया जाति",
+      "भील जाति"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Jantar is played by the Bhopas of Devnarayan Ji hanging it around their neck.",
+    "explanationHindi": "जंतर वाद्ययंत्र देवनारायण जी के भोपों द्वारा गले में लटकाकर बजाया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following folk musics is NOT related to Rajasthan?",
+    "qHindi": "निम्नलिखित में से किस संगीत का संबंध राजस्थान से नहीं है-",
+    "optionsEnglish": [
+      "Baul",
+      "Manganiyar",
+      "Bhopa",
+      "Langa"
+    ],
+    "optionsHindi": [
+      "बाउल",
+      "मांगणियार",
+      "भोपा",
+      "लंगा"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Baul is a traditional spiritual folk music form of Bengal, not Rajasthan.",
+    "explanationHindi": "बाउल पश्चिम बंगाल का आध्यात्मिक लोक गीत/संगीत है, इसका संबंध राजस्थान से नहीं है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following statements about Kamaycha is false?",
+    "qHindi": "कमायचा के बारे में निम्नलिखित में से कौनसा कथन असत्य है?",
+    "optionsEnglish": [
+      "It is a chordophone (Tat Vadya).",
+      "It has 27 strings.",
+      "Its main players are Manganiyars.",
+      "It is prevalent mainly in eastern Rajasthan."
+    ],
+    "optionsHindi": [
+      "यह एक तत् वाद्य है।",
+      "इसमें 27 तार होते हैं।",
+      "इसके मुख्य प्रयोगकर्ता मांगणियार हैं।",
+      "यह पूर्वी राजस्थान में मुख्यतः प्रचलित है।"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Kamaycha has 17 strings (not 27), and it is primarily played in western Rajasthan (Jaisalmer and Barmer). Both options (2) and (4) contain errors in general context.",
+    "explanationHindi": "कमायचा में कुल 17 तार होते हैं (27 नहीं) तथा यह पश्चिमी राजस्थान में प्रचलित है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which statement is FALSE regarding Kamaycha?",
+    "qHindi": "कमायचा के बारे में असत्य है।",
+    "optionsEnglish": [
+      "Kamaycha is widely used by the Manganiyar community.",
+      "It is made from a single piece of wood.",
+      "Its 3 main strings are made of goat intestine.",
+      "Kamaycha is considered the precursor to the violin."
+    ],
+    "optionsHindi": [
+      "कमायचा माँगंणियार समुदाय के द्वारा बहुतायत से प्रयोग किया जाता है।",
+      "यह लकड़ी के एकल टुकड़े से बनाया जाता है।",
+      "इसके 3 मुख्य तंतु बकरे की आँत के बने होते हैं।",
+      "कमायचा को वायलिन का अग्रगामी माना जाता है।"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Ravanhattha, not Kamaycha, is traditionally considered the precursor/ancestor of the violin.",
+    "explanationHindi": "वायलिन का अग्रगामी रावणहत्था को माना जाता है, कमायचा को नहीं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "The musical instrument named 'Kamaycha' is played by which community of Rajasthan?",
+    "qHindi": "'कमायचा' नाम का वाद्य राजस्थान के किस सम्प्रदाय के द्वारा बजाया जाता है-",
+    "optionsEnglish": [
+      "Manganiyar",
+      "Jogi",
+      "Kalbelia",
+      "Langa"
+    ],
+    "optionsHindi": [
+      "मांगणियार",
+      "जोगी",
+      "कालबेलिया",
+      "लंगा"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Kamaycha is predominantly played by the Manganiyar community of western Rajasthan.",
+    "explanationHindi": "कमायचा पश्चिमी राजस्थान की मांगणियार जाति द्वारा बजाया जाने वाला प्रमुख वाद्य है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following is NOT an aerophone (Sushir Vadya)?",
+    "qHindi": "कौनसा सुषिर वाद्य यंत्र नहीं है-",
+    "optionsEnglish": [
+      "Algoza",
+      "Satara",
+      "Morchang",
+      "Surmandal"
+    ],
+    "optionsHindi": [
+      "अलगोजा",
+      "सतारा",
+      "मोरचंग",
+      "सुरमण्डल"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Surmandal is a chordophone (Tat Vadya), not a wind instrument (Sushir Vadya).",
+    "explanationHindi": "सुरमण्डल एक तत् वाद्य यंत्र है, सुषिर वाद्य नहीं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Morchang (Jew's Harp) is a:",
+    "qHindi": "मोरचंग (ज्यूज हार्प ) है-",
+    "optionsEnglish": [
+      "Dance style",
+      "Singing style",
+      "Musical instrument",
+      "Painting style"
+    ],
+    "optionsHindi": [
+      "नृत्य शैली",
+      "गायन शैली",
+      "वाद्य यंत्र",
+      "चित्र शैली"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Morchang is a traditional aerophone (wind musical instrument), also known as the Jew's Harp.",
+    "explanationHindi": "मोरचंग (ज्यूज हार्प) एक पारंपरिक सुषिर वाद्य यंत्र है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which folk instrument of Rajasthan is also called Jew's Harp?",
+    "qHindi": "राजस्थान के किस लोक वाद्य को ज्यूज हार्प भी कहा जाता है-",
+    "optionsEnglish": [
+      "Morchang",
+      "Ravanhattha",
+      "Kamaycha",
+      "Khadtal"
+    ],
+    "optionsHindi": [
+      "मोरचंग",
+      "रावण हत्था",
+      "कमायचा",
+      "खड़ताल"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Morchang is popularly known in English as the Jew's Harp.",
+    "explanationHindi": "मोरचंग को 'ज्यूज हार्प' (Jew's Harp) भी कहा जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following statements is/are correct about 'Morchang' instrument?\n1. It is a small instrument made of iron.\n2. Morchang is played by holding it between the lips.\n3. It comes under the category of aerophone (Sushir Vadya).\n4. It has 27 strings.",
+    "qHindi": "'मोरचंग वाद्य' के बारे में कौनसा/कौनसे कथन कथन सही हैं-\n1. यह लोहे का बना छोटा-सा वाद्य है।\n2. मोरचंग को होठों के बीच रखकर बजाया जाता है।\n3. यह सुषिर वाद्य की श्रेणी में आता है।\n4. इसमें 27 तार होते हैं।",
+    "optionsEnglish": [
+      "Only 1",
+      "Only 2, 3",
+      "Only 1, 2, 3",
+      "All of the above"
+    ],
+    "optionsHindi": [
+      "केवल 1",
+      "केवल 2, 3",
+      "केवल 1, 2, 3",
+      "उपर्युक्त सभी"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Statements 1, 2, and 3 are correct. Sarangi has 27 strings, not Morchang.",
+    "explanationHindi": "कथन 1, 2 और 3 सही हैं। सारंगी में 27 तार होते हैं, मोरचंग में नहीं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "..... is an instrument made of iron and leather which is played in temples during prayer time and during festivals and religious celebrations.",
+    "qHindi": ".....एक लोहे और चमड़े से बना वाद्य है जो मंदिरों में प्रार्थना के समय तथा त्योहारों और धार्मिक उत्सवों के समय बजाया जाता है-",
+    "optionsEnglish": [
+      "Sarangi",
+      "Tabla",
+      "Sitar",
+      "Naubat"
+    ],
+    "optionsHindi": [
+      "सारंगी",
+      "तबला",
+      "सितार",
+      "नौबत"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Naubat is an egg-shaped metal vessel covered with buffalo hide played with wooden sticks at temples and festivities.",
+    "explanationHindi": "नौबत धातु की कुंडी पर चमड़ा मढ़कर बनाया जाने वाला अवनद्ध वाद्य है, जो मंदिरों व धार्मिक उत्सवों में बजाया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which pair is correct?",
+    "qHindi": "कौन-सा युग्म सही है?",
+    "optionsEnglish": [
+      "Khadtal - Sushir Vadya",
+      "Rabab - Tat Vadya",
+      "Bankiya - Ghan Vadya",
+      "Deru - Sushir Vadya"
+    ],
+    "optionsHindi": [
+      "खड़ताल - सुषिर वाद्य",
+      "रबाब - तत् वाद्य",
+      "बाँकिया - घन वाद्य",
+      "डेरू - सुषिर वाद्य"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Rabab is a chordophone (Tat Vadya). Khadtal is a Ghan Vadya, Bankiya is a Sushir Vadya, and Deru is an Avanaddh Vadya.",
+    "explanationHindi": "रबाब एक तत् वाद्य है। खड़ताल घन वाद्य, बाँकिया सुषिर वाद्य और डेरू अवनद्ध वाद्य है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which is the famous musical instrument played on the occasion of Muharram?",
+    "qHindi": "मुहर्रम के अवसर पर प्रयोग में लिया जाने वाला प्रसिद्ध वाद्ययंत्र कौन-सा है?",
+    "optionsEnglish": [
+      "Nagada",
+      "Tasha",
+      "Mandal",
+      "Manjira"
+    ],
+    "optionsHindi": [
+      "नगाड़ा",
+      "ताशा",
+      "मांदल",
+      "मंजीरा"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Tasha is played on the occasion of Muharram using bamboo sticks.",
+    "explanationHindi": "ताशा तांबे की चपटी परात पर बकरे का चमड़ा मढ़कर बनाया जाता है, जिसे मुहर्रम के अवसर पर बजाया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Musical instrument 'Tamak' is associated with which region?",
+    "qHindi": "वाद्ययंत्र 'टामक' का संबंध .....क्षेत्र से है-",
+    "optionsEnglish": [
+      "Mewat",
+      "Marwar",
+      "Merwara",
+      "Mewar"
+    ],
+    "optionsHindi": [
+      "मेवात",
+      "मारवाड़",
+      "मेरवाड़ा",
+      "मेवाड़"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Tamak (or Bam) is a huge drum related to the Mewat region, historically played in war.",
+    "explanationHindi": "टामक (बम) वाद्ययंत्र का संबंध मुख्य रूप से मेवात क्षेत्र से है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which musical instruments are required during Ghoomar dance?",
+    "qHindi": "घूमर नृत्य के समय कौनसे वाद्य यंत्रों की आवश्यकता होती है-",
+    "optionsEnglish": [
+      "Dholak and Veena",
+      "Manjira and Veena",
+      "Only Dholak",
+      "Dholak and Manjira"
+    ],
+    "optionsHindi": [
+      "ढोलक एवं वीणा",
+      "मंजीरा और वीणा",
+      "केवल ढोलक",
+      "ढोलक और मंजीरा"
+    ],
+    "correct": 3,
+    "explanationEnglish": "During Ghoomar dance, Dholak and Manjira are primarily used.",
+    "explanationHindi": "घूमर नृत्य के समय मुख्य रूप से ढोलक तथा मंजीरा वाद्य यंत्रों का उपयोग किया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "'Tarpi' musical instrument is mainly used by which caste/tribe?",
+    "qHindi": "'तारपी' वाद्ययंत्र का प्रयोग मुख्यतः किस जाति के द्वारा किया जाता है-",
+    "optionsEnglish": [
+      "Kathodis",
+      "Manganiyars",
+      "Nats",
+      "Jogis"
+    ],
+    "optionsHindi": [
+      "कथोड़ियों",
+      "मांगणियारों",
+      "नटों",
+      "जोगियों"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Tarpi is an aerophone traditionally used by the Kathodi community.",
+    "explanationHindi": "तारपी वाद्ययंत्र का प्रयोग मुख्यतः कथौड़ी जाति के लोगों द्वारा किया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "In which dance are the musical instruments Manjira, Tanpura, and Chautara used?",
+    "qHindi": "मंजीरा, तानपुरा, चौतारा वाद्य यंत्रों का प्रयोग किस नृत्य में किया जाता है?",
+    "optionsEnglish": [
+      "Gawari",
+      "Terah Taali",
+      "Walar",
+      "Ghoomar"
+    ],
+    "optionsHindi": [
+      "गवरी",
+      "तेरहताली",
+      "वालर",
+      "घूमर"
+    ],
+    "correct": 1,
+    "explanationEnglish": "In the Terah Taali dance, the main musical instruments used are Ektara, Chautara, Manjira, and Tandura (Tanpura).",
+    "explanationHindi": "तेरहताली नृत्य में मुख्य वाद्य यंत्र एकतारा, चौतारा, मंजीरा व तंदूरा (तानपुरा) होते हैं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following instruments is not used in the Terah Taali dance of Rajasthan?",
+    "qHindi": "निम्न में से कौन-सा यंत्र राजस्थान के तेरहताली नृत्य में काम नहीं आता?",
+    "optionsEnglish": [
+      "Manjira",
+      "Tanpura",
+      "Chautara",
+      "Deru"
+    ],
+    "optionsHindi": [
+      "मंजीरा",
+      "तानपुरा",
+      "चौतारा",
+      "डेरू"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Manjira, Tanpura, and Chautara are used in Terah Taali dance, whereas Deru is not used.",
+    "explanationHindi": "तेरहताली नृत्य में मंजीरा, तानपुरा और चौतारा प्रयुक्त होते हैं, जबकि डेरू का प्रयोग नहीं किया जाता।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "What is 'Deru'?",
+    "qHindi": "'डेरू' क्या है-",
+    "optionsEnglish": [
+      "A type of craft art",
+      "A stopping place",
+      "A bird",
+      "A musical instrument"
+    ],
+    "optionsHindi": [
+      "शिल्प कला का प्रकार",
+      "रुकने का स्थान",
+      "एक पक्षी",
+      "वाद्य यंत्र"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Deru is a percussion/membranophone musical instrument made by stretching leather on both sides of mango wood.",
+    "explanationHindi": "डेरू आम की लकड़ी पर दोनों ओर चमड़ा मढ़कर बनाया जाने वाला एक अवनद्ध वाद्य यंत्र है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which class was responsible for writing genealogies generation after generation?",
+    "qHindi": "वंशावलियों की पीढ़ी-दर-पीढ़ी लेखन करने वाला कौन वर्ग था?",
+    "optionsEnglish": [
+      "Mahajan",
+      "Jaga",
+      "Pujari",
+      "All of these"
+    ],
+    "optionsHindi": [
+      "महाजन",
+      "जागा",
+      "पुजारी",
+      "ये सभी"
+    ],
+    "correct": 1,
+    "explanationEnglish": "People of the Bhat/Jaga class maintain records of family genealogies across generations.",
+    "explanationHindi": "भाट/जागा जाति के लोग विभिन्न परिवारों की वंशावली का अभिलेख पीढ़ी-दर-पीढ़ी रखते हैं।",
+    "subject": "इतिहास",
+    "topic": "सामाजिक-सांस्कृतिक मुद्दे"
+  },
+  {
+    "qEnglish": "What are the main functions of the 'Bhat' caste?",
+    "qHindi": "'भाट' जाति के मुख्य कार्य हैं?",
+    "optionsEnglish": [
+      "Maintaining records of genealogies of various families",
+      "Singing songs on wedding occasions",
+      "Playing drum and dhol at festivals",
+      "Dancing at festivals"
+    ],
+    "optionsHindi": [
+      "विभिन्न परिवारों की वंशावली का अभिलेख रखना",
+      "शादी के अवसर पर गीत गाना",
+      "उत्सव व ढोल बजाना",
+      "उत्सव पर नाच दिखाना"
+    ],
+    "correct": 0,
+    "explanationEnglish": "The primary work of the Bhat community is keeping genealogical records of various families and earning their livelihood by reciting them to descendants.",
+    "explanationHindi": "भाट जाति के लोग विभिन्न परिवारों की वंशावली का अभिलेख रखते हैं और उनके वंशजों को सुनाकर अपनी आजीविका चलाते हैं।",
+    "subject": "इतिहास",
+    "topic": "सामाजिक-सांस्कृतिक मुद्दे"
+  },
+  {
+    "qEnglish": "The folk musical instrument 'Bhapang' is associated with which region of Rajasthan?",
+    "qHindi": "लोक वाद्य यंत्र 'भपंग' राजस्थान के किस क्षेत्र से सम्बन्धित है?",
+    "optionsEnglish": [
+      "Mewat",
+      "Mewar",
+      "Merwara",
+      "Marwar"
+    ],
+    "optionsHindi": [
+      "मेवात",
+      "मेवाड़",
+      "मेरवाड़ा",
+      "मारवाड़"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Bhapang is mainly played by Jogis of the Mewat (Alwar) region.",
+    "explanationHindi": "भपंग मुख्यतया मेवात (अलवर) क्षेत्र के जोगी बजाते हैं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "People of the Jogi caste in Alwar district play which of the following musical instruments?",
+    "qHindi": "अलवर जिले के जोगी जाति के लोग निम्न में से किस वाद्य को बजाते हैं-",
+    "optionsEnglish": [
+      "Rawaj",
+      "Bhapang",
+      "Sarangi",
+      "Jantar"
+    ],
+    "optionsHindi": [
+      "रवाज",
+      "भपंग",
+      "सारंगी",
+      "जन्तर"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Jogis of the Alwar region primarily play the Bhapang instrument.",
+    "explanationHindi": "अलवर क्षेत्र के जोगी मुख्य रूप से भपंग वाद्य यंत्र बजाते हैं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which musical instrument is played by the Jogis of Marwar while singing Khayals of Gopichand, Bharthari, Nihalde, etc.?",
+    "qHindi": "मारवाड़ के जोगियों द्वारा गोपीचन्द भर्तृहरि, निहालदे आदि के ख्याल गाते समय निम्नलिखित में से किस वाद्य का प्रयोग किया जाता है-",
+    "optionsEnglish": [
+      "Chang",
+      "Sarangi",
+      "Nagara",
+      "Algoza"
+    ],
+    "optionsHindi": [
+      "चंग",
+      "सारंगी",
+      "नगाड़ा",
+      "अलगोजा"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Sarangi (specifically Dhani Sarangi) is used by Jogis while singing narratives and Khayals like Gopichand, Bharthari, and Nihalde.",
+    "explanationHindi": "मारवाड़ के जोगियों द्वारा गोपीचन्द, भर्तृहरि, निहालदे आदि की कथा/ख्याल गाते समय सारंगी का प्रयोग किया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which type of Sarangi is played by the Jogis of Alwar-Bharatpur?",
+    "qHindi": "अलवर-भरतपुर के जोगियों द्वारा किस प्रकार की सारंगी बजाई जाती है-",
+    "optionsEnglish": [
+      "Jogiya Sarangi",
+      "Sindhi Sarangi",
+      "Jadi Sarangi",
+      "Gujratan Sarangi"
+    ],
+    "optionsHindi": [
+      "जोगिया सारंगी",
+      "सिंधी सारंगी",
+      "जड़ी सारंगी",
+      "गुजरातन सारंगी"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Jogiya Sarangi is played by the Bharthari Jogis of Alwar-Bharatpur along with Bhapang.",
+    "explanationHindi": "जोगिया सारंगी अलवर-भरतपुर के भरथरी जोगियों द्वारा भपंग के साथ प्रयुक्त की जाती है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Karna Bheel was a famous player of which musical instrument?",
+    "qHindi": "करणा भील किस वाद्य का प्रसिद्ध वादक था?",
+    "optionsEnglish": [
+      "Nad",
+      "Morchang",
+      "Satara",
+      "Karna"
+    ],
+    "optionsHindi": [
+      "नड़",
+      "मोरचंग",
+      "सतारा",
+      "करणा"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Karna Bheel of Jaisalmer was an internationally famous player of the Nad instrument.",
+    "explanationHindi": "करणा भील नड़ वाद्य यंत्र के विख्यात वादक थे।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which pair is not correctly matched?",
+    "qHindi": "कौनसा युग्म सही नहीं है?",
+    "optionsEnglish": [
+      "Rajab Ali Khan - Veena player",
+      "Aamir Khan - Sitar player",
+      "Allah Jilai Bai - Maand singer",
+      "Ravi Shankar - Nad player"
+    ],
+    "optionsHindi": [
+      "रजब अली खान - वीणा वादक",
+      "आमिर खान - सितार वादक",
+      "अल्लाह जिलाई बाई - मांड गायिका",
+      "रवि शंकर - नड़ वादक"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Pt. Ravi Shankar was a world-renowned Sitar player, not a Nad player (Karna Bheel is associated with Nad).",
+    "explanationHindi": "पंडित रवि शंकर विश्व प्रसिद्ध सितार वादक थे, नड़ वादक नहीं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "What is 'Nad'?",
+    "qHindi": "नड़ क्या है-",
+    "optionsEnglish": [
+      "A long flute",
+      "Four wooden strips",
+      "Twin flutes",
+      "A single-stringed instrument"
+    ],
+    "optionsHindi": [
+      "एक लम्बी बांसुरी",
+      "लकड़ी की चार पट्टियाँ",
+      "जुड़वाँ बांसुरियाँ",
+      "एक तार वाला वाद्य"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Nad is a wind musical instrument resembling a long flute made of Kangore wood.",
+    "explanationHindi": "नड़ सुषिर वाद्य यंत्र है जो लम्बी बांसुरी की तरह होता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "What is 'Ghuraliyo'?",
+    "qHindi": "'घुरालियों' क्या है?",
+    "optionsEnglish": [
+      "A dance style",
+      "A musical instrument of Kalbeliyas",
+      "An ornament of tribal Bheels",
+      "A folk drama"
+    ],
+    "optionsHindi": [
+      "एक नृत्य शैली",
+      "कालबेलियों का वाद्य यंत्र",
+      "आदिवासी भीलों का आभूषण",
+      "लोक नाट्य"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Ghuraliyo is a musical instrument made from bamboo splints, played by Kalbeliya and Garasia communities.",
+    "explanationHindi": "घुरालियो बांस की खपच्ची से बना वाद्य यंत्र है, जो कालबेलिया व गरासिया जाति का प्रमुख वाद्य है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which is the only folk musical instrument of Rajasthan in whose cord wooden pegs (gutke) like a Pakhawaj are inserted for tension?",
+    "qHindi": "राजस्थान का एकमात्र ऐसा लोकवाद्य जिसकी डोरी में तनाव के लिए पखावज की तरह लकड़ी के गुटके डाले जाते हैं-",
+    "optionsEnglish": [
+      "Tasa",
+      "Rawalon ka Madal",
+      "Dhaka",
+      "Deru"
+    ],
+    "optionsHindi": [
+      "तासा",
+      "रावलों का मादल",
+      "ढाका",
+      "डेरू"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Rawalon ka Madal is the only folk instrument where wooden pegs are used in its cords for tuning and tension like a Pakhawaj.",
+    "explanationHindi": "रावलों की मादल राजस्थान का ऐसा वाद्य है जिसकी डोरी में पखावज की भाँति लकड़ी के गट्टों (गुटके) का प्रयोग तनाव हेतु किया जाता है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which musical instrument is played by the people of Kamad caste in Rajasthan?",
+    "qHindi": "राजस्थान में कामड़ जाति के लोगों द्वारा कौनसा संगीत वाद्य बजाया जाता है?",
+    "optionsEnglish": [
+      "Tandura",
+      "Surinda",
+      "Gujari",
+      "None of these"
+    ],
+    "optionsHindi": [
+      "तन्दूरा",
+      "सुरिन्दा",
+      "गुजरी",
+      "इनमें से कोई नहीं"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Tandura (also called Chautara or Veno) has 4 strings and is played by the Kamad community.",
+    "explanationHindi": "तंदूरा (वेणो/चौतारा) लकड़ी का बना 4 तारों वाला वाद्य यंत्र है जिसे कामड़ जाति के लोग बजाते हैं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which statement regarding the folk musical instruments of Rajasthan is not correct?",
+    "qHindi": "राजस्थान के लोक वाद्य यंत्रों के विषय में कौनसा कथन सही नहीं है?",
+    "optionsEnglish": [
+      "Both Bhapang and Ravanhattha are Tat vadya (stringed instruments).",
+      "Both Algoza and Morchang are wind instruments.",
+      "Dholak, Naubat, Nagada, and Chang are percussion (Avanaddha) instruments.",
+      "Wind instruments Bankiya and Karna are not played on auspicious occasions."
+    ],
+    "optionsHindi": [
+      "भपंग एवं रावणहत्था दोनों तत् वाद्य यंत्र हैं।",
+      "अलगोजा एवं मोरचंग दोनों फूँक वाद्य यंत्र हैं।",
+      "ढोलक, नौबत, नगाड़ा एवं चंग थाप वाद्य यंत्र हैं।",
+      "फूँक वाद्य यंत्र बाँकिया एवं करणा को मांगलिक अवसरों पर नहीं बजाया जाता है।"
+    ],
+    "correct": 3,
+    "explanationEnglish": "Bankiya is a traditional instrument of the Sargada caste and is played specifically on auspicious occasions, making statement 4 incorrect.",
+    "explanationHindi": "बाँकिया सरगड़ा जाति का वाद्य है और इसे मांगलिक अवसरों पर बजाया जाता है, अतः कथन (4) असत्य है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Match the folk instruments with their prominent artists:",
+    "qHindi": "सुमेलित कीजिए (लोक वाद्य यंत्र तथा प्रख्यात कलाकार):",
+    "matchItemsEnglish": {
+      "col1Label": "Folk Instrument",
+      "col2Label": "Renowned Artist",
+      "col1": [
+        "Bhapang",
+        "Nad",
+        "Algoza",
+        "Khadtal"
+      ],
+      "col2": [
+        "Sadeek Khan",
+        "Zahoor Khan",
+        "Karna Bheel",
+        "Ramnath Chaudhary"
+      ]
+    },
+    "matchItemsHindi": {
+      "col1Label": "लोक वाद्य यंत्र",
+      "col2Label": "प्रख्यात कलाकार",
+      "col1": [
+        "भपंग",
+        "नड़",
+        "अलगोजा",
+        "खड़ताल"
+      ],
+      "col2": [
+        "सदीक खाँ",
+        "जहूर खाँ",
+        "करणा भील",
+        "रामनाथ चौधरी"
+      ]
+    },
+    "optionsEnglish": [
+      "A-2, B-3, C-4, D-1",
+      "A-4, B-2, C-3, D-1",
+      "A-1, B-2, C-3, D-4",
+      "A-2, B-1, C-3, D-4"
+    ],
+    "optionsHindi": [
+      "A-2, B-3, C-4, D-1",
+      "A-4, B-2, C-3, D-1",
+      "A-1, B-2, C-3, D-4",
+      "A-2, B-1, C-3, D-4"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Bhapang - Zahoor Khan Mewati; Nad - Karna Bheel; Algoza - Ramnath Chaudhary; Khadtal - Sadeek Khan.",
+    "explanationHindi": "भपंग - जहूर खाँ; नड़ - करणा भील; अलगोजा - रामनाथ चौधरी; खड़ताल - सदीक खाँ।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Ramnath Chaudhary is associated with which musical instrument?",
+    "qHindi": "रामनाथ चौधरी का संबंध किस वाद्य यंत्र से है-",
+    "optionsEnglish": [
+      "Dholak",
+      "Algoza",
+      "Poongi",
+      "None of these"
+    ],
+    "optionsHindi": [
+      "ढोलक",
+      "अलगोजा",
+      "पूंजी",
+      "इनमें से कोई नहीं"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Ramnath Chaudhary from Padampura village, Jaipur plays Algoza through his nose.",
+    "explanationHindi": "जयपुर निवासी रामनाथ चौधरी नाक से अलगोजा बजाने के लिए विख्यात हैं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Zahoor Khan is associated with which folk instrument?",
+    "qHindi": "जहूर खान किस लोकवाद्य से सम्बन्धित हैं?",
+    "optionsEnglish": [
+      "Bhapang",
+      "Nad",
+      "Algoza",
+      "Khadtal"
+    ],
+    "optionsHindi": [
+      "भपंग",
+      "नड़",
+      "अलगोजा",
+      "खड़ताल"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Zahoor Khan Mewati is known as the 'Magician of Bhapang'. Bhapang is a famous stringed folk instrument popular in the Mewat region (Alwar) of Rajasthan.",
+    "explanationHindi": "जहूर खान मेवाती को 'भपंग का जादूगर' कहा जाता है। भपंग मेवात क्षेत्र (अलवर) का एक अत्यंत लोकप्रिय तत् (तार वाला) लोक वाद्य यंत्र है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "For mastery in which folk musical instrument was Sakar Khan awarded the Padma Shri in 2012?",
+    "qHindi": "किस लोकवाद्य में महारथ होने से साकर खान को 2012 में पद्मश्री से सम्मानित किया गया?",
+    "optionsEnglish": [
+      "Kamayacha",
+      "Sarangi",
+      "Morchang",
+      "Khadtal"
+    ],
+    "optionsHindi": [
+      "कमायचा",
+      "सारंगी",
+      "मोरचंग",
+      "खड़ताल"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Kamal Sakar Khan of Jaisalmer was a renowned folk artist of the Manganiyar community who had extraordinary mastery over the Kamayacha. He was awarded the Padma Shri in 2012.",
+    "explanationHindi": "जैसलमेर निवासी कमल साकर खाँ मांगणियार जाति के प्रसिद्ध लोक कलाकार थे, जिन्हें कमायचा वादन में महारथ हासिल थी। इन्हें वर्ष 2012 में भारत सरकार द्वारा पद्मश्री से सम्मानित किया गया था।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Who is the famous Pakhawaj player of Rajasthan?",
+    "qHindi": "राजस्थान के प्रसिद्ध पखावज वादक हैं?",
+    "optionsEnglish": [
+      "Pt. Ram Narayan",
+      "Pt. Purushottam Das",
+      "Ustad Asad Ali Khan",
+      "Ustad Hidayat Khan"
+    ],
+    "optionsHindi": [
+      "पं. रामनारायण",
+      "पं. पुरुषोत्तम दास",
+      "उस्ताद असदअली खां",
+      "उस्ताद हिदायत खां"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Pt. Purushottam Das of Nathdwara was a legendary Pakhawaj player. The Government of India honored him with the Padma Shri, and he documented his vast expertise in the book 'Mridang Vadan'.",
+    "explanationHindi": "नाथद्वारा के पं. पुरुषोत्तम दास प्रसिद्ध पखावज वादक थे। भारत सरकार ने इन्हें पद्मश्री से अलंकृत किया तथा इन्होंने अपने समस्त ज्ञान को 'मृदंग वादन' नामक पुस्तक में संकलित किया।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Bhand, Dholi, and Manganiyar are Rajasthan's...?",
+    "qHindi": "भांड, ढोली और मांगणियार राजस्थान के.... हैं?",
+    "optionsEnglish": [
+      "Traditional folk musicians",
+      "Folk art forms",
+      "Religious groups",
+      "Sports persons"
+    ],
+    "optionsHindi": [
+      "पारंपरिक लोक संगीतकार",
+      "लोककला",
+      "धार्मिक समूह",
+      "खिलाड़ी"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Bhand, Dholi, Langa, and Manganiyar are hereditary musical communities of Rajasthan. Manganiyars excel in Kamayacha and Khadtal, while Dholis specialize in playing the Dhol.",
+    "explanationHindi": "भांड, ढोली, लंगा और मांगणियार राजस्थान की पारंपरिक संगीतकार जातियां हैं। मांगणियार मुख्य रूप से कमायचा, खड़ताल व सुरणाई तथा ढोली ढोल वादन में पारंगत होते हैं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Renowned classical instrumentalists of Rajasthan origin, Ram Narayan and Sultan Khan, are associated with which musical instrument?",
+    "qHindi": "राजस्थान मूल के प्रख्यात शास्त्रीय वादक रामनारायण तथा सुल्तान खाँ का सम्बन्ध किस वाद्य यन्त्र से है?",
+    "optionsEnglish": [
+      "Kamayacha",
+      "Sitar",
+      "Sarangi",
+      "Tabla"
+    ],
+    "optionsHindi": [
+      "कमायचा",
+      "सितार",
+      "सारंगी",
+      "तबला"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Pandit Ram Narayan and Padma Bhushan Ustad Sultan Khan are world-renowned Sarangi maestros hailing from Rajasthan. Ustad Sultan Khan was born in Sikar, Rajasthan.",
+    "explanationHindi": "पंडित रामनारायण तथा पद्मभूषण से सम्मानित उस्ताद सुल्तान खाँ दोनों ही राजस्थान के विश्वविख्यात सारंगी वादक हैं। उस्ताद सुल्तान खाँ का जन्म सीकर में हुआ था।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following is not correctly matched?",
+    "qHindi": "सही सुमेलित नहीं है?",
+    "optionsEnglish": [
+      "Vishwa Mohan Bhatt - Mohan Veena",
+      "Chatur Lal - Tabla",
+      "Sultan Khan - Kamayacha",
+      "Zia Fariduddin Dagar - Dhrupad"
+    ],
+    "optionsHindi": [
+      "विश्वमोहन भट्ट - मोहन वीणा",
+      "चतुर लाल - तबला",
+      "सुल्तान खां - कमायचा",
+      "जिया फरीदुद्दीन डागर - ध्रुपद"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Ustad Sultan Khan was an acclaimed Sarangi player, not a Kamayacha player. All the other pairs are correctly matched.",
+    "explanationHindi": "उस्ताद सुल्तान खाँ का सम्बन्ध सारंगी वादन से था, न कि कमायचा से। अतः विकल्प (3) सही सुमेलित नहीं है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which folk instrument of the snake charmer community (Sapera) is famous?",
+    "qHindi": "सपेरों का कौनसा लोक वाद्य प्रसिद्ध है?",
+    "optionsEnglish": [
+      "Pungi",
+      "Shehnai",
+      "Bansuri",
+      "Manjira"
+    ],
+    "optionsHindi": [
+      "पूँगी",
+      "शहनाई",
+      "बांसुरी",
+      "मंजीरा"
+    ],
+    "correct": 0,
+    "explanationEnglish": "Pungi (also known as Been) is crafted from a dried gourd (tumba) with two pipes and is the traditional wind instrument played by snake charmers.",
+    "explanationHindi": "पूँगी (बीन) का निर्माण विशेष प्रकार के सूखे तुम्बे से किया जाता है जिसमें दो नलियां लगी होती हैं। यह मुख्य रूप से सपेरा जाति का प्रसिद्ध सुषिर वाद्य यंत्र है।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which of the following musical instruments is also known as 'Bheri'?",
+    "qHindi": "निम्नलिखित में से किस वाद्य यंत्र को 'भेरी' भी कहा जाता है?",
+    "optionsEnglish": [
+      "Bankiya",
+      "Bhungal",
+      "Mashak",
+      "Pungi"
+    ],
+    "optionsHindi": [
+      "बांकिया",
+      "भूंगल",
+      "मशक",
+      "पूँगी"
+    ],
+    "correct": 1,
+    "explanationEnglish": "Bhungal is also referred to as 'Ranbheri' or 'Bheri'. It is a brass trumpet-like instrument played by Bhavai artists of Mewar and was historically blown as a war bugle.",
+    "explanationHindi": "भूंगल को 'रणभेरी' या 'भेरी' भी कहा जाता है। यह पीतल की लम्बी नली का बना वाद्य है जिसे मेवाड़ के भवाई खेल शुरू करने से पहले बजाते हैं। युद्ध काल में इसे युद्ध शुरू होने से पहले बजाया जाता था।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  },
+  {
+    "qEnglish": "Which musical instrument is different from the others?",
+    "qHindi": "कौनसा वाद्य यंत्र अलग है?",
+    "optionsEnglish": [
+      "Shehnai",
+      "Mashak",
+      "Khadtal",
+      "Algoza"
+    ],
+    "optionsHindi": [
+      "शहनाई",
+      "मशक",
+      "खड़ताल",
+      "अलगोजा"
+    ],
+    "correct": 2,
+    "explanationEnglish": "Khadtal is a percussion/idiophone instrument (Ghana vadya), whereas Shehnai, Mashak, and Algoza are all wind instruments (Sushir vadya).",
+    "explanationHindi": "खड़ताल एक घन वाद्य यंत्र है, जबकि शहनाई, मशक और अलगोजा तीनों फूँक मारकर बजाए जाने वाले सुषिर वाद्य यंत्र हैं।",
+    "subject": "इतिहास",
+    "topic": "कला, संस्कृति, साहित्य एवं स्थापत्य"
+  }
+]
