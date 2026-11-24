@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SponsorBlock API Submitter</title>
+    <style>
+        /* SpaceX Inspired Dark Theme */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 30px 15px;
+            box-sizing: border-box;
+        }
+        .container {
+            background: #111111;
+            border: 1px solid #444444;
+            padding: 25px;
+            width: 440px;
+            max-width: 100%;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        h2 {
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        input, textarea, select {
+            width: 100%;
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #555;
+            padding: 10px;
+            font-family: monospace;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        textarea {
+            height: 130px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #ffffff;
+        }
+        button {
+            width: 100%;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.2s;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        button:hover { background: #cccccc; }
+        button:disabled { background: #666; color: #222; cursor: not-allowed; }
+        #status {
+            margin-top: 15px;
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        .success { color: #00ff00; }
+        .error { color: #ff4444; }
+        .loading { color: #00aaff; }
+        .note { font-size: 10px; color: #666; margin-top: 5px; text-align: center; line-height: 1.4; }
+        #idPreview { color: #00aaff; font-size: 11px; margin-top: 5px; display: none; }
+        .input-wrap { position: relative; }
+        .input-wrap input { padding-right: 34px; }
+        .clear-x {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            line-height: 16px;
+            text-align: center;
+            background: #222222;
+            color: #aaaaaa;
+            border: 1px solid #444444;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            padding: 0;
+            margin: 0;
+        }
+        .clear-x:hover { background: #444444; color: #ffffff; }
+        .paste-hint { font-size: 10px; color: #666666; margin-top: 4px; }
+        #rotPreview { color: #00aaff; font-size: 11px; margin-top: 6px; }
+        .gen-row { display: flex; gap: 6px; margin-top: 6px; align-items: stretch; }
+        .gen-row input[type="number"] { width: 70px; text-align: center; padding: 8px; }
+        .gen-row button { margin-top: 0; padding: 8px 10px; font-size: 11px; width: auto; flex: 1; }
+        .check-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11px; color: #aaaaaa; }
+        .check-row input { width: auto; }
+        #parsePreview { font-size: 11px; margin-top: 8px; color: #888; display: none; }
+        #parsePreview .chip {
+            display: inline-block;
+            border: 1px solid #444;
+            padding: 2px 6px;
+            margin: 2px 3px 0 0;
+            color: #ddd;
+            border-radius: 3px;
+        }
+        #parsePreview .warn { color: #ffaa00; }
+        #log {
+            margin-top: 12px;
+            font-size: 11px;
+            color: #888;
+            max-height: 160px;
+            overflow-y: auto;
+            border-top: 1px solid #333;
+            padding-top: 8px;
+            display: none;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>SponsorBlock API</h2>
+
+        <div class="input-group">
+            <label>YouTube Video URL or ID</label>
+            <div class="input-wrap">
+                <input type="text" id="videoId" placeholder="Click here to paste a copied link">
+                <button type="button" class="clear-x" id="clearVideo" title="Clear">&#215;</button>
+            </div>
+            <div class="paste-hint" id="pasteHint">Click the field to paste from clipboard</div>
+            <div id="idPreview">Extracted ID: <span></span></div>
+        </div>
+
+        <div class="input-group">
+            <label>Private User IDs (auto-generated, one per line)</label>
+            <textarea id="userId" placeholder="Leave empty and IDs are generated for you&#10;or paste existing 32+ char IDs" style="height:80px"></textarea>
+            <div class="gen-row">
+                <input type="number" id="genCount" value="3" min="1" max="50" step="1">
+                <button type="button" id="genBtn">Generate IDs</button>
+                <button type="button" id="clearBtn">Clear</button>
+            </div>
+            <div class="check-row">
+                <input type="checkbox" id="autoGen" checked>
+                <label for="autoGen" style="margin:0; text-transform:none; font-size:11px; color:#aaaaaa;">Auto-generate when list is empty</label>
+            </div>
+            <div id="rotPreview">Rotation: no IDs yet</div>
+            <div class="note">IDs are generated locally and saved in this browser. Treat them like passwords.</div>
+        </div>
+
+        <div class="input-group">
+            <label>Timestamps &amp; Category</label>
+            <textarea id="timestamps" placeholder="[00:00]-[02:03] SELFPROMO&#10;[06:47]-[08:24] FILLER&#10;[09:50]-[10:27] INTERACTION&#10;[51:39]-[52:19] OUTRO"></textarea>
+            <div id="parsePreview"></div>
+            <div class="note">Format: [MM:SS]-[MM:SS] CATEGORY (category optional)</div>
+        </div>
+
+        <div class="input-group">
+            <label>Default Category (when line has none)</label>
+            <select id="defaultCategory">
+                <option value="sponsor" selected>sponsor</option>
+                <option value="selfpromo">selfpromo</option>
+                <option value="interaction">interaction</option>
+                <option value="intro">intro</option>
+                <option value="outro">outro</option>
+                <option value="preview">preview</option>
+                <option value="filler">filler</option>
+                <option value="music_offtopic">music_offtopic</option>
+                <option value="poi_highlight">poi_highlight</option>
+            </select>
+        </div>
+
+        <button id="submitBtn">Upload Segments</button>
+        <div id="status">Ready</div>
+        <div id="log"></div>
+    </div>
+
+    <script>
+        const LS_IDS = 'sb-html-userids';
+        const LS_LEGACY_ID = 'sb-html-userid';
+        const LS_ROT = 'sb-html-rotate-idx';
+        const USER_AGENT = 'sb-html-submitter/2.0';
+        const API_URL = 'https://sponsor.ajay.app/api/skipSegments';
+
+        // ---------- Helpers ----------
+
+        // Convert H:MM:SS / MM:SS / SS to seconds
+        function timeToSeconds(timeStr) {
+            const parts = timeStr.trim().split(':').reverse();
+            let seconds = 0;
+            for (let i = 0; i < parts.length; i++) {
+                seconds += parseInt(parts[i], 10) * Math.pow(60, i);
+            }
+            return seconds;
+        }
+
+        // Extract video ID from any YouTube URL shape
+        function extractVideoId(url) {
+            url = url.trim();
+            if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+            const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/|live\/))([^"&?\/\s]{11})/);
+            return match ? match[1] : null;
+        }
+
+        // Normalise a free-text category label to a SponsorBlock category
+        function normalizeCategory(raw) {
+            if (!raw) return null;
+            const key = raw.toLowerCase().replace(/[^a-z]/g, '');
+            const map = {
+                sponsor: 'sponsor', sponsored: 'sponsor', ad: 'sponsor', ads: 'sponsor',
+                selfpromo: 'selfpromo', selfpromotion: 'selfpromo', selfpromote: 'selfpromo', promo: 'selfpromo',
+                interaction: 'interaction', interactions: 'interaction',
+                intro: 'intro', outro: 'outro',
+                preview: 'preview', recap: 'preview',
+                filler: 'filler', fillertangent: 'filler', tangent: 'filler',
+                musicofftopic: 'music_offtopic', music: 'music_offtopic', offtopic: 'music_offtopic',
+                poihighlight: 'poi_highlight', poi: 'poi_highlight', highlight: 'poi_highlight'
+            };
+            return map[key] || null;
+        }
+
+        function formatTime(sec) {
+            const h = Math.floor(sec / 3600);
+            const m = Math.floor((sec % 3600) / 60);
+            const s = sec % 60;
+            const pad = (n) => String(n).padStart(2, '0');
+            return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
+        }
+
+        function maskId(id) {
+            return id.length <= 8 ? id : id.slice(0, 4) + '…' + id.slice(-4);
+        }
+
+        // Generate a local SponsorBlock userID: random, 32 chars, created client side
+        function generateUserId() {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            const bytes = new Uint8Array(32);
+            crypto.getRandomValues(bytes);
+            let out = '';
+            for (let i = 0; i < 32; i++) out += alphabet[bytes[i] % alphabet.length];
+            return out;
+        }
+
+        // Add N freshly generated IDs to the pool and persist them
+        function appendIds(count) {
+            const existing = readIds();
+            const fresh = [];
+            for (let i = 0; i < count; i++) fresh.push(generateUserId());
+            userIdsEl.value = existing.concat(fresh).join('\n');
+            localStorage.setItem(LS_IDS, userIdsEl.value);
+            renderRotation();
+            return fresh;
+        }
+
+        // Parse whole text: [MM:SS]-[MM:SS] CATEGORY  (category optional)
+        const SEG_REGEX = /\[\s*(\d{1,3}:\d{1,2}(?::\d{1,2})?)\s*\]\s*[-–—~]+\s*\[\s*(\d{1,3}:\d{1,2}(?::\d{1,2})?)\s*\]\s*([A-Za-z][A-Za-z_ ]*)?/g;
+
+        function parseSegments(text, defaultCategory) {
+            const segments = [];
+            const warnings = [];
+            const seen = new Set();
+            let m;
+            SEG_REGEX.lastIndex = 0;
+
+            while ((m = SEG_REGEX.exec(text)) !== null) {
+                const start = timeToSeconds(m[1]);
+                const end = timeToSeconds(m[2]);
+                const label = m[3] ? m[3].trim() : '';
+
+                if (end <= start) {
+                    warnings.push(`skipped ${m[1]}-${m[2]} (end <= start)`);
+                    continue;
+                }
+                const key = `${start}-${end}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
+
+                let category = normalizeCategory(label);
+                if (label && !category) warnings.push(`"${label}" unknown → ${defaultCategory}`);
+                if (!category) category = defaultCategory;
+
+                segments.push({
+                    segment: [start, end],
+                    category: category,
+                    actionType: category === 'poi_highlight' ? 'poi' : 'skip',
+                    label: label || defaultCategory
+                });
+            }
+
+            segments.sort((a, b) => a.segment[0] - b.segment[0]);
+            return { segments, warnings };
+        }
+
+        // ---------- DOM ----------
+        const videoInput = document.getElementById('videoId');
+        const idPreview = document.getElementById('idPreview');
+        const userIdsEl = document.getElementById('userId');
+        const rotPreview = document.getElementById('rotPreview');
+        const tsEl = document.getElementById('timestamps');
+        const parsePreview = document.getElementById('parsePreview');
+        const defaultCatEl = document.getElementById('defaultCategory');
+        const statusEl = document.getElementById('status');
+        const logEl = document.getElementById('log');
+        const submitBtn = document.getElementById('submitBtn');
+        const clearVideoBtn = document.getElementById('clearVideo');
+        const pasteHint = document.getElementById('pasteHint');
+
+        function readIds() {
+            return userIdsEl.value
+                .split(/[\s,;]+/)
+                .map(s => s.trim())
+                .filter(Boolean);
+        }
+
+        function getRotationIndex(total) {
+            const stored = parseInt(localStorage.getItem(LS_ROT) || '0', 10);
+            return total > 0 ? ((isNaN(stored) ? 0 : stored) % total + total) % total : 0;
+        }
+
+        function setRotationIndex(idx) {
+            localStorage.setItem(LS_ROT, String(idx));
+        }
+
+        function renderRotation() {
+            const ids = readIds();
+            if (ids.length === 0) {
+                rotPreview.textContent = 'Rotation: no IDs yet';
+                return;
+            }
+            const idx = getRotationIndex(ids.length);
+            rotPreview.textContent = `Rotation: ${ids.length} ID${ids.length > 1 ? 's' : ''} · next starts at #${idx + 1} (${maskId(ids[idx])})`;
+        }
+
+        function renderParsePreview() {
+            const { segments, warnings } = parseSegments(tsEl.value, defaultCatEl.value);
+            if (!tsEl.value.trim()) {
+                parsePreview.style.display = 'none';
+                return;
+            }
+            parsePreview.style.display = 'block';
+            if (segments.length === 0) {
+                parsePreview.innerHTML = '<span class="warn">No valid segments found.</span>';
+                return;
+            }
+            const counts = {};
+            segments.forEach(s => { counts[s.category] = (counts[s.category] || 0) + 1; });
+            let html = `<b>${segments.length}</b> segment${segments.length > 1 ? 's' : ''} · `;
+            html += Object.entries(counts).map(([c, n]) => `<span class="chip">${c} ×${n}</span>`).join('');
+            if (warnings.length) {
+                html += `<div class="warn">${warnings.length} warning${warnings.length > 1 ? 's' : ''}: ${warnings.join('; ')}</div>`;
+            }
+            parsePreview.innerHTML = html;
+        }
+
+        function log(msg, cls) {
+            logEl.style.display = 'block';
+            const line = document.createElement('div');
+            line.textContent = msg;
+            if (cls) line.style.color = cls;
+            logEl.appendChild(line);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        // ---------- Load saved state ----------
+        window.addEventListener('load', () => {
+            const savedIds = localStorage.getItem(LS_IDS);
+            const legacy = localStorage.getItem(LS_LEGACY_ID);
+            if (savedIds) {
+                userIdsEl.value = savedIds;
+            } else if (legacy) {
+                userIdsEl.value = legacy;
+            }
+            renderRotation();
+            renderParsePreview();
+            updateIdPreview();
+
+            // Auto-generate on first run so the form is usable straight away
+            if (!userIdsEl.value.trim() && document.getElementById('autoGen').checked) {
+                const fresh = appendIds(1);
+                log('auto-generated user ID ' + maskId(fresh[0]), '#00aaff');
+            }
+        });
+
+        function updateIdPreview() {
+            const id = extractVideoId(videoInput.value);
+            if (id && videoInput.value.trim().length > 11) {
+                idPreview.style.display = 'block';
+                idPreview.querySelector('span').textContent = id;
+            } else {
+                idPreview.style.display = 'none';
+            }
+            clearVideoBtn.style.display = videoInput.value.trim() ? 'block' : 'none';
+        }
+
+        // Click the field to pull the copied link straight out of the clipboard
+        async function pasteFromClipboard() {
+            if (!navigator.clipboard || !navigator.clipboard.readText) {
+                pasteHint.textContent = 'Clipboard not available — press Ctrl+V';
+                return;
+            }
+            try {
+                const text = ((await navigator.clipboard.readText()) || '').trim();
+                if (!text) return;
+
+                const clipId = extractVideoId(text);
+                if (!clipId) {
+                    pasteHint.textContent = 'Clipboard does not contain a YouTube link';
+                    return;
+                }
+                // Never clobber a link that is already sitting in the field
+                if (extractVideoId(videoInput.value) && videoInput.value.trim() !== text) {
+                    pasteHint.textContent = 'Field already has a link — clear it first to replace';
+                    return;
+                }
+                videoInput.value = text;
+                updateIdPreview();
+                pasteHint.textContent = 'Pasted from clipboard · ' + clipId;
+            } catch (err) {
+                pasteHint.textContent = 'Clipboard permission denied — press Ctrl+V';
+            }
+        }
+
+        videoInput.addEventListener('input', updateIdPreview);
+        videoInput.addEventListener('click', pasteFromClipboard);
+
+        clearVideoBtn.addEventListener('click', () => {
+            videoInput.value = '';
+            updateIdPreview();
+            pasteHint.textContent = 'Click the field to paste from clipboard';
+            videoInput.focus();
+        });
+
+        userIdsEl.addEventListener('input', renderRotation);
+
+        document.getElementById('genBtn').addEventListener('click', () => {
+            const n = Math.min(50, Math.max(1, parseInt(document.getElementById('genCount').value, 10) || 1));
+            const fresh = appendIds(n);
+            logEl.innerHTML = '';
+            logEl.style.display = 'none';
+            log(`generated ${n} ID${n > 1 ? 's' : ''} · ${maskId(fresh[0])}${n > 1 ? ' … ' + maskId(fresh[n - 1]) : ''}`, '#00aaff');
+            statusEl.textContent = `${n} ID${n > 1 ? 's' : ''} added · ${readIds().length} in pool`;
+            statusEl.className = 'success';
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            userIdsEl.value = '';
+            localStorage.setItem(LS_IDS, '');
+            renderRotation();
+            statusEl.textContent = 'ID pool cleared';
+            statusEl.className = '';
+        });
+        tsEl.addEventListener('input', renderParsePreview);
+        defaultCatEl.addEventListener('change', renderParsePreview);
+
+        // ---------- Submit ----------
+        submitBtn.addEventListener('click', async () => {
+            logEl.innerHTML = '';
+            logEl.style.display = 'none';
+
+            const videoId = extractVideoId(videoInput.value);
+            const defaultCategory = defaultCatEl.value;
+            const { segments, warnings } = parseSegments(tsEl.value, defaultCategory);
+
+            if (!videoId) {
+                statusEl.textContent = 'ERROR: Invalid YouTube URL or ID.';
+                statusEl.className = 'error';
+                return;
+            }
+
+            // Auto-generate a pool if the user left the field empty
+            let allIds = readIds();
+            if (allIds.length === 0) {
+                if (!document.getElementById('autoGen').checked) {
+                    statusEl.textContent = 'ERROR: At least one Private User ID is required.';
+                    statusEl.className = 'error';
+                    return;
+                }
+                const fresh = appendIds(1);
+                allIds = readIds();
+                log('auto-generated user ID ' + maskId(fresh[0]), '#00aaff');
+            }
+
+            // SponsorBlock only accepts IDs of 32 characters or more
+            const ids = allIds.filter(id => id.length >= 32);
+            if (ids.length === 0) {
+                statusEl.textContent = 'ERROR: Each Private User ID must be at least 32 characters.';
+                statusEl.className = 'error';
+                return;
+            }
+            if (ids.length !== allIds.length) {
+                warnings.push(`ignored ${allIds.length - ids.length} ID(s) shorter than 32 chars`);
+            }
+            if (segments.length === 0) {
+                statusEl.textContent = 'ERROR: No valid timestamps found.';
+                statusEl.className = 'error';
+                return;
+            }
+
+            localStorage.setItem(LS_IDS, ids.join('\n'));
+            renderRotation();
+
+            let rotIdx = getRotationIndex(ids.length);
+            let ok = 0;
+            let failed = 0;
+
+            submitBtn.disabled = true;
+            statusEl.textContent = `Uploading ${segments.length} segment(s)…`;
+            statusEl.className = 'loading';
+
+            warnings.forEach(w => log('! ' + w, '#ffaa00'));
+
+            for (const seg of segments) {
+                const [start, end] = seg.segment;
+                const range = `${formatTime(start)}-${formatTime(end)}`;
+                const payload = {
+                    videoID: videoId,
+                    userID: null,
+                    userAgent: USER_AGENT,
+                    segments: [{
+                        segment: [start, end],
+                        category: seg.category,
+                        actionType: seg.actionType
+                    }]
+                };
+
+                let attempt = 0;
+                let done = false;
+
+                while (attempt < ids.length && !done) {
+                    const userId = ids[rotIdx % ids.length];
+                    payload.userID = userId;
+                    statusEl.textContent = `Uploading ${ok + failed + 1}/${segments.length} · ID #${(rotIdx % ids.length) + 1}`;
+
+                    try {
+                        const res = await fetch(API_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (res.ok) {
+                            ok++;
+                            done = true;
+                            log(`✓ ${range} ${seg.category} · ID #${(rotIdx % ids.length) + 1} (${maskId(userId)})`, '#00ff00');
+                        } else if (res.status === 403) {
+                            // Bad / banned ID: rotate to the next one and retry this segment
+                            log(`✗ ${range} · ID #${(rotIdx % ids.length) + 1} rejected (403), rotating`, '#ff4444');
+                            attempt++;
+                            rotIdx++;
+                            if (attempt >= ids.length) {
+                                failed++;
+                                done = true;
+                                log(`✗ ${range} ${seg.category} · all IDs rejected`, '#ff4444');
+                            }
+                        } else if (res.status === 429) {
+                            log(`✗ ${range} · rate limited (429) on ID #${(rotIdx % ids.length) + 1}, rotating`, '#ffaa00');
+                            attempt++;
+                            rotIdx++;
+                            if (attempt >= ids.length) {
+                                failed++;
+                                done = true;
+                            }
+                        } else {
+                            const errText = await res.text();
+                            failed++;
+                            done = true;
+                            log(`✗ ${range} ${seg.category} · ${res.status}: ${errText.slice(0, 120)}`, '#ff4444');
+                        }
+                    } catch (err) {
+                        failed++;
+                        done = true;
+                        log(`✗ ${range} · network error (${err.message})`, '#ff4444');
+                    }
+                }
+
+                // Advance rotation for the next segment
+                if (done && ok + failed > 0) rotIdx++;
+                setRotationIndex(rotIdx % ids.length);
+                renderRotation();
+
+                // Small gap to be gentle on the API
+                await new Promise(r => setTimeout(r, 250));
+            }
+
+            submitBtn.disabled = false;
+
+            if (failed === 0) {
+                statusEl.textContent = `SUCCESS: ${ok} segment(s) uploaded across ${ids.length} ID(s).`;
+                statusEl.className = 'success';
+                tsEl.value = '';
+                renderParsePreview();
+            } else if (ok > 0) {
+                statusEl.textContent = `PARTIAL: ${ok} uploaded, ${failed} failed.`;
+                statusEl.className = 'error';
+            } else {
+                statusEl.textContent = `ERROR: all ${failed} segment(s) failed.`;
+                statusEl.className = 'error';
+            }
+        });
+    </script>
+
+</body>
+</html>
